@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import bodyParser from 'body-parser';
+
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -15,10 +15,30 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const BLOCKS_FILE = path.join(__dirname, 'data', 'blocks.json');
+const DATA_DIR =
+  process.env.DATA_DIR || path.join(__dirname, 'data');
 
-app.use(cors());
-app.use(bodyParser.json());
+const BLOCKS_FILE = path.join(DATA_DIR, 'blocks.json');
+
+
+app.use(
+  cors({
+    origin: process.env.NODE_ENV === 'production'
+      ? 'https://yourdomain.com'
+      : '*',
+    credentials: true
+  })
+);
+
+app.use(express.json());
+if (!fs.existsSync(DATA_DIR)) {
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+}
+
+if (!fs.existsSync(BLOCKS_FILE)) {
+  fs.writeFileSync(BLOCKS_FILE, JSON.stringify([], null, 2));
+}
+
 
 // Serve static files from the React app
 const clientBuildPath = path.join(__dirname, '..', 'client', 'dist');
