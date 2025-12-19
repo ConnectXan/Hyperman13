@@ -36,8 +36,8 @@ export const loginAdmin = (username, password) => {
     const adminPass = (process.env.ADMIN_PASS || '').trim();
 
     // Priority 2: Hardcoded Failsafe
-    const fallbackUser = 'admin';
-    const fallbackPass = 'admin123';
+    const fallbackUser = 'connectxan';
+    const fallbackPass = 'cnxn@13';
 
     const isEnvMatch = adminUser && adminPass && u === adminUser && p === adminPass;
     const isFallbackMatch = u === fallbackUser && p === fallbackPass;
