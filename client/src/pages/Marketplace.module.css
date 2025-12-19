@@ -1,0 +1,214 @@
+.container {
+    min-height: 100vh;
+    padding: 120px var(--spacing-md) 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: var(--color-bg);
+}
+
+.header {
+    margin-bottom: 5rem;
+    max-width: 800px;
+}
+
+.eyebrow {
+    font-size: 0.8rem;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.header h1 {
+    font-size: clamp(3rem, 8vw, 5rem);
+    margin-bottom: 1rem;
+    letter-spacing: -3px;
+    line-height: 1.1;
+}
+
+.header p {
+    font-size: 1.2rem;
+    color: var(--color-text-dim);
+    line-height: 1.6;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+    gap: 3rem;
+}
+
+.productCard {
+    display: block;
+    text-decoration: none;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.productCard:hover {
+    border-color: var(--accent);
+}
+
+.cardStatus {
+    background: var(--color-bg);
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent);
+}
+
+.cardContent {
+    padding: 3rem;
+}
+
+.iconWrapper {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='light'] .iconWrapper {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.productIcon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.tag {
+    font-size: 0.7rem;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.cardContent h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+    letter-spacing: -1px;
+}
+
+.cardContent p {
+    color: var(--color-text-dim);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.cta {
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.8rem;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cta span {
+    transition: transform 0.3s;
+}
+
+.productCard:hover .cta span {
+    transform: translateX(5px);
+}
+
+.footer {
+    margin-top: 10rem;
+    text-align: center;
+    border-top: 1px solid var(--color-border);
+    padding-top: 4rem;
+}
+
+.footer p {
+    font-size: 0.9rem;
+    color: var(--color-text-dim);
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 100px 1rem 100px;
+    }
+
+    .header {
+        margin-bottom: 3rem;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+        letter-spacing: -2px;
+    }
+
+    .header p {
+        font-size: 1rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .cardContent {
+        padding: 2rem 1.5rem;
+    }
+
+    .iconWrapper {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1.5rem;
+    }
+
+    .productIcon {
+        width: 45px;
+        height: 45px;
+    }
+
+    .cardContent h2 {
+        font-size: 1.75rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .cardContent p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+    }
+
+    .tag {
+        font-size: 0.65rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .cta {
+        font-size: 0.75rem;
+    }
+
+    .footer {
+        margin-top: 4rem;
+    }
+}

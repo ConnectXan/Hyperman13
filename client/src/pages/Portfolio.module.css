@@ -1,0 +1,295 @@
+.container {
+    min-height: 100vh;
+    padding: 120px var(--spacing-md) 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: var(--color-bg);
+}
+
+.intelBanner {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    flex-wrap: wrap;
+}
+
+.statBox {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.statLabel {
+    font-size: 0.7rem;
+    color: var(--color-text-dim);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.statValue {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+[data-theme='light'] .intelBanner {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+}
+
+[data-theme='light'] .statValue {
+    color: var(--color-primary);
+}
+
+.header {
+    margin-bottom: 4rem;
+}
+
+.header h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    margin-bottom: 1rem;
+    letter-spacing: -4px;
+    line-height: 0.9;
+}
+
+.header p {
+    font-size: 1.1rem;
+    color: var(--color-text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 3rem;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.groupToggle {
+    display: inline-flex;
+    background: var(--color-surface);
+    padding: 0.4rem;
+    border-radius: 50px;
+    border: 1px solid var(--color-border);
+    width: max-content;
+}
+
+.groupToggle button {
+    padding: 0.8rem 2rem;
+    border-radius: 40px;
+    border: none;
+    background: transparent;
+    color: var(--color-text-dim);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.groupToggle button.activeBtn {
+    background: var(--color-primary);
+    color: var(--color-bg);
+}
+
+.serviceFilters {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.serviceFilters button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text-dim);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.serviceFilters button.activeFilter {
+    border-color: var(--service-color, var(--color-primary));
+    color: var(--color-text);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.clientGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.clientSection {
+    background: var(--color-surface);
+    border-radius: 16px;
+    padding: 2.5rem;
+    border: 1px solid var(--color-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.clientHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.clientTitle {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+}
+
+.statusIndicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+.clientTitle h2 {
+    font-size: 2.5rem;
+    margin: 0;
+    letter-spacing: -1px;
+}
+
+.serv.liveTag {
+    font-size: 0.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #4CAF50;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 100px var(--spacing-sm) 100px;
+    }
+
+    .header h1 {
+        font-size: 2.5rem;
+        letter-spacing: -2px;
+    }
+
+    /* Hide stats banner on mobile to reduce clutter */
+    .intelBanner {
+        display: none;
+    }
+
+    .header {
+        margin-bottom: 2rem;
+    }
+
+    .filterBar {
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .filterBtn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.75rem;
+    }
+
+    .grid {
+        gap: 2rem;
+    }
+
+    .projectCard {
+        padding: 1.5rem;
+    }
+
+    .projectHeader h3 {
+        font-size: 1.25rem;
+    }
+
+    .projectDesc {
+        font-size: 0.9rem;
+        margin: 0.75rem 0;
+    }
+
+    .progressBar {
+        height: 6px;
+    }
+}
+
+.serviceTag {
+    font-size: 0.8rem;
+    color: var(--color-text-dim);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.projectStatus {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.badge {
+    padding: 0.5rem 1rem;
+    border: 1px solid;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.miniProgress {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 200px;
+}
+
+.progressText {
+    font-size: 0.7rem;
+    color: var(--color-text-dim);
+    text-align: right;
+    font-weight: 700;
+}
+
+.progressRail {
+    height: 4px;
+    background: var(--color-border);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.widgetRow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .clientTitle h2 {
+        font-size: 1.8rem;
+    }
+
+    .projectStatus {
+        align-items: flex-start;
+    }
+
+    .miniProgress {
+        width: 100%;
+    }
+}

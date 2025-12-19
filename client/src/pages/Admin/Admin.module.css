@@ -1,0 +1,316 @@
+.loginContainer {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a0a0a;
+    padding: 2rem;
+}
+
+.loginCard {
+    background: #111;
+    padding: 3rem;
+    border-radius: 12px;
+    border: 1px solid #333;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.loginCard h2 {
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    color: #fff;
+}
+
+.loginCard p {
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.inputGroup {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.inputGroup label {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 0.5rem;
+}
+
+.inputGroup input {
+    width: 100%;
+    padding: 1rem;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.loginCard button {
+    width: 100%;
+    padding: 1rem;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.loginCard button:hover {
+    transform: translateY(-2px);
+}
+
+.error {
+    background: #ff475722;
+    color: #ff4757;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+}
+
+/* Panel Styles */
+.panelContainer {
+    min-height: 100vh;
+    background: #0a0a0a;
+    color: #fff;
+}
+
+[data-theme='light'] .panelContainer {
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+.panelHeader {
+    padding: 2rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #222;
+}
+
+.logoutBtn {
+    background: transparent;
+    color: #ff4757;
+    border: 1px solid #ff4757;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.tabNav {
+    padding: 1rem 5%;
+    display: flex;
+    gap: 1rem;
+    background: #111;
+    overflow-x: auto;
+}
+
+.tabNav button {
+    background: transparent;
+    border: none;
+    color: #666;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    text-transform: capitalize;
+    font-weight: bold;
+}
+
+.tabNav button.activeTab {
+    color: #fff;
+    border-bottom: 2px solid #fff;
+}
+
+.contentArea {
+    padding: 2rem 5%;
+}
+
+.blockList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.blockItem {
+    background: #111;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid #222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+[data-theme='light'] .blockItem {
+    background: var(--color-surface);
+    border-color: var(--color-border);
+}
+
+[data-theme='light'] .blockType {
+    color: var(--color-text-dim);
+}
+
+[data-theme='light'] .tabNav {
+    background: var(--color-surface);
+}
+
+[data-theme='light'] .tabNav button {
+    color: var(--color-text-dim);
+}
+
+[data-theme='light'] .tabNav button.activeTab {
+    color: var(--color-text);
+}
+
+.blockType {
+    font-size: 0.7rem;
+    color: #666;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.2rem;
+}
+
+.blockActions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.blockActions button {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border: 1px solid #333;
+}
+
+.visibleBtn {
+    background: #2ecc7122;
+    color: #2ecc71;
+    border-color: #2ecc71 !important;
+}
+
+.hiddenBtn {
+    background: #666222;
+    color: #666;
+}
+
+.editBtn {
+    background: #3498db22;
+    color: #3498db;
+}
+
+.deleteBtn {
+    background: #e74c3c22;
+    color: #e74c3c;
+    border-color: #e74c3c !important;
+}
+
+.addBtn {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(218, 192, 163, 0.1);
+    border: 1px dashed #DAC0A3;
+    color: #DAC0A3;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    z-index: 1000;
+}
+
+.modal {
+    background: #111;
+    border: 1px solid #333;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+[data-theme='light'] .modal {
+    background: var(--color-surface);
+    border-color: var(--color-border);
+    color: var(--color-text);
+}
+
+[data-theme='light'] .form input,
+[data-theme='light'] .form select,
+[data-theme='light'] .form textarea {
+    background: var(--color-bg);
+    border-color: var(--color-border);
+    color: var(--color-text);
+}
+
+[data-theme='light'] .form label {
+    color: var(--color-text-dim);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.form label {
+    font-size: 0.8rem;
+    color: #888;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form input,
+.form select,
+.form textarea {
+    background: #222;
+    border: 1px solid #444;
+    color: white;
+    padding: 0.8rem;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.modalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.saveBtn {
+    background: #DAC0A3;
+    color: black;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+}

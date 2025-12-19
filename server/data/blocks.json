@@ -1,0 +1,597 @@
+[
+  {
+    "id": "service-meta-ads",
+    "section": "services",
+    "type": "service-card",
+    "data": {
+      "id": "meta-ads",
+      "label": "Meta Ads",
+      "description": "High-conversion campaigns on Facebook & Instagram in India.",
+      "color": "#DAC0A3",
+      "activeColor": "#C8A17E",
+      "metrics": {
+        "roas": "4.8x",
+        "spend": "₹5L+/mo"
+      },
+      "formFields": [
+        {
+          "name": "monthlyBudget",
+          "label": "Monthly Ad Budget",
+          "type": "select",
+          "options": [
+            "< ₹1L",
+            "₹1L - ₹5L",
+            "₹5L - ₹20L",
+            "₹20L+"
+          ]
+        }
+      ],
+      "modalInfo": {
+        "title": "Meta Ads Excellence",
+        "description": "Dominate Facebook & Instagram with data-driven campaigns optimized for the Indian market.",
+        "features": [
+          "Advanced audience targeting",
+          "A/B creative testing",
+          "Real-time ROAS optimization",
+          "Conversion tracking setup"
+        ],
+        "deliverables": "Campaign strategy, ad creatives, performance reports"
+      }
+    },
+    "order": 0,
+    "visible": true
+  },
+  {
+    "id": "service-google-ads",
+    "section": "services",
+    "type": "service-card",
+    "data": {
+      "id": "google-ads",
+      "label": "Google Ads",
+      "description": "Search, Display, and Video campaigns for the Indian market.",
+      "color": "#F4D03F",
+      "activeColor": "#F1C40F",
+      "metrics": {
+        "roas": "5.5x",
+        "conversions": "1.5k+"
+      },
+      "formFields": [
+        {
+          "name": "targetRegion",
+          "label": "Target Region",
+          "type": "text",
+          "placeholder": "e.g. Pan India, Mumbai, Bangalore"
+        }
+      ],
+      "modalInfo": {
+        "title": "Google Ads Mastery",
+        "description": "Capture high-intent customers with precision-targeted Search, Display, and Video campaigns.",
+        "features": [
+          "Keyword research & optimization",
+          "Smart bidding strategies",
+          "YouTube video ads",
+          "Performance tracking & analytics"
+        ],
+        "deliverables": "Ad strategy, campaign setup, monthly optimization reports"
+      }
+    },
+    "order": 1,
+    "visible": true
+  },
+  {
+    "id": "service-shopify-dev",
+    "section": "services",
+    "type": "service-card",
+    "data": {
+      "id": "shopify-dev",
+      "label": "Shopify Development",
+      "description": "Custom themes and apps for Indian D2C brands.",
+      "color": "#7DCEA0",
+      "activeColor": "#52BE80",
+      "metrics": {
+        "uptime": "99.99%",
+        "loadTime": "0.6s"
+      },
+      "formFields": [
+        {
+          "name": "storeUrl",
+          "label": "Current Store URL (if any)",
+          "type": "text",
+          "placeholder": "e.g. www.your-brand.in"
+        }
+      ],
+      "modalInfo": {
+        "title": "Shopify Expertise",
+        "description": "Build high-converting Shopify stores tailored for Indian D2C brands.",
+        "features": [
+          "Custom theme development",
+          "Payment gateway integration (Razorpay, Paytm)",
+          "App development & integration",
+          "Speed optimization"
+        ],
+        "deliverables": "Fully functional Shopify store, custom theme, technical support"
+      }
+    },
+    "order": 2,
+    "visible": true
+  },
+  {
+    "id": "service-web-dev",
+    "section": "services",
+    "type": "service-card",
+    "data": {
+      "id": "web-dev",
+      "label": "Web Development",
+      "description": "Next-gen web solutions for high-growth Indian startups.",
+      "color": "#3498DB",
+      "activeColor": "#2E86C1",
+      "metrics": {
+        "lighthouse": "100",
+        "deployments": "Daily"
+      },
+      "formFields": [
+        {
+          "name": "projectType",
+          "label": "Project Type",
+          "type": "select",
+          "options": [
+            "E-commerce",
+            "SaaS Platform",
+            "Corporate Portal"
+          ]
+        }
+      ],
+      "modalInfo": {
+        "title": "Web Development",
+        "description": "Build lightning-fast, scalable web applications with modern technologies.",
+        "features": [
+          "React/Next.js development",
+          "Responsive design",
+          "SEO optimization",
+          "Cloud deployment"
+        ],
+        "deliverables": "Production-ready website, source code, deployment & hosting setup"
+      }
+    },
+    "order": 3,
+    "visible": true
+  },
+  {
+    "id": "service-social-mgmt",
+    "section": "services",
+    "type": "service-card",
+    "data": {
+      "id": "social-mgmt",
+      "label": "Social Media Mgmt",
+      "description": "Organic growth strategies for the Indian demographic.",
+      "color": "#FF5C8D",
+      "activeColor": "#E91E63",
+      "metrics": {
+        "engagement": "+350%",
+        "followers": "+15k"
+      },
+      "formFields": [
+        {
+          "name": "platforms",
+          "label": "Priority Platforms",
+          "type": "text",
+          "placeholder": "IG, TikTok (Intl), LinkedIn, WhatsApp..."
+        }
+      ],
+      "modalInfo": {
+        "title": "Social Media Management",
+        "description": "Grow your brand presence with strategic content and community management.",
+        "features": [
+          "Content calendar & creation",
+          "Community engagement",
+          "Influencer collaborations",
+          "Analytics & growth tracking"
+        ],
+        "deliverables": "Monthly content plan, posts & stories, engagement reports"
+      }
+    },
+    "order": 4,
+    "visible": true
+  },
+  {
+    "id": "service-ai-animation",
+    "section": "services",
+    "type": "service-card",
+    "data": {
+      "id": "ai-animation",
+      "label": "AI 2D Animation",
+      "description": "Cutting-edge AI visuals for Indian brands and agencies.",
+      "color": "#BB86FC",
+      "activeColor": "#9965f4",
+      "metrics": {
+        "production": "-90% time",
+        "uniqueness": "100%"
+      },
+      "formFields": [
+        {
+          "name": "videoStyle",
+          "label": "Preferred Style",
+          "type": "select",
+          "options": [
+            "Abstract",
+            "Realistic",
+            "Bollywood Style",
+            "Anime"
+          ]
+        }
+      ],
+      "modalInfo": {
+        "title": "AI 2D Animation",
+        "description": "Create stunning animated content with AI-powered tools and human creativity.",
+        "features": [
+          "Character animation",
+          "Explainer videos",
+          "Social media animations",
+          "Brand storytelling"
+        ],
+        "deliverables": "Animated videos, source files, revisions included"
+      }
+    },
+    "order": 5,
+    "visible": true
+  },
+  {
+    "id": "portfolio-vedic-wellness",
+    "section": "portfolio",
+    "type": "portfolio-item",
+    "data": {
+      "id": "vedic-wellness",
+      "name": "Vedic Wellness India",
+      "serviceId": "meta-ads",
+      "status": "Scaling Aggressively",
+      "group": "live",
+      "progress": 88,
+      "color": "#DAC0A3",
+      "widgets": [
+        {
+          "title": "ROAS",
+          "value": "4.8x",
+          "subtext": "Target: 4.0x",
+          "type": "stat"
+        },
+        {
+          "title": "Managed Spend",
+          "value": "₹12L",
+          "subtext": "Monthly Operating",
+          "type": "stat"
+        },
+        {
+          "title": "CAC",
+          "value": "₹380",
+          "subtext": "-12% vs Prev Month",
+          "type": "stat"
+        }
+      ]
+    },
+    "order": 0,
+    "visible": true
+  },
+  {
+    "id": "portfolio-rajputana-d2c",
+    "section": "portfolio",
+    "type": "portfolio-item",
+    "data": {
+      "id": "rajputana-d2c",
+      "name": "Royal Rajputana D2C",
+      "serviceId": "shopify-dev",
+      "status": "Handover Phase",
+      "group": "finished",
+      "progress": 100,
+      "color": "#7DCEA0",
+      "widgets": [
+        {
+          "title": "Daily Revenue",
+          "value": "₹2.4L",
+          "subtext": "Post-Launch Peak",
+          "type": "stat"
+        },
+        {
+          "title": "Core Web Vitals",
+          "value": "98/100",
+          "subtext": "Mobile Performance",
+          "type": "stat"
+        },
+        {
+          "title": "Conversion Rate",
+          "value": "3.8%",
+          "subtext": "Industry Benchmark: 2.1%",
+          "type": "stat"
+        }
+      ]
+    },
+    "order": 1,
+    "visible": true
+  },
+  {
+    "id": "portfolio-bengaluru-tech",
+    "section": "portfolio",
+    "type": "portfolio-item",
+    "data": {
+      "id": "bengaluru-tech",
+      "name": "Bengaluru Tech Hub",
+      "serviceId": "web-dev",
+      "status": "Development",
+      "group": "live",
+      "progress": 65,
+      "color": "#3498DB",
+      "widgets": [
+        {
+          "title": "Build Health",
+          "value": "Stable",
+          "subtext": "CI/CD Pipelines",
+          "type": "stat"
+        },
+        {
+          "title": "Feature Set",
+          "value": "82%",
+          "subtext": "Sprint 8/12",
+          "type": "progress"
+        },
+        {
+          "title": "Active Devs",
+          "value": "4",
+          "subtext": "High Velocity",
+          "type": "stat"
+        }
+      ]
+    },
+    "order": 2,
+    "visible": true
+  },
+  {
+    "id": "portfolio-mumbai-glam",
+    "section": "portfolio",
+    "type": "portfolio-item",
+    "data": {
+      "id": "mumbai-glam",
+      "name": "Mumbai Glam Cosmetics",
+      "serviceId": "social-mgmt",
+      "status": "Content Production",
+      "group": "live",
+      "progress": 42,
+      "color": "#FF5C8D",
+      "widgets": [
+        {
+          "title": "Weekly Reach",
+          "value": "1.2M",
+          "subtext": "Organic Focus",
+          "type": "stat"
+        },
+        {
+          "title": "Engagement",
+          "value": "8.4%",
+          "subtext": "High Interaction",
+          "type": "stat"
+        },
+        {
+          "title": "Inbound Leads",
+          "value": "450+",
+          "subtext": "Weekly Average",
+          "type": "stat"
+        }
+      ]
+    },
+    "order": 3,
+    "visible": true
+  },
+  {
+    "id": "portfolio-jaipur-jewels",
+    "section": "portfolio",
+    "type": "portfolio-item",
+    "data": {
+      "id": "jaipur-jewels",
+      "name": "Jaipur Jewels",
+      "serviceId": "google-ads",
+      "status": "Optimizing Filters",
+      "group": "live",
+      "progress": 75,
+      "color": "#F4D03F",
+      "widgets": [
+        {
+          "title": "Impression Share",
+          "value": "82%",
+          "subtext": "Top of Page",
+          "type": "stat"
+        },
+        {
+          "title": "Profitability",
+          "value": "₹8.2L",
+          "subtext": "Net Monthly",
+          "type": "stat"
+        }
+      ]
+    },
+    "order": 4,
+    "visible": true
+  },
+  {
+    "id": "portfolio-ai-visuals-delhi",
+    "section": "portfolio",
+    "type": "portfolio-item",
+    "data": {
+      "id": "ai-visuals-delhi",
+      "name": "Cyber Delhi AI",
+      "serviceId": "ai-animation",
+      "status": "Deployment",
+      "group": "finished",
+      "progress": 100,
+      "color": "#BB86FC",
+      "widgets": [
+        {
+          "title": "Assets Produced",
+          "value": "120+",
+          "subtext": "AI-Generated 2D",
+          "type": "stat"
+        },
+        {
+          "title": "Production Time",
+          "value": "-85%",
+          "subtext": "vs Traditional",
+          "type": "stat"
+        }
+      ]
+    },
+    "order": 5,
+    "visible": true
+  },
+  {
+    "id": "case-case-1",
+    "section": "case-studies",
+    "type": "case-study-card",
+    "data": {
+      "id": "case-1",
+      "title": "Vedic Wellness: Scaling to 5Cr",
+      "serviceId": "meta-ads",
+      "type": "blog",
+      "thumbnail": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800",
+      "color": "#DAC0A3",
+      "description": "How we used Meta Ads to build a wellness empire in India.",
+      "content": {
+        "summary": "A deep dive into the retention strategies and ad creative pipeline.",
+        "fullText": "\n                # Scaling Vedic Wellness\n                In late 2024, Vedic Wellness was at a plateau. Their CAC was rising and ROAS was dipping below 2.5x.\n                \n                ## The Strategy\n                We implemented a three-tier funnel:\n                1. **Awareness**: AI-generated educational videos about Ashwagandha benefits.\n                2. **Consideration**: User-generated content (UGC) from verified Indian yoga instructors.\n                3. **Conversion**: High-intent retargeting with exclusive bundle offers.\n                \n                ## The Results\n                By month 4, we had scaled them to ₹1.2Cr monthly spend with a stable 4.2x ROAS.\n            "
+      }
+    },
+    "order": 0,
+    "visible": true
+  },
+  {
+    "id": "case-case-2",
+    "section": "case-studies",
+    "type": "case-study-card",
+    "data": {
+      "id": "case-2",
+      "title": "The Future of D2C Fashion",
+      "serviceId": "ai-animation",
+      "type": "video",
+      "thumbnail": "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=800",
+      "color": "#BB86FC",
+      "description": "AI-generated 2D campaign for a premium Mumbai street-wear brand.",
+      "content": {
+        "url": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "summary": "Using AI to reduce production costs by 85% while increasing engagement."
+      }
+    },
+    "order": 1,
+    "visible": true
+  },
+  {
+    "id": "case-case-3",
+    "section": "case-studies",
+    "type": "case-study-card",
+    "data": {
+      "id": "case-3",
+      "title": "Mumbai Glam x Hyper13",
+      "serviceId": "social-mgmt",
+      "type": "social",
+      "thumbnail": "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=800",
+      "color": "#FF5C8D",
+      "description": "Exclusive social media highlights of our latest cosmetics campaign.",
+      "content": {
+        "url": "https://www.instagram.com/p/C-XyX-ySg3_/",
+        "summary": "Organic reach highlights on Instagram."
+      }
+    },
+    "order": 2,
+    "visible": true
+  },
+  {
+    "id": "case-case-4",
+    "section": "case-studies",
+    "type": "case-study-card",
+    "data": {
+      "id": "case-4",
+      "title": "Shopify Core: Tech Excellence",
+      "serviceId": "shopify-dev",
+      "type": "blog",
+      "thumbnail": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800",
+      "color": "#7DCEA0",
+      "description": "How we achieved 98/100 Mobile speed for Jaipur Jewels.",
+      "content": {
+        "summary": "Technical breakdown of theme optimization and edge caching.",
+        "fullText": "\n                # Speed as a Feature\n                For Jaipur Jewels, conversion was directly tied to mobile load times.\n                \n                ## Optimization Path\n                We removed all legacy apps and replaced them with custom-coded liquid solutions.\n                Using cloudflare workers, we implemented regional edge caching across India.\n                \n                ## The Impact\n                Checkouts increased by 35% within the first two weeks of the new launch.\n            "
+      }
+    },
+    "order": 3,
+    "visible": true
+  },
+  {
+    "id": "case-case-5",
+    "section": "case-studies",
+    "type": "case-study-card",
+    "data": {
+      "id": "case-5",
+      "title": "Google Ads: Search Intent",
+      "serviceId": "google-ads",
+      "type": "video",
+      "thumbnail": "https://images.unsplash.com/photo-1504868584819-f8e90526ef49?q=80&w=800",
+      "color": "#F4D03F",
+      "description": "Behind the scenes of a pan-India search campaign.",
+      "content": {
+        "url": "https://www.youtube.com/embed/jNQXAC9IVRw",
+        "summary": "Dominating search intent with smart bidding."
+      }
+    },
+    "order": 4,
+    "visible": true
+  },
+  {
+    "id": "product-animnow",
+    "section": "products",
+    "type": "product-item",
+    "data": {
+      "name": "Animnow",
+      "status": "Live",
+      "description": "A precision-engineered, browser-native 2D studio.",
+      "features": [
+        "Vector Sovereignty",
+        "Spatial Architect",
+        "Keyframe Nirvana",
+        "AI Co-Pilot",
+        "Cloud Render"
+      ],
+      "cta": "Secure Early Access"
+    },
+    "order": 0,
+    "visible": true
+  },
+  {
+    "id": "nav-main",
+    "section": "navigation",
+    "type": "header-nav",
+    "data": {
+      "0": {
+        "label": "Portfolio",
+        "link": "/portfolio"
+      },
+      "1": {
+        "label": "Market",
+        "link": "/marketplace"
+      }
+    },
+    "order": 0,
+    "visible": true
+  },
+  {
+    "id": "theme-config",
+    "section": "theme",
+    "type": "global-theme",
+    "data": {
+      "colors": {
+        "primary": "#DAC0A3",
+        "bg": "#000000",
+        "text": "#FFFFFF"
+      },
+      "fonts": {
+        "main": "Inter, sans-serif"
+      },
+      "borderRadius": "4px"
+    },
+    "order": 0,
+    "visible": true
+  }
+]

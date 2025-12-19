@@ -1,0 +1,232 @@
+.logoWrapper {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    z-index: 1001;
+}
+
+.brandLogo {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+}
+
+.logoText {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 950;
+    color: var(--color-text);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+}
+
+.logoText span {
+    color: var(--color-bg);
+    background: var(--color-accent);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 4px;
+    font-size: 0.9em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[data-theme='dark'] .logoText span {
+    background: var(--color-primary);
+    color: var(--color-bg);
+}
+
+.logoSubline {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-weight: 800;
+    color: var(--color-text-dim);
+    margin-top: -2px;
+}
+
+@media (max-width: 768px) {
+    .logoWrapper {
+        top: 1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        /* Center it */
+    }
+
+    .brandLogo {
+        align-items: center;
+        /* Center the text */
+    }
+
+    .logoText {
+        font-size: 1.5rem;
+        /* Bigger on mobile */
+        letter-spacing: 1px;
+    }
+
+    .logoText span {
+        font-size: 1rem;
+        /* Proportionally bigger */
+        padding: 3px 8px;
+    }
+
+    .logoSubline {
+        font-size: 0.5rem;
+        letter-spacing: 3px;
+        margin-top: 2px;
+        /* Space from main logo */
+    }
+}
+
+/* Base & Desktop Navigation */
+.nav {
+    position: fixed;
+    top: 1.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    background: var(--color-surface);
+    /* Use theme surface */
+    backdrop-filter: blur(20px);
+    padding: 0.5rem;
+    border-radius: 50px;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    width: max-content;
+}
+
+.desktopOnly {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .desktopOnly {
+        display: block;
+    }
+}
+
+.list {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    /* Center the toggle */
+}
+
+.link {
+    position: relative;
+    padding: 0.75rem 1.5rem;
+    color: var(--color-text-dim);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.link:hover,
+.link.active {
+    color: var(--color-text);
+}
+
+.pill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    z-index: -1;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='light'] .pill {
+    background: var(--color-accent);
+    border: 1px solid var(--color-accent);
+}
+
+/* Mobile Bottom Navigation (Icon Only) */
+.mobileBottomNav {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: var(--color-surface);
+    backdrop-filter: blur(20px);
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 50px;
+    border: 1px solid var(--color-border);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    width: max-content;
+}
+
+@media (min-width: 1024px) {
+    .mobileBottomNav {
+        display: none;
+    }
+}
+
+.mobileIconLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: var(--color-text-dim);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    position: relative;
+    font-size: 1.4rem;
+}
+
+.mobileIconLink.active {
+    background: var(--color-primary);
+    color: var(--color-bg);
+    box-shadow: 0 5px 15px var(--color-primary-dim);
+}
+
+[data-theme='light'] .mobileIconLink.active {
+    background: var(--color-accent);
+    color: var(--color-primary);
+}
+
+.themeToggle {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.themeToggle:hover {
+    transform: scale(1.1);
+}
+
+/* Helper for standard line-clamp */
+.lineClamp2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    /* Standard property */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

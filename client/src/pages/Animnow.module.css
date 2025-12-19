@@ -1,0 +1,761 @@
+.container {
+    min-height: 100vh;
+    background: var(--color-bg);
+    color: var(--color-text);
+    overflow-x: hidden;
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px var(--spacing-md) 80px;
+    gap: 4rem;
+}
+
+.heroContent {
+    flex: 1;
+    max-width: 600px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+    color: var(--color-primary);
+}
+
+.hero h1 {
+    font-size: clamp(4rem, 10vw, 8rem);
+    margin-bottom: 1.5rem;
+    letter-spacing: -5px;
+    line-height: 0.9;
+}
+
+.lead {
+    font-size: 1.5rem;
+    color: var(--color-text-dim);
+    margin-bottom: 3rem;
+    line-height: 1.7;
+    /* Improved spacing */
+}
+
+.heroActions {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.primaryCTA {
+    padding: 1.2rem 2.5rem;
+    background: var(--color-text);
+    color: var(--color-bg);
+    border-radius: 4px;
+    font-weight: 800;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: transform 0.3s;
+}
+
+.secondaryCTA {
+    padding: 1.2rem 2.5rem;
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.visualContainer {
+    flex: 1.2;
+    display: flex;
+    justify-content: center;
+}
+
+/* Enhanced Editor UI */
+.editorWindow {
+    width: 100%;
+    max-width: 900px;
+    height: 550px;
+    background: #0D0D0D;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.editorHeader {
+    height: 44px;
+    background: #1A1A1A;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+    gap: 2rem;
+}
+
+.dotGroup {
+    display: flex;
+    gap: 6px;
+}
+
+.dotGroup span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.editorTab {
+    background: #262626;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    font-size: 0.7rem;
+    font-family: monospace;
+    color: var(--color-text-dim);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.editorBody {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+.sidePanel {
+    width: 180px;
+    background: #141414;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+}
+
+.rightPanel {
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: none;
+}
+
+.panelTitle {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-text-dim);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.layerItem {
+    font-size: 0.75rem;
+    color: var(--color-text-dim);
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.activeLayer {
+    background: rgba(var(--color-primary-rgb), 0.1);
+    color: var(--color-primary);
+}
+
+.uiCanvas {
+    flex: 1;
+    background: #0a0a0a;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.gridOverlay {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+.characterContainer {
+    position: relative;
+    z-index: 2;
+}
+
+.stickMan {
+    filter: drop-shadow(0 0 15px var(--color-primary-dim));
+}
+
+.selectionBox {
+    position: absolute;
+    width: 140px;
+    height: 220px;
+    border: 1px solid var(--color-primary);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.property {
+    font-size: 0.7rem;
+    color: var(--color-text-dim);
+    margin-bottom: 0.5rem;
+    font-family: monospace;
+}
+
+.property span {
+    color: rgba(255, 255, 255, 0.2);
+    margin-right: 4px;
+}
+
+.uiTimeline {
+    height: 120px;
+    background: #141414;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.timelineHeader {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.65rem;
+    font-family: monospace;
+}
+
+.playbackBtns {
+    display: flex;
+    gap: 1rem;
+    opacity: 0.5;
+}
+
+.tracks {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.track {
+    height: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 4px;
+    position: relative;
+    margin-bottom: 6px;
+}
+
+.playhead {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 45%;
+    width: 2px;
+    background: #ff4757;
+    z-index: 5;
+}
+
+.keyframe {
+    position: absolute;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    background: #fff;
+    border-radius: 2px;
+    transform: rotate(45deg);
+}
+
+/* Evocative Section Styling */
+.label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: var(--color-primary);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.problem {
+    padding: 10rem var(--spacing-md);
+    background: radial-gradient(circle at top right, rgba(var(--color-primary-rgb), 0.05), transparent 40%),
+        radial-gradient(circle at bottom left, rgba(var(--color-primary-rgb), 0.05), transparent 40%);
+}
+
+.sectionContent {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.problemHeader {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 6rem;
+}
+
+.problemHeader h2 {
+    font-size: clamp(3rem, 6vw, 5rem);
+    letter-spacing: -3px;
+    margin-bottom: 2rem;
+}
+
+.problemHeader h2 span {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 8px;
+}
+
+.problemIntro {
+    font-size: 1.2rem;
+    color: var(--color-text-dim);
+    line-height: 1.8;
+    /* More breathing room */
+}
+
+.frictionList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .frictionList {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+.frictionItem {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 3rem;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.frictionItem::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--color-primary);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.frictionItem:hover {
+    border-color: rgba(var(--color-primary-rgb), 0.3);
+    background: rgba(var(--color-primary-rgb), 0.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.frictionItem:hover::before {
+    opacity: 1;
+}
+
+.fNum {
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--color-primary);
+    opacity: 0.2;
+    margin-bottom: 2rem;
+    font-family: monospace;
+}
+
+.fContent h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.5px;
+}
+
+.fContent p {
+    color: var(--color-text-dim);
+    line-height: 1.8;
+    /* Better readability */
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.impactTag {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-primary);
+}
+
+.darkBanner {
+    background: #000;
+    color: #fff;
+    padding: 10rem var(--spacing-md);
+    text-align: center;
+}
+
+.darkBanner h2 {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    max-width: 900px;
+    margin: 0 auto;
+    font-weight: 300;
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+.cardNumber {
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 0.8;
+    margin-bottom: 2rem;
+    background: linear-gradient(to bottom, var(--color-primary), transparent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    /* Standard property */
+    -webkit-text-fill-color: transparent;
+    opacity: 0.3;
+}
+
+@media (max-width: 1024px) {
+    .editorWindow {
+        height: auto;
+    }
+
+    .sidePanel {
+        display: none;
+    }
+}
+
+/* Features */
+.features {
+    padding: 10rem var(--spacing-md);
+}
+
+.sectionHeader {
+    margin-bottom: 5rem;
+    text-align: center;
+}
+
+.statusTag {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.features h2 {
+    font-size: 3.5rem;
+    letter-spacing: -2px;
+}
+
+.featureGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.featureCard {
+    background: var(--color-surface);
+    padding: 3rem;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+}
+
+.featureCard h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.featureCard p {
+    color: var(--color-text-dim);
+    line-height: 1.8;
+    /* More space between lines */
+}
+
+/* Workflow */
+.workflow {
+    padding: 10rem var(--spacing-md);
+    background: #000;
+    color: #fff;
+}
+
+.workflow h2 {
+    font-size: 3rem;
+    margin-bottom: 5rem;
+    text-align: center;
+}
+
+.workflowSteps {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.step {
+    flex: 1;
+    text-align: center;
+}
+
+.stepNum {
+    font-size: 4rem;
+    font-weight: 900;
+    opacity: 0.2;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.step h3 {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Status / Roadmap */
+.status {
+    padding: 10rem var(--spacing-md);
+}
+
+.statusContainer {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.statusContainer h2 {
+    font-size: 2.5rem;
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.roadmap {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.roadmapItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    opacity: 0.5;
+}
+
+.roadmapItem.completed {
+    opacity: 1;
+    border-color: #2ecc71;
+}
+
+.roadmapItem.active {
+    opacity: 1;
+    border-color: var(--color-primary);
+    background: rgba(var(--color-primary-rgb), 0.05);
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+}
+
+.completed .dot {
+    background: #2ecc71;
+    border-color: #2ecc71;
+}
+
+.active .dot {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 10px var(--color-primary);
+}
+
+/* Users */
+.users {
+    padding: 5rem var(--spacing-md);
+}
+
+.users h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2rem;
+}
+
+.userGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.userGrid span {
+    padding: 1rem 2rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 50px;
+    font-weight: 700;
+}
+
+/* Early Access */
+.earlyAccess {
+    padding: 10rem var(--spacing-md);
+}
+
+.formCard {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--color-surface);
+    padding: 5rem;
+    border-radius: 20px;
+    border: 1px solid var(--color-border);
+    text-align: center;
+}
+
+.formCard h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: -2px;
+}
+
+.formCard p {
+    color: var(--color-text-dim);
+    margin-bottom: 3rem;
+}
+
+.signupForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.inputRow {
+    display: flex;
+    gap: 1rem;
+}
+
+.inputRow input,
+.inputRow select {
+    flex: 1;
+    padding: 1.2rem;
+    border-radius: 4px;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+.signupForm button {
+    padding: 1.2rem;
+    background: var(--color-text);
+    color: var(--color-bg);
+    border: none;
+    border-radius: 4px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.successMessage {
+    padding: 2rem;
+}
+
+.pageFooter {
+    padding: 5rem var(--spacing-md);
+    text-align: center;
+    border-top: 1px solid var(--color-border);
+}
+
+.pageFooter p {
+    font-size: 0.9rem;
+    color: var(--color-text-dim);
+    font-style: italic;
+}
+
+@media (max-width: 1024px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 160px;
+    }
+
+    .heroContent {
+        max-width: 100%;
+    }
+
+    .heroActions {
+        justify-content: center;
+    }
+
+    .problemGrid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .workflowSteps {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .frictionItem {
+        padding: 2rem;
+    }
+
+    .fNum {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .problemHeader {
+        margin-bottom: 3rem;
+    }
+
+    .problem {
+        padding: 5rem var(--spacing-md);
+    }
+}
+
+@media (max-width: 768px) {
+    .formCard {
+        padding: 2rem;
+    }
+
+    .inputRow {
+        flex-direction: column;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+    }
+}

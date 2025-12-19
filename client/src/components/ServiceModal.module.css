@@ -1,0 +1,212 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 2rem;
+}
+
+.modal {
+    position: relative;
+    max-width: 400px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme='light'] .modal {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.closeBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--color-text);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.closeBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.modalHeader {
+    margin-bottom: 1.5rem;
+}
+
+.modalHeader h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+    background: linear-gradient(135deg, var(--service-color), var(--color-text));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.description {
+    font-size: 0.85rem;
+    color: var(--color-text-dim);
+    line-height: 1.5;
+}
+
+.modalBody {
+    margin-bottom: 1.5rem;
+}
+
+.section {
+    margin-bottom: 1.25rem;
+}
+
+.section h3 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--color-text-dim);
+    margin-bottom: 0.75rem;
+    font-weight: 700;
+}
+
+.featureList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.featureList li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    color: var(--color-text);
+    font-size: 0.85rem;
+}
+
+.checkmark {
+    color: var(--service-color);
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.deliverables {
+    color: var(--color-text);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    padding: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='light'] .deliverables {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.metrics {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.25rem;
+}
+
+.metric {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.metricValue {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--service-color);
+}
+
+.metricLabel {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-text-dim);
+}
+
+.modalFooter {
+    display: flex;
+    justify-content: center;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='light'] .modalFooter {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.ctaButton {
+    background: var(--service-color);
+    color: #000;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.75rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.ctaButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile adjustments */
+@media (max-width: 1024px) {
+    .modal {
+        max-width: 90%;
+        padding: 1.5rem;
+    }
+
+    .modalHeader h2 {
+        font-size: 1.25rem;
+    }
+
+    .description {
+        font-size: 0.8rem;
+    }
+
+    .featureList li {
+        font-size: 0.8rem;
+    }
+
+    .metrics {
+        gap: 1rem;
+    }
+
+    .metricValue {
+        font-size: 1.1rem;
+    }
+}
