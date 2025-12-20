@@ -12,6 +12,11 @@ export function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
     const { theme, toggleTheme } = useTheme();
 
+    // Hide global navigation on admin routes to prevent UI overlap
+    if (location.startsWith('/admin')) {
+        return null;
+    }
+
     const staticLinks = [
         { path: '/', label: 'Home', icon: '⌂' },
         { path: '/contact', label: 'Contact', icon: '✉' },

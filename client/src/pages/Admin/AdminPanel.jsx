@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useLocation } from 'wouter';
 import { useAdminStore } from '../../store/adminStore';
 import classes from './Admin.module.css';
 
 export default function AdminPanel() {
-    const { token, blocks, fetchBlocks, updateBlock, deleteBlock, setToken } = useAdminStore();
+    const { token, blocks, fetchBlocks, updateBlock, deleteBlock, createBlock, setToken } = useAdminStore();
     const [, setLocation] = useLocation();
-    const [activeTab, setActiveTab] = useState('services');
+    const [activeTab, setActiveTab] = useState('dashboard');
     const [editingBlock, setEditingBlock] = useState(null);
     const [editData, setEditData] = useState({});
 
@@ -20,7 +20,7 @@ export default function AdminPanel() {
 
     const handleLogout = () => {
         setToken(null);
-        setLocation('/admin/login');
+        setLocation('/');
     };
 
     const toggleVisibility = async (block) => {
@@ -28,8 +28,13 @@ export default function AdminPanel() {
     };
 
     const startAdd = () => {
-        setEditingBlock({ id: 'new', section: activeTab, data: { type: 'blog', content: {} } });
-        setEditData({ type: 'blog', content: {} });
+        let initialData = {};
+        if (activeTab === 'case-studies') initialData = { type: 'blog', content: {} };
+        if (activeTab === 'portfolio') initialData = { name: '', status: 'Active', progress: 0 };
+        if (activeTab === 'services') initialData = { label: '', description: '', color: '#DAC0A3' };
+
+        setEditingBlock({ id: 'new', section: activeTab, data: initialData });
+        setEditData(initialData);
     };
 
     const startEdit = (block) => {
@@ -39,14 +44,21 @@ export default function AdminPanel() {
 
     const handleSave = async () => {
         if (editingBlock.id === 'new') {
+            // Ensure correct type mapping for industry standard storage
+            let type = 'generic-item';
+            if (activeTab === 'case-studies') type = 'case-study-card';
+            if (activeTab === 'portfolio') type = 'portfolio-item';
+            if (activeTab === 'services') type = 'service-card';
+            if (activeTab === 'products') type = 'product-item';
+
             const newBlock = {
                 section: activeTab,
-                type: activeTab === 'case-studies' ? 'case-study-card' : 'generic-item',
+                type: type,
                 data: editData,
                 visible: true,
                 order: blocks.filter(b => b.section === activeTab).length
             };
-            await useAdminStore.getState().createBlock(newBlock);
+            await createBlock(newBlock);
         } else {
             await updateBlock(editingBlock.id, { data: editData });
         }
@@ -54,161 +66,313 @@ export default function AdminPanel() {
         fetchBlocks();
     };
 
-    const sections = ['services', 'portfolio', 'case-studies', 'products', 'navigation', 'theme'];
+    const sections = [
+        { id: 'dashboard', label: 'Dashboard', icon: '📊' },
+        { id: 'services', label: 'Services', icon: '🛠️' },
+        { id: 'portfolio', label: 'Portfolio', icon: '💼' },
+        { id: 'case-studies', label: 'Case Studies', icon: '📂' },
+        { id: 'products', label: 'Products', icon: '📦' },
+        { id: 'navigation', label: 'Navigation', icon: '🔗' },
+        { id: 'theme', label: 'Theme Config', icon: '🎨' }
+    ];
+
+    const getCount = (sectionId) => {
+        return blocks.filter(b => b.section === sectionId).length;
+    };
+
+    // Derived list of services for selectors
+    const availableServices = useMemo(() => {
+        return blocks
+            .filter(b => b.section === 'services')
+            .map(b => ({ id: b.data.id || b.id, label: b.data.label }));
+    }, [blocks]);
+
+    const stats = useMemo(() => ([
+        { label: 'Total Blocks', value: blocks.length },
+        { label: 'Active Services', value: blocks.filter(b => b.section === 'services' && b.visible).length },
+        { label: 'Case Studies', value: blocks.filter(b => b.section === 'case-studies').length },
+        { label: 'System Uptime', value: '99.9%' }
+    ]), [blocks]);
 
     return (
         <div className={classes.panelContainer}>
-            <header className={classes.panelHeader}>
-                <h1>Admin Control Center</h1>
-                <button onClick={handleLogout} className={classes.logoutBtn}>Logout</button>
-            </header>
-
-            <nav className={classes.tabNav}>
-                {sections.map(s => (
-                    <button
-                        key={s}
-                        className={activeTab === s ? classes.activeTab : ''}
-                        onClick={() => setActiveTab(s)}
-                    >
-                        {s.replace('-', ' ')}
-                    </button>
-                ))}
-            </nav>
-
-            <main className={classes.contentArea}>
-                <div className={classes.blockList}>
-                    <button onClick={startAdd} className={classes.addBtn}>+ Add New {activeTab.replace('-', ' ')} Item</button>
-                    {blocks.filter(b => b.section === activeTab).map(block => (
-                        <div key={block.id} className={classes.blockItem}>
-                            <div className={classes.blockInfo}>
-                                <span className={classes.blockType}>{block.type}</span>
-                                <h3>{block.data.label || block.data.name || block.data.title || block.id}</h3>
+            {/* Sidebar Navigation */}
+            <aside className={classes.sidebar}>
+                <div className={classes.sidebarHeader}>
+                    <h2>Hyper<span>Control</span></h2>
+                </div>
+                <nav className={classes.sidebarNav}>
+                    {sections.map(s => (
+                        <button
+                            key={s.id}
+                            className={`${classes.navItem} ${activeTab === s.id ? classes.activeTab : ''}`}
+                            onClick={() => setActiveTab(s.id)}
+                        >
+                            <div className={classes.itemLabel}>
+                                <span>{s.icon}</span> {s.label}
                             </div>
-                            <div className={classes.blockActions}>
-                                <button
-                                    onClick={() => toggleVisibility(block)}
-                                    className={block.visible ? classes.visibleBtn : classes.hiddenBtn}
-                                >
-                                    {block.visible ? 'Visible' : 'Hidden'}
-                                </button>
-                                <button onClick={() => startEdit(block)} className={classes.editBtn}>Edit</button>
-                                <button
-                                    onClick={() => window.confirm('Delete this item?') && deleteBlock(block.id)}
-                                    className={classes.deleteBtn}
-                                >
-                                    Delete
-                                </button>
+                            {s.id !== 'dashboard' && (
+                                <span className={classes.countBadge}>{getCount(s.id)}</span>
+                            )}
+                        </button>
+                    ))}
+                </nav>
+                <div className={classes.sidebarFooter}>
+                    <div style={{ padding: '0 0.5rem 1rem', fontSize: '0.65rem', color: '#333' }}>
+                        DEBUG: Sync Nodes [{blocks.length}]
+                    </div>
+                    <button onClick={handleLogout} className={classes.logoutBtn}>Sign Out</button>
+                </div>
+            </aside>
+
+            {/* Main Content */}
+            <main className={classes.mainContent}>
+                <header className={classes.contentHeader}>
+                    <div className={classes.headerTitles}>
+                        <span className={classes.breadcrumb}>Sector / {activeTab}</span>
+                        <h1>{activeTab.replace('-', ' ')}</h1>
+                    </div>
+                    <div className={classes.headerActions}>
+                        <button onClick={fetchBlocks} className={classes.actionBtn} style={{ marginRight: '1rem' }}>
+                            ⟳ Refresh Nodes
+                        </button>
+                        {activeTab !== 'dashboard' && (
+                            <button onClick={startAdd} className={classes.addBtn}>
+                                + New Protocol
+                            </button>
+                        )}
+                    </div>
+                </header>
+
+                <div className={classes.contentArea}>
+                    {activeTab === 'dashboard' ? (
+                        <div className={classes.dashboardOverview}>
+                            <div className={classes.statsGrid}>
+                                {stats.map((s, i) => (
+                                    <div key={i} className={classes.statCard}>
+                                        <div className={classes.statLabel}>{s.label}</div>
+                                        <div className={classes.statValue}>{s.value}</div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className={classes.welcomeMsg}>
+                                <h2>Industrial Management Hub</h2>
+                                <p>Operational integrity is optimal. Use the sidebar to manage your enterprise infrastructure. All data nodes are synchronized with the primary SQLite engine.</p>
+                                <div style={{ marginTop: '1.5rem', fontSize: '0.8rem', opacity: 0.5 }}>
+                                    Current session: {new Date().toLocaleTimeString()} | DB: SQLite-Hyper.db
+                                </div>
                             </div>
                         </div>
-                    ))}
+                    ) : (
+                        <div className={classes.blockList}>
+                            {blocks.filter(b => b.section === activeTab).map(block => (
+                                <div key={block.id} className={classes.blockItem}>
+                                    <div className={classes.blockInfo}>
+                                        <div className={classes.idBadge}>ID: {block.id}</div>
+                                        <span className={classes.blockType}>{block.type}</span>
+                                        <h3>{block.data.label || block.data.name || block.data.title || block.id}</h3>
+                                        {block.data.serviceId && (
+                                            <div style={{ fontSize: '0.7rem', color: '#666', marginTop: '4px' }}>
+                                                Linked Service: {availableServices.find(s => s.id === block.data.serviceId)?.label || block.data.serviceId}
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className={classes.blockActions}>
+                                        <button
+                                            onClick={() => toggleVisibility(block)}
+                                            className={`${classes.actionBtn} ${block.visible ? classes.visibleBtn : classes.hiddenBtn}`}
+                                        >
+                                            {block.visible ? 'Published' : 'Draft'}
+                                        </button>
+                                        <button onClick={() => startEdit(block)} className={`${classes.actionBtn} ${classes.editBtn}`}>Modify</button>
+                                        <button
+                                            onClick={() => window.confirm('Permanently delete this item?') && deleteBlock(block.id)}
+                                            className={`${classes.actionBtn} ${classes.deleteBtn}`}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                            {blocks.filter(b => b.section === activeTab).length === 0 && (
+                                <div className={classes.emptyState}>
+                                    <div className={classes.emptyIcon}>∅</div>
+                                    <p>No operational records found in the "{activeTab}" sector.</p>
+                                    <button onClick={startAdd} className={classes.addBtn} style={{ marginTop: '2rem' }}>
+                                        Initialize First Entry
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </div>
 
                 {editingBlock && (
                     <div className={classes.modalOverlay}>
                         <div className={classes.modal}>
-                            <h2>Edit {activeTab}</h2>
+                            <h2>{editingBlock.id === 'new' ? 'New' : 'Edit'} {activeTab}</h2>
                             <div className={classes.form}>
                                 {activeTab === 'case-studies' && (
                                     <>
-                                        <label>Title</label>
-                                        <input type="text" value={editData.title || ''} onChange={e => setEditData({ ...editData, title: e.target.value })} />
-
-                                        <label>Type</label>
-                                        <select value={editData.type || 'blog'} onChange={e => setEditData({ ...editData, type: e.target.value })}>
-                                            <option value="blog">Blog</option>
-                                            <option value="video">YouTube Video</option>
-                                            <option value="social">Instagram Post</option>
-                                        </select>
-
-                                        <label>Thumbnail URL</label>
-                                        <input type="text" value={editData.thumbnail || ''} onChange={e => setEditData({ ...editData, thumbnail: e.target.value })} />
-
+                                        <div className={classes.inputGroup}>
+                                            <label>Industrial Title</label>
+                                            <input type="text" value={editData.title || ''} onChange={e => setEditData({ ...editData, title: e.target.value })} />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Content Vector (Type)</label>
+                                            <select value={editData.type || 'blog'} onChange={e => setEditData({ ...editData, type: e.target.value })}>
+                                                <option value="blog">Article / Case</option>
+                                                <option value="video">System Visual (YouTube)</option>
+                                                <option value="social">Social Integration</option>
+                                            </select>
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Assigned Unit (Service)</label>
+                                            <select value={editData.serviceId || ''} onChange={e => setEditData({ ...editData, serviceId: e.target.value })}>
+                                                <option value="">Unassigned</option>
+                                                {availableServices.map(s => (
+                                                    <option key={s.id} value={s.id}>{s.label}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Visual Asset (URL)</label>
+                                            <input type="text" value={editData.thumbnail || ''} onChange={e => setEditData({ ...editData, thumbnail: e.target.value })} />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Status Color (Hex)</label>
+                                            <input type="text" value={editData.color || '#DAC0A3'} onChange={e => setEditData({ ...editData, color: e.target.value })} />
+                                        </div>
                                         {editData.type === 'blog' ? (
-                                            <>
-                                                <label>Full Text (Markdown)</label>
-                                                <textarea value={editData.content?.fullText || ''} onChange={e => setEditData({ ...editData, content: { ...editData.content, fullText: e.target.value } })} />
-                                            </>
+                                            <div className={classes.inputGroup}>
+                                                <label>Technical Log (Markdown)</label>
+                                                <textarea rows="6" value={editData.content?.fullText || ''} onChange={e => setEditData({ ...editData, content: { ...editData.content, fullText: e.target.value } })} />
+                                            </div>
                                         ) : (
-                                            <>
-                                                <label>Media URL (YouTube Embed or IG Link)</label>
+                                            <div className={classes.inputGroup}>
+                                                <label>Media Source Link (URL)</label>
                                                 <input type="text" value={editData.content?.url || ''} onChange={e => setEditData({ ...editData, content: { ...editData.content, url: e.target.value } })} />
-                                            </>
+                                            </div>
                                         )}
-
-                                        <label>Summary</label>
-                                        <textarea value={editData.content?.summary || ''} onChange={e => setEditData({ ...editData, content: { ...editData.content, summary: e.target.value } })} />
-
-                                        <label>Color (Hex)</label>
-                                        <input type="text" value={editData.color || '#DAC0A3'} onChange={e => setEditData({ ...editData, color: e.target.value })} />
-
-                                        <label>Service ID (e.g. meta-ads, google-ads)</label>
-                                        <input type="text" value={editData.serviceId || ''} onChange={e => setEditData({ ...editData, serviceId: e.target.value })} />
+                                        <div className={classes.inputGroup}>
+                                            <label>Architecture Summary</label>
+                                            <textarea value={editData.content?.summary || ''} onChange={e => setEditData({ ...editData, content: { ...editData.content, summary: e.target.value } })} />
+                                        </div>
                                     </>
                                 )}
 
                                 {activeTab === 'services' && (
                                     <>
-                                        <label>Service Label</label>
-                                        <input type="text" value={editData.label || ''} onChange={e => setEditData({ ...editData, label: e.target.value })} />
-
-                                        <label>Description</label>
-                                        <textarea value={editData.description || ''} onChange={e => setEditData({ ...editData, description: e.target.value })} />
-
-                                        <label>Color (Hex)</label>
-                                        <input type="text" value={editData.color || ''} onChange={e => setEditData({ ...editData, color: e.target.value })} />
+                                        <div className={classes.inputGroup}>
+                                            <label>System Capability (Label)</label>
+                                            <input type="text" value={editData.label || ''} onChange={e => setEditData({ ...editData, label: e.target.value })} />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Service ID (Internal)</label>
+                                            <input type="text" value={editData.id || ''} onChange={e => setEditData({ ...editData, id: e.target.value })} placeholder="e.g. meta-ads" />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Deployment Description</label>
+                                            <textarea value={editData.description || ''} onChange={e => setEditData({ ...editData, description: e.target.value })} />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Status Color (Hex)</label>
+                                            <input type="text" value={editData.color || '#DAC0A3'} onChange={e => setEditData({ ...editData, color: e.target.value })} />
+                                        </div>
                                     </>
                                 )}
 
                                 {activeTab === 'portfolio' && (
                                     <>
-                                        <label>Project Name</label>
-                                        <input type="text" value={editData.name || ''} onChange={e => setEditData({ ...editData, name: e.target.value })} />
-
-                                        <label>Status</label>
-                                        <input type="text" value={editData.status || ''} onChange={e => setEditData({ ...editData, status: e.target.value })} />
-
-                                        <label>Service ID</label>
-                                        <input type="text" value={editData.serviceId || ''} onChange={e => setEditData({ ...editData, serviceId: e.target.value })} />
-
-                                        <label>Progress (%)</label>
-                                        <input type="number" min="0" max="100" value={editData.progress || 0} onChange={e => setEditData({ ...editData, progress: parseInt(e.target.value) })} />
+                                        <div className={classes.inputGroup}>
+                                            <label>Project Designation (Name)</label>
+                                            <input type="text" value={editData.name || ''} onChange={e => setEditData({ ...editData, name: e.target.value })} />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Assigned Unit (Service)</label>
+                                            <select value={editData.serviceId || ''} onChange={e => setEditData({ ...editData, serviceId: e.target.value })}>
+                                                <option value="">Unassigned</option>
+                                                {availableServices.map(s => (
+                                                    <option key={s.id} value={s.id}>{s.label}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Lifecycle Status</label>
+                                            <select value={editData.status || 'Active'} onChange={e => setEditData({ ...editData, status: e.target.value })}>
+                                                <option value="Active">Active / Scaling</option>
+                                                <option value="Deployment">Deployment Mode</option>
+                                                <option value="Stable">Stable Operations</option>
+                                                <option value="Optimizing">Optimization Phase</option>
+                                                <option value="Success">Success Story (Completed)</option>
+                                            </select>
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Operational Group</label>
+                                            <select value={editData.group || 'live'} onChange={e => setEditData({ ...editData, group: e.target.value })}>
+                                                <option value="live">Live Operations</option>
+                                                <option value="finished">Success Stories</option>
+                                            </select>
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Optimization Index (%)</label>
+                                            <input type="number" min="0" max="100" value={editData.progress || 0} onChange={e => setEditData({ ...editData, progress: parseInt(e.target.value) })} />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Visual Identity (Hex Color)</label>
+                                            <input type="text" value={editData.color || '#DAC0A3'} onChange={e => setEditData({ ...editData, color: e.target.value })} />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Metrics Visualization (JSON Array)</label>
+                                            <textarea
+                                                rows="6"
+                                                value={JSON.stringify(editData.widgets || [], null, 2)}
+                                                onChange={e => {
+                                                    try {
+                                                        const widgets = JSON.parse(e.target.value);
+                                                        setEditData({ ...editData, widgets });
+                                                    } catch (err) { }
+                                                }}
+                                            />
+                                        </div>
                                     </>
                                 )}
 
                                 {activeTab === 'products' && (
                                     <>
-                                        <label>Product Name</label>
-                                        <input type="text" value={editData.name || ''} onChange={e => setEditData({ ...editData, name: e.target.value })} />
-
-                                        <label>Description</label>
-                                        <textarea value={editData.description || ''} onChange={e => setEditData({ ...editData, description: e.target.value })} />
-
-                                        <label>Link</label>
-                                        <input type="text" value={editData.link || ''} onChange={e => setEditData({ ...editData, link: e.target.value })} />
+                                        <div className={classes.inputGroup}>
+                                            <label>Product Domain</label>
+                                            <input type="text" value={editData.name || ''} onChange={e => setEditData({ ...editData, name: e.target.value })} />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Technical Specs</label>
+                                            <textarea value={editData.description || ''} onChange={e => setEditData({ ...editData, description: e.target.value })} />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Access Link</label>
+                                            <input type="text" value={editData.link || ''} onChange={e => setEditData({ ...editData, link: e.target.value })} />
+                                        </div>
                                     </>
                                 )}
 
                                 {(activeTab === 'navigation' || activeTab === 'theme') && (
-                                    <>
-                                        <label>Data (JSON)</label>
+                                    <div className={classes.inputGroup}>
+                                        <label>Technical Node (JSON Archive)</label>
                                         <textarea
-                                            rows="10"
+                                            rows="12"
                                             value={JSON.stringify(editData, null, 2)}
                                             onChange={e => {
                                                 try {
                                                     setEditData(JSON.parse(e.target.value));
-                                                } catch (err) {
-                                                    // Invalid JSON, don't update
-                                                }
+                                                } catch (err) { }
                                             }}
                                         />
-                                        <small style={{ color: 'var(--color-text-dim)' }}>Edit as JSON for advanced configuration</small>
-                                    </>
+                                    </div>
                                 )}
                             </div>
                             <div className={classes.modalActions}>
-                                <button onClick={() => setEditingBlock(null)}>Cancel</button>
-                                <button onClick={handleSave} className={classes.saveBtn}>Save Changes</button>
+                                <button onClick={() => setEditingBlock(null)} className={classes.cancelBtn}>Abort</button>
+                                <button onClick={handleSave} className={classes.saveBtn}>Commit Changes</button>
                             </div>
                         </div>
                     </div>

@@ -6,6 +6,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import { generateToken, authenticateToken, loginAdmin } from './auth.js';
+import { query, run, get as dbGet } from './db.js';
 
 dotenv.config(); // Look in root
 dotenv.config({ path: path.join(path.dirname(fileURLToPath(import.meta.url)), '.env') }); // Look in server/
@@ -15,29 +16,16 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const DATA_DIR =
-  process.env.DATA_DIR || path.join(__dirname, 'data');
-
-const BLOCKS_FILE = path.join(DATA_DIR, 'blocks.json');
-
-
 app.use(
-  cors({
-    origin: process.env.NODE_ENV === 'production'
-      ? 'https://yourdomain.com'
-      : '*',
-    credentials: true
-  })
+    cors({
+        origin: process.env.NODE_ENV === 'production'
+            ? 'https://yourdomain.com'
+            : '*',
+        credentials: true
+    })
 );
 
 app.use(express.json());
-if (!fs.existsSync(DATA_DIR)) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-}
-
-if (!fs.existsSync(BLOCKS_FILE)) {
-  fs.writeFileSync(BLOCKS_FILE, JSON.stringify([], null, 2));
-}
 
 
 // Serve static files from the React app
@@ -46,35 +34,37 @@ if (fs.existsSync(clientBuildPath)) {
     app.use(express.static(clientBuildPath));
 }
 
-// Helper to read blocks
-const getBlocks = () => {
-    const data = fs.readFileSync(BLOCKS_FILE, 'utf8');
-    return JSON.parse(data);
-};
+// Helper to map DB rows to frontend format
+const formatBlock = (row) => ({
+    ...row,
+    data: JSON.parse(row.data),
+    visible: !!row.visible
+});
 
 // --- PUBLIC APIs ---
 
 // Fetch blocks by section
-app.get('/api/blocks/:section', (req, res) => {
+app.get('/api/blocks/:section', async (req, res) => {
     try {
         const { section } = req.params;
-        const blocks = getBlocks();
-        const filtered = blocks
-            .filter(b => b.section === section && b.visible)
-            .sort((a, b) => a.order - b.order);
-        res.json(filtered);
+        const rows = await query(
+            'SELECT * FROM blocks WHERE section = ? AND visible = 1 ORDER BY [order] ASC',
+            [section]
+        );
+        res.json(rows.map(formatBlock));
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'Failed to fetch blocks' });
     }
 });
 
 // Fetch all public content (for initial load)
-app.get('/api/content', (req, res) => {
+app.get('/api/content', async (req, res) => {
     try {
-        const blocks = getBlocks();
-        const publicContent = blocks.filter(b => b.visible);
-        res.json(publicContent);
+        const rows = await query('SELECT * FROM blocks WHERE visible = 1 ORDER BY section, [order] ASC');
+        res.json(rows.map(formatBlock));
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'Failed to fetch content' });
     }
 });
@@ -95,52 +85,54 @@ app.post('/api/login', (req, res) => {
 });
 
 // Admin: CRUD blocks
-app.get('/api/admin/blocks', authenticateToken, (req, res) => {
+app.get('/api/admin/blocks', authenticateToken, async (req, res) => {
     try {
-        const blocks = getBlocks();
-        res.json(blocks);
+        const rows = await query('SELECT * FROM blocks ORDER BY section, [order] ASC');
+        res.json(rows.map(formatBlock));
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch blocks' });
     }
 });
 
-app.post('/api/admin/blocks', authenticateToken, (req, res) => {
+app.post('/api/admin/blocks', authenticateToken, async (req, res) => {
     try {
-        const blocks = getBlocks();
-        const newBlock = { ...req.body, id: `block-${Date.now()}` };
-        blocks.push(newBlock);
-        fs.writeFileSync(BLOCKS_FILE, JSON.stringify(blocks, null, 2));
-        res.status(201).json(newBlock);
+        const { section, type, data, order, visible } = req.body;
+        const id = `block-${Date.now()}`;
+        await run(
+            'INSERT INTO blocks (id, section, type, data, [order], visible) VALUES (?, ?, ?, ?, ?, ?)',
+            [id, section, type, JSON.stringify(data), order || 0, visible ? 1 : 0]
+        );
+        res.status(201).json({ id, ...req.body });
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'Failed to create block' });
     }
 });
 
-app.put('/api/admin/blocks/:id', authenticateToken, (req, res) => {
+app.put('/api/admin/blocks/:id', authenticateToken, async (req, res) => {
     try {
         const { id } = req.params;
-        let blocks = getBlocks();
-        const index = blocks.findIndex(b => b.id === id);
+        const { section, type, data, order, visible } = req.body;
 
-        if (index === -1) return res.status(404).json({ error: 'Block not found' });
+        await run(
+            'UPDATE blocks SET section = ?, type = ?, data = ?, [order] = ?, visible = ? WHERE id = ?',
+            [section, type, JSON.stringify(data), order, visible ? 1 : 0, id]
+        );
 
-        blocks[index] = { ...blocks[index], ...req.body };
-        fs.writeFileSync(BLOCKS_FILE, JSON.stringify(blocks, null, 2));
-        res.json(blocks[index]);
+        res.json({ id, ...req.body });
     } catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'Failed to update block' });
     }
 });
 
-app.delete('/api/admin/blocks/:id', authenticateToken, (req, res) => {
+app.delete('/api/admin/blocks/:id', authenticateToken, async (req, res) => {
     try {
         const { id } = req.params;
-        let blocks = getBlocks();
-        const filtered = blocks.filter(b => b.id !== id);
+        const result = await run('DELETE FROM blocks WHERE id = ?', [id]);
 
-        if (blocks.length === filtered.length) return res.status(404).json({ error: 'Block not found' });
+        if (result.changes === 0) return res.status(404).json({ error: 'Block not found' });
 
-        fs.writeFileSync(BLOCKS_FILE, JSON.stringify(filtered, null, 2));
         res.status(204).send();
     } catch (error) {
         res.status(500).json({ error: 'Failed to delete block' });

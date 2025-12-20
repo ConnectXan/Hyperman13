@@ -21,9 +21,9 @@ function Portfolio() {
     }, [activeGroup, selectedService, portfolioData]);
 
     const agencyStats = [
-        { label: 'Active Partnerships', value: '7+' },
-        { label: 'Managed Assets', value: '₹4.5Cr+' },
-        { label: 'Growth Rating', value: '98.2%' }
+        { label: 'Asset Management', value: '₹4.5Cr+' },
+        { label: 'Active Partnerships', value: '12' },
+        { label: 'Ecosystem Growth', value: '98.2%' }
     ];
 
     return (
@@ -42,8 +42,21 @@ function Portfolio() {
                     ))}
                 </motion.div>
 
-                <h1>Growth Intelligence</h1>
-                <p>Decoding performance across our ecosystem.</p>
+                <motion.h1
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 }}
+                >
+                    Growth<br />Intelligence<span>_</span>
+                </motion.h1>
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                >
+                    Scaling D2C brands and tech ecosystems with industrial precision.
+                    Real-time performance metrics across our active partner network.
+                </motion.p>
 
                 <div className={classes.controls}>
                     <div className={classes.groupToggle}>
@@ -51,7 +64,7 @@ function Portfolio() {
                             className={activeGroup === 'live' ? classes.activeBtn : ''}
                             onClick={() => setActiveGroup('live')}
                         >
-                            Live Operations
+                            Live Ops
                         </button>
                         <button
                             className={activeGroup === 'finished' ? classes.activeBtn : ''}
@@ -88,51 +101,63 @@ function Portfolio() {
                         <motion.div
                             key={project.id}
                             layout
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
+                            initial={{ opacity: 0, y: 40 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
                             exit={{ opacity: 0, scale: 0.95 }}
                             className={classes.clientSection}
+                            style={{ '--service-color': project.color }}
                         >
                             <div className={classes.clientHeader}>
                                 <div className={classes.clientTitle}>
-                                    <div className={classes.statusIndicator} style={{ backgroundColor: project.color }} />
-                                    <div>
-                                        <h2>{project.name}</h2>
-                                        <span className={classes.serviceTag}>
-                                            {servicesConfig.find(s => s.id === project.serviceId)?.label}
-                                        </span>
-                                    </div>
+                                    <span className={classes.serviceTag}>
+                                        {servicesConfig.find(s => s.id === project.serviceId)?.label || 'Strategy'}
+                                    </span>
+                                    <h2>{project.name}</h2>
                                 </div>
                                 <div className={classes.projectStatus}>
                                     {project.group === 'live' && (
                                         <div className={classes.miniProgress}>
-                                            <span className={classes.progressText}>{project.progress}%</span>
+                                            <span className={classes.progressText}>{project.progress}% Optimization</span>
                                             <div className={classes.progressRail}>
-                                                <div
+                                                <motion.div
                                                     className={classes.progressFill}
-                                                    style={{ width: `${project.progress}%`, backgroundColor: project.color }}
+                                                    initial={{ width: 0 }}
+                                                    whileInView={{ width: `${project.progress}%` }}
+                                                    transition={{ duration: 1.5, ease: "easeOut" }}
+                                                    style={{ backgroundColor: project.color }}
                                                 />
                                             </div>
                                         </div>
                                     )}
-                                    <span className={classes.badge} style={{ color: project.color, borderColor: project.color }}>
+                                    <span className={classes.badge} style={{ color: project.color, borderColor: `${project.color}33` }}>
                                         {project.status}
                                     </span>
                                 </div>
                             </div>
 
                             <div className={classes.widgetRow}>
-                                {project.widgets.map((widget, idx) => (
+                                {project.widgets?.map((widget, idx) => (
                                     <DashboardWidget
                                         key={idx}
                                         {...widget}
                                         color={project.color}
                                     />
                                 ))}
+                                {(!project.widgets || project.widgets.length === 0) && (
+                                    <div style={{ color: '#444', fontStyle: 'italic', fontSize: '0.9rem' }}>
+                                        Initializing technical instrumentation...
+                                    </div>
+                                )}
                             </div>
                         </motion.div>
                     ))}
                 </AnimatePresence>
+                {filteredProjects.length === 0 && (
+                    <div style={{ textAlign: 'center', padding: '4rem', color: '#666' }}>
+                        No intelligence reports found for this sector.
+                    </div>
+                )}
             </motion.div>
         </div>
     );

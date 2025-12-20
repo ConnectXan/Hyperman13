@@ -13,7 +13,7 @@ function HyperControl() {
                         animate={{ opacity: 1, scale: 1 }}
                         className={classes.badge}
                     >
-                        Internal Infrastructure System
+                        Enterprise Infrastructure Engine
                     </motion.div>
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
@@ -28,7 +28,7 @@ function HyperControl() {
                         transition={{ delay: 0.2 }}
                         className={classes.lead}
                     >
-                        The unified backend content engine powering Hyper13 agency and Animnow. Manages authentication, dynamic content, and API services with enterprise-grade security.
+                        The ultimate industrial-grade backend engine. Designed for rapid integration, Hyper-Control centralizes your content, security, and data architecture into a single, high-performance SQLite-powered hub.
                     </motion.p>
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -36,8 +36,8 @@ function HyperControl() {
                         transition={{ delay: 0.3 }}
                         className={classes.heroActions}
                     >
-                        <a href="/admin/login" className={classes.primaryCTA}>Access Admin Panel</a>
-                        <button className={classes.secondaryCTA}>View Documentation</button>
+                        <a href="/admin/login" className={classes.primaryCTA}>Deploy Control Hub</a>
+                        <button className={classes.secondaryCTA}>API Documentation</button>
                     </motion.div>
                 </div>
 
@@ -46,17 +46,17 @@ function HyperControl() {
                     <div className={classes.editorWindow}>
                         <div className={classes.editorHeader}>
                             <div className={classes.dotGroup}><span></span><span></span><span></span></div>
-                            <div className={classes.editorTab}>admin/blocks/services.json</div>
+                            <div className={classes.editorTab}>hyper-control/db/blocks.sqlite</div>
                         </div>
                         <div className={classes.editorBody}>
                             <aside className={classes.sidePanel}>
                                 <div className={classes.panelGroup}>
-                                    <div className={classes.panelTitle}>Content Blocks</div>
-                                    <div className={classes.layerItem}><span>📦</span> services.json</div>
-                                    <div className={classes.layerItem}><span>📦</span> portfolio.json</div>
-                                    <div className={classes.layerItem + ' ' + classes.activeLayer}><span>📦</span> casestudies.json</div>
-                                    <div className={classes.layerItem}><span>📦</span> navigation.json</div>
-                                    <div className={classes.layerItem}><span>🔐</span> auth.js</div>
+                                    <div className={classes.panelTitle}>Schema Tables</div>
+                                    <div className={classes.layerItem}><span>📊</span> blocks</div>
+                                    <div className={classes.layerItem}><span>👥</span> users</div>
+                                    <div className={classes.layerItem + ' ' + classes.activeLayer}><span>📡</span> api_nodes</div>
+                                    <div className={classes.layerItem}><span>🛡️</span> security_logs</div>
+                                    <div className={classes.layerItem}><span>⚙️</span> config_global</div>
                                 </div>
                             </aside>
 
@@ -74,7 +74,7 @@ function HyperControl() {
                                     transition={{ delay: 0.3 }}
                                 >
                                     <div style={{ marginBottom: '0.5rem', color: 'var(--color-text-dim)' }}>
-                                        <span style={{ color: 'var(--color-accent)' }}>GET</span> /api/blocks/case-studies
+                                        <span style={{ color: 'var(--color-accent)' }}>QUERY</span> SELECT * FROM blocks WHERE section='pro'
                                     </div>
                                     <div style={{
                                         background: 'var(--color-surface)',
@@ -83,24 +83,24 @@ function HyperControl() {
                                         border: '1px solid var(--color-border)',
                                         marginBottom: '1rem'
                                     }}>
-                                        <div style={{ color: 'var(--color-text-dim)' }}>{'{'}</div>
+                                        <div style={{ color: 'var(--color-text-dim)' }}>[{'{'}</div>
                                         <div style={{ paddingLeft: '1rem' }}>
-                                            <span style={{ color: 'var(--color-accent)' }}>"id"</span>:
-                                            <span style={{ color: 'var(--color-primary)' }}> "case-meta-growth"</span>,
+                                            <span style={{ color: 'var(--color-accent)' }}>"node"</span>:
+                                            <span style={{ color: 'var(--color-primary)' }}> "enterprise-sync"</span>,
                                         </div>
                                         <div style={{ paddingLeft: '1rem' }}>
-                                            <span style={{ color: 'var(--color-accent)' }}>"title"</span>:
-                                            <span style={{ color: 'var(--color-primary)' }}> "Meta Ads Growth"</span>,
+                                            <span style={{ color: 'var(--color-accent)' }}>"status"</span>:
+                                            <span style={{ color: 'var(--color-primary)' }}> "optimal"</span>,
                                         </div>
                                         <div style={{ paddingLeft: '1rem' }}>
-                                            <span style={{ color: 'var(--color-accent)' }}>"type"</span>:
-                                            <span style={{ color: 'var(--color-primary)' }}> "blog"</span>,
+                                            <span style={{ color: 'var(--color-accent)' }}>"engine"</span>:
+                                            <span style={{ color: 'var(--color-primary)' }}> "SQLite 3.x"</span>,
                                         </div>
                                         <div style={{ paddingLeft: '1rem' }}>
-                                            <span style={{ color: 'var(--color-accent)' }}>"visible"</span>:
+                                            <span style={{ color: 'var(--color-accent)' }}>"active"</span>:
                                             <span style={{ color: '#4CAF50' }}> true</span>
                                         </div>
-                                        <div style={{ color: 'var(--color-text-dim)' }}>{'}'}</div>
+                                        <div style={{ color: 'var(--color-text-dim)' }}>{'}'}]</div>
                                     </div>
                                     <div style={{
                                         padding: '0.75rem',
@@ -110,33 +110,33 @@ function HyperControl() {
                                         color: '#4CAF50',
                                         fontWeight: '600'
                                     }}>
-                                        ✓ 200 OK • Authenticated • 12 blocks loaded
+                                        ✓ SQL Execution: 0.2ms • Persistence: Secure
                                     </div>
                                 </motion.div>
                             </div>
 
                             <aside className={classes.sidePanel + ' ' + classes.rightPanel}>
                                 <div className={classes.panelGroup}>
-                                    <div className={classes.panelTitle}>System Monitor</div>
-                                    <div className={classes.property}><span>Auth:</span> JWT Active</div>
-                                    <div className={classes.property}><span>Uptime:</span> 99.8%</div>
-                                    <div className={classes.property}><span>Requests:</span> 12.4k</div>
-                                    <div className={classes.property}><span>Storage:</span> 45 MB</div>
+                                    <div className={classes.panelTitle}>Engine Core</div>
+                                    <div className={classes.property}><span>DB:</span> SQLite Indexed</div>
+                                    <div className={classes.property}><span>IO:</span> Ultra-Low Latency</div>
+                                    <div className={classes.property}><span>Scale:</span> Infinity Ready</div>
+                                    <div className={classes.property}><span>Security:</span> JWT-AES</div>
                                 </div>
                                 <div className={classes.panelGroup} style={{ marginTop: '1rem' }}>
-                                    <div className={classes.panelTitle}>Active Users</div>
-                                    <div className={classes.property}><span>Admin:</span> 1</div>
-                                    <div className={classes.property}><span>Sessions:</span> 3</div>
+                                    <div className={classes.panelTitle}>Integration</div>
+                                    <div className={classes.property}><span>Any Web App:</span> YES</div>
+                                    <div className={classes.property}><span>CMS Mode:</span> Active</div>
                                 </div>
                             </aside>
                         </div>
                         <div className={classes.uiTimeline}>
                             <div className={classes.timelineHeader}>
                                 <span style={{ fontSize: '0.7rem', color: 'var(--color-text-dim)' }}>
-                                    <span style={{ color: 'var(--color-accent)' }}>▶</span> Server: localhost:5000
+                                    <span style={{ color: 'var(--color-accent)' }}>▶</span> Instance: cluster-alpha-13
                                 </span>
                                 <div className={classes.playbackBtns}>
-                                    <span style={{ fontSize: '0.65rem' }}>Node.js v18.x</span>
+                                    <span style={{ fontSize: '0.65rem' }}>Production Active</span>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +144,7 @@ function HyperControl() {
                 </div>
             </section>
 
-            {/* 2. Core System */}
+            {/* 2. Industry Standard Section */}
             <section className={classes.problem}>
                 <div className={classes.sectionContent}>
                     <motion.div
@@ -153,10 +153,10 @@ function HyperControl() {
                         viewport={{ once: true }}
                         className={classes.problemHeader}
                     >
-                        <span className={classes.label}>The Backend Engine</span>
-                        <h2>Unified <span>infrastructure.</span></h2>
+                        <span className={classes.label}>Industry Standard</span>
+                        <h2>One Engine. <span>Every App.</span></h2>
                         <p className={classes.problemIntro}>
-                            Hyper-Control is the central nervous system powering all our applications. Built for performance, security, and scalability.
+                            Hyper-Control isn't just for us. It's a plug-and-play backbone designed for developers who need enterprise-level content management without the complexity of traditional databases.
                         </p>
                     </motion.div>
 
@@ -164,21 +164,21 @@ function HyperControl() {
                         {[
                             {
                                 num: '01',
-                                title: 'Content Management',
-                                text: 'RESTful API for managing all website content blocks, themes, and configurations with real-time sync across applications.',
-                                barrier: 'Dynamic Content'
+                                title: 'Universal Integration',
+                                text: 'Sync your entire product ecosystem. Whether it is a marketing site, a web app, or a 2D studio, Hyper-Control provides the single source of truth.',
+                                barrier: 'Connect Any App'
                             },
                             {
                                 num: '02',
-                                title: 'Authentication & Authorization',
-                                text: 'JWT-based secure authentication with role-based access control. Manages admin sessions for both agency site and Animnow.',
-                                barrier: 'Security First'
+                                title: 'Industrial Security',
+                                text: 'Military-grade session management and JWT authentication. Your data is protected by industry-standard protocols and role-based access.',
+                                barrier: 'Shielded Data'
                             },
                             {
                                 num: '03',
-                                title: 'File-Based Storage',
-                                text: 'Lightweight JSON-based data storage for rapid reads and writes. No database overhead, perfect for content-driven applications.',
-                                barrier: 'High Performance'
+                                title: 'Lightning Architecture',
+                                text: 'Powered by an optimized SQLite engine. Massive performance gains with zero-configuration persistence and instant query resolution.',
+                                barrier: 'Blazing Fast'
                             }
                         ].map((item, idx) => (
                             <motion.div
@@ -194,7 +194,7 @@ function HyperControl() {
                                 <div className={classes.fContent}>
                                     <h3>{item.title}</h3>
                                     <p>{item.text}</p>
-                                    <div className={classes.impactTag}>Feature: {item.barrier}</div>
+                                    <div className={classes.impactTag}>Standard: {item.barrier}</div>
                                 </div>
                             </motion.div>
                         ))}
@@ -202,19 +202,19 @@ function HyperControl() {
                 </div>
             </section>
 
-            {/* 3. Tech Stack */}
+            {/* 3. Integration Grid */}
             <section className={classes.features}>
                 <div className={classes.sectionHeader}>
-                    <span className={classes.statusTag}>Technology Stack</span>
-                    <h2>Built on proven technology.</h2>
+                    <span className={classes.statusTag}>Developer Friendly</span>
+                    <h2>Scalable Integration.</h2>
                 </div>
                 <div className={classes.featureGrid}>
                     {[
-                        { title: 'Node.js + Express', desc: 'High-performance JavaScript runtime with Express framework for robust API endpoints.' },
-                        { title: 'JWT Authentication', desc: 'Industry-standard token-based authentication for secure, stateless sessions.' },
-                        { title: 'File-Based Storage', desc: 'Lightweight JSON storage for fast reads and easy version control.' },
-                        { title: 'RESTful API', desc: 'Clean, predictable API design following REST principles for seamless integration.' },
-                        { title: 'CORS Enabled', desc: 'Cross-origin resource sharing configured for secure frontend-backend communication.' }
+                        { title: 'Global API Endpoint', desc: 'Secure /api/blocks endpoint ready for any frontend framework (React, Vue, Next.js).' },
+                        { title: 'Dynamic Theme Sync', desc: 'Control your brand colors, fonts, and assets globally from one central dashboard.' },
+                        { title: 'SQLite Core', desc: 'Enterprise data persistence with the simplicity of local file management.' },
+                        { title: 'Role-Based ACL', desc: 'Granular control over who can view, edit, or delete specific content modules.' },
+                        { title: 'Instant Deployment', desc: 'Built-in Vercel and Render optimization for zero-downtime infrastructure updates.' }
                     ].map((f, i) => (
                         <div key={i} className={classes.featureCard}>
                             <div className={classes.cardNumber}>0{i + 1}</div>
@@ -225,29 +225,29 @@ function HyperControl() {
                 </div>
             </section>
 
-            {/* 4. Status */}
+            {/* 4. Infrastructure Status */}
             <section className={classes.status}>
                 <div className={classes.statusContainer}>
-                    <h2>System Status</h2>
+                    <h2>Infrastructure Roadmap</h2>
                     <div className={classes.roadmap}>
                         <div className={classes.roadmapItem + ' ' + classes.completed}>
-                            <span>Core API</span>
+                            <span>Core SQLite Engine</span>
                             <div className={classes.dot}></div>
                         </div>
                         <div className={classes.roadmapItem + ' ' + classes.completed}>
-                            <span>Authentication</span>
+                            <span>JWT Shield</span>
                             <div className={classes.dot}></div>
                         </div>
                         <div className={classes.roadmapItem + ' ' + classes.completed}>
-                            <span>Content CRUD</span>
+                            <span>Universal API</span>
                             <div className={classes.dot}></div>
                         </div>
                         <div className={classes.roadmapItem + ' ' + classes.active}>
-                            <span>Animnow Integration</span>
+                            <span>Partner Integration Hub</span>
                             <div className={classes.dot}></div>
                         </div>
                         <div className={classes.roadmapItem}>
-                            <span>Cloud Deployment</span>
+                            <span>Auto-Scaling Clusters</span>
                             <div className={classes.dot}></div>
                         </div>
                     </div>
@@ -255,7 +255,7 @@ function HyperControl() {
             </section>
 
             <footer className={classes.pageFooter}>
-                <p>"Hyper-Control is the backbone infrastructure powering our entire product ecosystem."</p>
+                <p>"Hyper-Control: The industry-standard backbone for professional web applications."</p>
             </footer>
         </div>
     );
