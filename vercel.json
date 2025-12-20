@@ -3,15 +3,18 @@
     "rewrites": [
         {
             "source": "/api/(.*)",
-            "destination": "/server/index.js"
+            "destination": "/api/index.js"
         },
         {
-            "source": "/(.*)",
-            "destination": "/client/dist/$1",
-            "check": true
+            "source": "/assets/(.*)",
+            "destination": "/client/dist/assets/$1"
         },
         {
-            "source": "/(.*)",
+            "source": "/favicon.png",
+            "destination": "/client/dist/favicon.png"
+        },
+        {
+            "source": "/((?!api/).*)",
             "destination": "/client/dist/index.html"
         }
     ]
