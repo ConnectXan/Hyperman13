@@ -1,88 +1,75 @@
 .overlay {
-    position: relative;
-    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100vh;
+    height: 100%;
+    pointer-events: none;
+    padding: 3rem 4rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    padding: var(--spacing-lg);
-    pointer-events: none;
-}
-
-.header,
-.serviceList,
-.instruction {
-    pointer-events: auto;
+    justify-content: flex-end; /* Align content to the bottom */
 }
 
 .header {
-    max-width: 600px;
-    margin-top: 2rem;
-    /* Give breathing room from the logo */
+    position: absolute;
+    top: 3rem;
+    left: 4rem;
+    pointer-events: auto;
+    align-self: flex-start;
 }
 
 .mainTagline {
-    font-size: 0.9rem;
-    line-height: 1.5;
-    margin: 0;
-    letter-spacing: 4px;
-    font-weight: 700;
-    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: 300; /* Lighter font weight */
     color: var(--color-text-dim);
+    max-width: 280px; /* Reduced width */
+    line-height: 1.6;
+    border-left: 2px solid var(--color-text-dim); /* Subtle accent */
+    padding-left: 1rem;
 }
 
 .serviceList {
+    pointer-events: auto;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    max-width: 400px;
-    margin-top: auto;
-    margin-bottom: 100px;
-    /* Space for bottom nav on mobile */
+    align-items: flex-start;
+    gap: 0.75rem; /* Increased gap */
+    margin-bottom: 2rem; /* Give some space from the bottom */
 }
 
 .serviceItem {
-    background: transparent;
-    border: none;
-    padding: 0.5rem 0;
-    color: var(--color-text);
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    font-weight: 800;
+    font-size: 2.2rem; /* Slightly smaller */
+    font-weight: 400; /* Regular weight */
     cursor: pointer;
-    text-align: left;
+    background: none;
+    border: none;
+    color: var(--color-text-dim);
+    transition: color 0.3s ease, transform 0.3s ease;
+    padding: 0;
     position: relative;
-    text-transform: uppercase;
-    letter-spacing: -0.5px;
-    transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    transform-origin: left;
 }
 
-.serviceItem:hover,
+.serviceItem:hover {
+    transform: translateX(10px); /* Move on hover for interactivity */
+}
+
 .serviceItem.active {
-    padding-left: 1.5rem;
+    font-weight: 600; /* Bolder on active */
 }
 
 .indicator {
     position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 8px;
-    height: 8px;
+    bottom: 0px; /* Aligned with bottom */
+    left: -15px; /* Positioned to the left */
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
 }
 
 .instruction {
-    position: absolute;
-    bottom: var(--spacing-lg);
-    right: var(--spacing-lg);
-    color: var(--color-text-dim);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    font-weight: 700;
-    writing-mode: vertical-rl;
+    display: none; /* Hiding for a cleaner look */
 }
 
 @media (min-width: 1024px) {

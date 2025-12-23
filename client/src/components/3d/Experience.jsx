@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment, ContactShadows } from '@react-three/drei';
+import { EffectComposer, Bloom, DepthOfField } from '@react-three/postprocessing';
 import { MorphingObject } from './MorphingObject';
 
 import { useTheme } from '../../context/ThemeContext';
@@ -40,13 +41,26 @@ export function Experience() {
 
                     <ContactShadows
                         position={[0, -2, 0]}
-                        opacity={isDark ? 0.3 : 0.4} // Darker shadows in light mode for grounding
+                        opacity={isDark ? 0.3 : 0.4}
                         scale={15}
                         blur={2}
                         far={5}
                         resolution={256}
                         color={isDark ? "#000000" : "#5C5248"}
                     />
+                    <EffectComposer>
+                        <Bloom
+                            luminanceThreshold={isDark ? 0.05 : 0.2}
+                            luminanceSmoothing={0.9}
+                            height={300}
+                            intensity={isDark ? 1.2 : 1.0}
+                        />
+                        <DepthOfField
+                            focusDistance={0.01}
+                            focalLength={0.05}
+                            bokehScale={isDark ? 5 : 2}
+                        />
+                    </EffectComposer>
                 </Suspense>
             </Canvas>
         </div>

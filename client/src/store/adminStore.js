@@ -33,7 +33,7 @@ export const useAdminStore = create((set, get) => ({
                 set({ error: data.error });
                 return false;
             }
-        } catch (err) {
+        } catch {
             set({ error: 'Connection failed' });
             return false;
         } finally {
