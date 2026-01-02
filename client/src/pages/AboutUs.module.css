@@ -1,0 +1,659 @@
+.container {
+    min-height: 100vh;
+    background: var(--color-background);
+    color: var(--color-text);
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(218, 192, 163, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.heroContent {
+    flex: 1;
+    max-width: 600px;
+    z-index: 2;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    background: rgba(218, 192, 163, 0.1);
+    border: 1px solid rgba(218, 192, 163, 0.3);
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.hero h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+}
+
+.cursor {
+    color: var(--color-primary);
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+    opacity: 0.9;
+}
+
+.description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-text-dim);
+    margin-bottom: 0;
+}
+
+/* Hero Visual */
+.visualContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 2rem;
+}
+
+.dashboardWindow {
+    width: 500px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.windowHeader {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: var(--color-surface-elevated);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.dotGroup {
+    display: flex;
+    gap: 0.5rem;
+    margin-right: 1rem;
+}
+
+.dotGroup span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-text-dim);
+    opacity: 0.3;
+}
+
+.dotGroup span:first-child { background: #ff5f57; opacity: 1; }
+.dotGroup span:nth-child(2) { background: #ffbd2e; opacity: 1; }
+.dotGroup span:nth-child(3) { background: #28ca42; opacity: 1; }
+
+.windowTab {
+    font-size: 0.8rem;
+    color: var(--color-text-dim);
+    font-family: 'SF Mono', monospace;
+}
+
+.dashboardBody {
+    padding: 1.5rem;
+}
+
+.metricsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.metricCard {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.metricLabel {
+    font-size: 0.7rem;
+    color: var(--color-text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.metricValue {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.25rem;
+}
+
+.metricTrend {
+    font-size: 0.75rem;
+    color: #4CAF50;
+    font-weight: 600;
+}
+
+.chartArea {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.chartHeader {
+    font-size: 0.8rem;
+    color: var(--color-text-dim);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.chart {
+    display: flex;
+    align-items: end;
+    gap: 4px;
+    height: 60px;
+}
+
+.chartBar {
+    flex: 1;
+    background: linear-gradient(to top, var(--color-primary), rgba(218, 192, 163, 0.3));
+    border-radius: 2px;
+    min-height: 8px;
+}
+
+/* Section Styles */
+.sectionContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.sectionHeader {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.label {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: rgba(218, 192, 163, 0.1);
+    border: 1px solid rgba(218, 192, 163, 0.3);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sectionHeader h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+}
+
+.sectionHeader h2 span {
+    color: var(--color-primary);
+}
+
+.sectionHeader p {
+    font-size: 1.1rem;
+    color: var(--color-text-dim);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Approach Section */
+.approach {
+    padding: 8rem 0;
+    background: var(--color-surface);
+}
+
+.approachGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.approachCard {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.approachCard:hover,
+.approachCard.active {
+    border-color: var(--color-primary);
+    box-shadow: 0 10px 30px rgba(218, 192, 163, 0.1);
+}
+
+.cardIcon {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.approachCard h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+}
+
+.approachCard p {
+    color: var(--color-text-dim);
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+.cardNumber {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--color-text-dim);
+    font-weight: 700;
+    opacity: 0.5;
+}
+
+/* Story Section */
+.story {
+    padding: 8rem 0;
+}
+
+.storyHeader {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.storyHeader h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    color: var(--color-text);
+}
+
+.storyContent {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: var(--color-text-dim);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timelineItem {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.timelineItem:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.timelineYear {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    min-width: 80px;
+}
+
+.timelineContent h4 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+
+.timelineContent p {
+    color: var(--color-text-dim);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Capabilities Section */
+.capabilities {
+    padding: 8rem 0;
+    background: var(--color-surface);
+}
+
+.capabilitiesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.capabilityItem {
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+    color: var(--color-text);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.capabilityItem:hover {
+    border-color: var(--color-primary);
+    background: rgba(218, 192, 163, 0.05);
+}
+
+/* Team Section */
+.team {
+    padding: 8rem 0;
+}
+
+.teamGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    justify-items: center;
+}
+
+.teamCard {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    max-width: 350px;
+    transition: all 0.3s ease;
+}
+
+.teamCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.memberImage {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 1.5rem;
+    border: 3px solid var(--color-primary);
+}
+
+.memberImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.memberInfo h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+
+.memberRole {
+    font-size: 0.9rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.memberInfo p {
+    color: var(--color-text-dim);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.socialLink {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: opacity 0.2s;
+}
+
+.socialLink:hover {
+    opacity: 0.8;
+}
+
+/* CTA Section */
+.cta {
+    padding: 8rem 0;
+    background: var(--color-surface);
+}
+
+.ctaContent {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.ctaContent h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+}
+
+.ctaContent p {
+    font-size: 1.1rem;
+    color: var(--color-text-dim);
+    margin-bottom: 3rem;
+    line-height: 1.6;
+}
+
+.ctaActions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.primaryCTA,
+.secondaryCTA {
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.primaryCTA {
+    background: var(--color-primary);
+    color: var(--color-background);
+    border: 2px solid var(--color-primary);
+}
+
+.primaryCTA:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(218, 192, 163, 0.3);
+}
+
+.secondaryCTA {
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+}
+
+.secondaryCTA:hover {
+    background: var(--color-primary);
+    color: var(--color-background);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        padding: 2rem 1rem;
+        text-align: center;
+        min-height: auto;
+        padding-top: 6rem;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .visualContainer {
+        padding-left: 0;
+        margin-top: 3rem;
+    }
+
+    .dashboardWindow {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .metricsGrid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .sectionContent {
+        padding: 0 1rem;
+    }
+
+    .sectionHeader h2 {
+        font-size: 2rem;
+    }
+
+    .approach,
+    .story,
+    .capabilities,
+    .team,
+    .cta {
+        padding: 4rem 0;
+    }
+
+    .approachGrid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .timelineItem {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .timelineYear {
+        min-width: auto;
+    }
+
+    .capabilitiesGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .teamGrid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .ctaActions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .primaryCTA,
+    .secondaryCTA {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 1rem;
+        padding-top: 5rem;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .description {
+        font-size: 1rem;
+    }
+
+    .dashboardWindow {
+        max-width: 320px;
+    }
+
+    .dashboardBody {
+        padding: 1rem;
+    }
+
+    .sectionHeader h2 {
+        font-size: 1.8rem;
+    }
+
+    .approachCard,
+    .capabilityItem,
+    .teamCard {
+        padding: 1.5rem;
+    }
+}

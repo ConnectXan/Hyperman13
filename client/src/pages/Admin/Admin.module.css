@@ -4,6 +4,7 @@
     background: #050505;
     color: #e0e0e0;
     font-family: 'Inter', system-ui, sans-serif;
+    position: relative;
 }
 
 /* Sidebar Styling */
@@ -17,6 +18,50 @@
     position: sticky;
     top: 0;
     height: 100vh;
+    transition: transform 0.3s ease;
+}
+
+/* Mobile Menu Toggle */
+.mobileMenuToggle {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 1001;
+    background: #0a0a0a;
+    border: 1px solid #1a1a1a;
+    color: #DAC0A3;
+    padding: 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.mobileCloseBtn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: #888;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: color 0.2s;
+}
+
+.mobileCloseBtn:hover {
+    color: #DAC0A3;
+}
+
+.mobileOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 999;
 }
 
 .sidebarHeader {
@@ -60,6 +105,7 @@
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 500;
     width: 100%;
+    min-height: 48px; /* Touch-friendly height */
 }
 
 .itemLabel {
@@ -134,6 +180,8 @@
     position: sticky;
     top: 0;
     z-index: 10;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .headerTitles h1 {
@@ -158,6 +206,8 @@
 .headerActions {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .idBadge {
@@ -235,6 +285,8 @@
     justify-content: space-between;
     align-items: center;
     transition: border-color 0.2s;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
 .blockItem:hover {
@@ -260,6 +312,7 @@
 .blockActions {
     display: flex;
     gap: 0.75rem;
+    flex-wrap: wrap;
 }
 
 .actionBtn {
@@ -270,6 +323,10 @@
     cursor: pointer;
     border: 1px solid transparent;
     transition: all 0.2s;
+    min-height: 44px; /* Touch-friendly minimum height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Modal Styling */
@@ -328,6 +385,9 @@
     font-size: 0.9rem;
     font-family: inherit;
     transition: all 0.2s;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 .inputGroup select {
@@ -379,6 +439,7 @@
     align-items: center;
     justify-content: center;
     background: #050505;
+    padding: 1rem;
 }
 
 .loginCard {
@@ -386,7 +447,8 @@
     padding: 3.5rem;
     border-radius: 16px;
     border: 1px solid #1a1a1a;
-    width: 440px;
+    width: 100%;
+    max-width: 440px;
     text-align: center;
 }
 
@@ -419,4 +481,224 @@
 .hiddenBtn {
     color: #666;
     background: rgba(102, 102, 102, 0.1);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .panelContainer {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 280px;
+        height: 100vh;
+        z-index: 1000;
+        transform: translateX(-100%);
+        padding: 1.5rem 1rem;
+    }
+
+    .sidebar.mobileOpen {
+        transform: translateX(0);
+    }
+
+    .mobileMenuToggle {
+        display: block;
+    }
+
+    .mobileCloseBtn {
+        display: block;
+    }
+
+    .mobileOverlay.active {
+        display: block;
+    }
+
+    .mainContent {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .contentHeader {
+        padding: 1.5rem 1rem;
+        padding-top: 4rem; /* Account for mobile menu button */
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .headerTitles h1 {
+        font-size: 1.8rem;
+    }
+
+    .headerActions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .contentArea {
+        padding: 1.5rem 1rem;
+    }
+
+    .statsGrid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .statCard {
+        padding: 1rem;
+    }
+
+    .blockItem {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+
+    .blockActions {
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 0.5rem;
+    }
+
+    .actionBtn {
+        font-size: 0.8rem;
+        padding: 0.6rem 0.8rem;
+        min-height: 44px;
+    }
+
+    .modal {
+        width: 95vw;
+        max-width: 500px;
+        padding: 1.5rem;
+        margin: 1rem;
+        max-height: 90vh;
+    }
+
+    .modalActions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .saveBtn,
+    .cancelBtn {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    .loginCard {
+        width: 90vw;
+        max-width: 400px;
+        padding: 2rem;
+        margin: 1rem;
+    }
+
+    .loginCard h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Sidebar adjustments for mobile */
+    .sidebarHeader {
+        margin-bottom: 2rem;
+    }
+
+    .sidebarHeader h2 {
+        font-size: 1.1rem;
+    }
+
+    .navItem {
+        padding: 0.75rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .itemLabel {
+        gap: 0.8rem;
+    }
+
+    .countBadge {
+        font-size: 0.65rem;
+        padding: 0.1rem 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contentHeader {
+        padding: 1rem 0.75rem;
+        padding-top: 3.5rem;
+    }
+
+    .headerTitles h1 {
+        font-size: 1.5rem;
+    }
+
+    .contentArea {
+        padding: 1rem 0.75rem;
+    }
+
+    .blockItem {
+        padding: 0.75rem;
+    }
+
+    .blockActions {
+        gap: 0.5rem;
+    }
+
+    .actionBtn {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.6rem;
+        min-height: 40px;
+    }
+
+    .modal {
+        padding: 1rem;
+    }
+
+    .inputGroup input,
+    .inputGroup textarea,
+    .inputGroup select {
+        padding: 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    .loginCard {
+        padding: 1.5rem;
+    }
+
+    .sidebar {
+        width: 260px;
+        padding: 1rem 0.75rem;
+    }
+}
+/* Empty State */
+.emptyState {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #666;
+}
+
+.emptyIcon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.emptyState p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .emptyState {
+        padding: 2rem 1rem;
+    }
+    
+    .emptyIcon {
+        font-size: 2.5rem;
+    }
+    
+    .emptyState p {
+        font-size: 0.85rem;
+    }
 }

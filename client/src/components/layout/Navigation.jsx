@@ -3,6 +3,7 @@ import { Link, useLocation } from 'wouter';
 import { motion, AnimatePresence } from 'framer-motion';
 import classes from './Navigation.module.css';
 import { useContent } from '../../hooks/useContent';
+import NavigationIcon from '../ui/NavigationIcon';
 
 import { useTheme } from '../../context/ThemeContext';
 
@@ -18,11 +19,12 @@ export function Navigation() {
     }
 
     const staticLinks = [
-        { path: '/', label: 'Home', icon: '⌂' },
-        { path: '/contact', label: 'Contact', icon: '✉' },
-        { path: '/portfolio', label: 'Portfolio', icon: '◈' },
-        { path: '/case-study', label: 'Cases', icon: '✦' },
-        { path: '/marketplace', label: 'Market', icon: '⊞' }
+        { path: '/', label: 'Home', icon: 'home' },
+        { path: '/contact', label: 'Contact', icon: 'mail' },
+        { path: '/portfolio', label: 'Portfolio', icon: 'briefcase' },
+        { path: '/case-study', label: 'Cases', icon: 'file-text' },
+        { path: '/about', label: 'About', icon: 'user' },
+        { path: '/marketplace', label: 'Market', icon: 'grid' }
     ];
 
     // Intelligent merge: Backend items override static links if paths match,
@@ -42,7 +44,7 @@ export function Navigation() {
                 // Add new (if not a duplicate of a standard route logic and not one of the filtered ones)
                 const isFiltered = ['services'].includes(backendItem.label.toLowerCase());
                 if (!isFiltered) {
-                    links.push({ path: backendItem.link, label: backendItem.label, icon: '✦' });
+                    links.push({ path: backendItem.link, label: backendItem.label, icon: 'file-text' });
                 }
             }
         });
@@ -50,13 +52,24 @@ export function Navigation() {
 
     const toggleMenu = () => setIsOpen(!isOpen);
 
-    const ThemeToggle = () => (
+    const ThemeToggle = ({ isDesktop = false }) => (
         <button
             className={classes.themeToggle}
-            onClick={toggleTheme}
+            onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log(`${isDesktop ? 'Desktop' : 'Mobile'} theme toggle clicked`);
+                toggleTheme();
+            }}
             aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+            style={isDesktop ? {
+                padding: '0.5rem 1rem',
+                borderRadius: '25px',
+                width: 'auto',
+                height: 'auto'
+            } : {}}
         >
-            {theme === 'light' ? '🌙' : '☀️'}
+            <NavigationIcon name={theme === 'light' ? 'moon' : 'sun'} size={18} />
         </button>
     );
 
@@ -65,11 +78,11 @@ export function Navigation() {
             {/* Global Brand Logo (Top Left) */}
             <div className={classes.logoWrapper}>
                 <Link href="/">
-                    <a className={classes.brandLogo}>
+                    <div className={classes.brandLogo}>
                         <div className={classes.logoText}>
                             Hyperman<span>13</span>
                         </div>
-                    </a>
+                    </div>
                 </Link>
             </div>
 
@@ -90,7 +103,7 @@ export function Navigation() {
                             </li>
                         );
                     })}
-                    <li><ThemeToggle /></li>
+                    <li><ThemeToggle isDesktop={true} /></li>
                 </ul>
             </nav>
 
@@ -104,11 +117,11 @@ export function Navigation() {
                             href={link.path}
                             className={`${classes.mobileIconLink} ${isActive ? classes.active : ''}`}
                         >
-                            <span className={classes.navIcon}>{link.icon}</span>
+                            <NavigationIcon name={link.icon} size={20} />
                         </Link>
                     );
                 })}
-                <ThemeToggle />
+                <ThemeToggle isDesktop={false} />
             </nav>
         </>
     );

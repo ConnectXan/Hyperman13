@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Experience } from '../components/3d/Experience';
 import { useContent } from '../hooks/useContent';
 import { servicesConfig as staticServices } from '../data/servicesConfig';
 import { useStore } from '../hooks/useStore';
@@ -10,14 +9,13 @@ import classes from './Home.module.css';
 
 function Home() {
     const { data: servicesConfig } = useContent('services', staticServices);
-    const { data: caseStudies } = useContent('case-studies', []);
     const { setActiveServiceId, activeServiceId } = useStore();
     const [selectedService, setSelectedService] = useState(null);
 
     return (
         <>
-            {/* 3D Background */}
-            <Experience />
+            {/* Plain Background */}
+            <div className={classes.plainBackground} />
 
             {/* UI Overlay */}
             <div className={classes.overlay}>
@@ -66,7 +64,7 @@ function Home() {
                 </nav>
 
                 <div className={classes.instruction}>
-                    Interact with the core to explore services
+                    Explore our digital services
                 </div>
             </div>
 

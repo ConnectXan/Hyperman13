@@ -18,7 +18,7 @@ export default function Login() {
     return (
         <div className={classes.loginContainer}>
             <form className={classes.loginCard} onSubmit={handleSubmit}>
-                <h2>Hyper13 Admin</h2>
+                <h2>Hyperman13 Admin</h2>
                 <p>Secure Content Engine Access</p>
                 {error && <div className={classes.error}>{error}</div>}
                 <div className={classes.inputGroup}>

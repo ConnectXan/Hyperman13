@@ -34,6 +34,34 @@ export function MediaModal({ isOpen, onClose, data }) {
                     >
                         <button className={classes.closeBtn} onClick={onClose}>×</button>
 
+                        <div className={classes.header}>
+                            <div className={classes.headerContent}>
+                                <span className={classes.eyebrow} style={{ color: data.color }}>
+                                    {data.type === 'video' && 'Video Case Study'}
+                                    {data.type === 'social' && 'Social Campaign'}
+                                    {data.type === 'blog' && 'In-Depth Analysis'}
+                                </span>
+                                <h1>{data.title}</h1>
+                                <p>{data.description}</p>
+                                
+                                <div className={classes.headerMeta}>
+                                    <div className={classes.metaItem}>
+                                        <span className={classes.metaLabel}>Industry</span>
+                                        <span className={classes.metaValue}>{data.industry}</span>
+                                    </div>
+                                    <div className={classes.metaItem}>
+                                        <span className={classes.metaLabel}>Duration</span>
+                                        <span className={classes.metaValue}>{data.duration}</span>
+                                    </div>
+                                    {data.featured && (
+                                        <div className={classes.featuredBadge}>
+                                            ⭐ Featured Case
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+
                         <div className={classes.mediaContainer}>
                             {data.type === 'video' && (
                                 <iframe
@@ -48,20 +76,23 @@ export function MediaModal({ isOpen, onClose, data }) {
                             )}
                             {data.type === 'social' && (
                                 <div className={classes.socialPlaceholder}>
-                                    <h3>Instagram Content</h3>
-                                    <p>Embedded post would appear here.</p>
-                                    <a href={data.content.url} target="_blank" rel="noopener noreferrer" style={{ color: data.color }}>
-                                        View Post on Instagram →
+                                    <div className={classes.socialIcon}>📱</div>
+                                    <h3>Social Media Campaign</h3>
+                                    <p>This campaign showcases our social media expertise and engagement strategies.</p>
+                                    <a 
+                                        href={data.content.url} 
+                                        target="_blank" 
+                                        rel="noopener noreferrer" 
+                                        className={classes.socialLink}
+                                        style={{ backgroundColor: data.color }}
+                                    >
+                                        View Campaign →
                                     </a>
                                 </div>
                             )}
                             {data.type === 'blog' && (
                                 <div className={classes.blogScroll}>
-                                    <div className={classes.blogHeader} style={{ background: data.color + '20' }}>
-                                        <span className={classes.tag} style={{ backgroundColor: data.color }}>Case Study</span>
-                                        <h1>{data.title}</h1>
-                                    </div>
-                                    <div className={classes.blogBody}>
+                                    <div className={classes.blogContent}>
                                         <pre className={classes.fullText}>{data.content.fullText}</pre>
                                     </div>
                                 </div>
@@ -69,8 +100,78 @@ export function MediaModal({ isOpen, onClose, data }) {
                         </div>
 
                         <div className={classes.footer}>
-                            <h2>{data.title}</h2>
-                            <p>{data.content.summary}</p>
+                            <div className={classes.footerGrid}>
+                                {/* Challenge, Solution, Results */}
+                                <div className={classes.insights}>
+                                    <div className={classes.insightCard}>
+                                        <h4>🎯 Challenge</h4>
+                                        <p>{data.content.challenge}</p>
+                                    </div>
+                                    <div className={classes.insightCard}>
+                                        <h4>💡 Solution</h4>
+                                        <p>{data.content.solution}</p>
+                                    </div>
+                                    <div className={classes.insightCard}>
+                                        <h4>📈 Results</h4>
+                                        <p>{data.content.results}</p>
+                                    </div>
+                                </div>
+
+                                {/* Metrics */}
+                                {data.metrics && (
+                                    <div className={classes.metricsSection}>
+                                        <h4>Key Metrics</h4>
+                                        <div className={classes.metricsGrid}>
+                                            {Object.entries(data.metrics).map(([key, value]) => (
+                                                <div key={key} className={classes.metricCard}>
+                                                    <span className={classes.metricValue} style={{ color: data.color }}>
+                                                        {value}
+                                                    </span>
+                                                    <span className={classes.metricLabel}>
+                                                        {key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                                                    </span>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Client Testimonial */}
+                                {data.client && (
+                                    <div className={classes.testimonial}>
+                                        <h4>Client Testimonial</h4>
+                                        <div className={classes.testimonialCard}>
+                                            <blockquote>"{data.client.testimonial}"</blockquote>
+                                            <div className={classes.clientInfo}>
+                                                <img 
+                                                    src={data.client.avatar} 
+                                                    alt={data.client.name}
+                                                    className={classes.clientAvatar}
+                                                />
+                                                <span className={classes.clientName}>{data.client.name}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Tags */}
+                                {data.tags && (
+                                    <div className={classes.tagsSection}>
+                                        <h4>Tags</h4>
+                                        <div className={classes.tagsList}>
+                                            {data.tags.map(tag => (
+                                                <span 
+                                                    key={tag} 
+                                                    className={classes.tag}
+                                                    style={{ borderColor: data.color, color: data.color }}
+                                                >
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </motion.div>
                 </motion.div>

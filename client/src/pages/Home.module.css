@@ -239,3 +239,13 @@
 .miniCard:hover h3 {
     color: var(--color-primary);
 }
+/* Plain Background */
+.plainBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-background);
+    z-index: 0;
+}

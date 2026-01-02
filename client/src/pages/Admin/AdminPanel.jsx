@@ -9,6 +9,7 @@ export default function AdminPanel() {
     const [activeTab, setActiveTab] = useState('dashboard');
     const [editingBlock, setEditingBlock] = useState(null);
     const [editData, setEditData] = useState({});
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     useEffect(() => {
         if (!token) {
@@ -23,6 +24,15 @@ export default function AdminPanel() {
         setLocation('/');
     };
 
+    const closeMobileMenu = () => {
+        setMobileMenuOpen(false);
+    };
+
+    const handleTabChange = (tabId) => {
+        setActiveTab(tabId);
+        setMobileMenuOpen(false); // Close mobile menu when tab changes
+    };
+
     const toggleVisibility = async (block) => {
         await updateBlock(block.id, { visible: !block.visible });
     };
@@ -32,6 +42,12 @@ export default function AdminPanel() {
         if (activeTab === 'case-studies') initialData = { type: 'blog', content: {} };
         if (activeTab === 'portfolio') initialData = { name: '', status: 'Active', progress: 0 };
         if (activeTab === 'services') initialData = { label: '', description: '', color: '#DAC0A3' };
+        if (activeTab === 'performance-metrics') initialData = { 
+            label: '', 
+            value: 0, 
+            color: '#4CAF50', 
+            icon: '📊'
+        };
 
         setEditingBlock({ id: 'new', section: activeTab, data: initialData });
         setEditData(initialData);
@@ -50,6 +66,7 @@ export default function AdminPanel() {
             if (activeTab === 'portfolio') type = 'portfolio-item';
             if (activeTab === 'services') type = 'service-card';
             if (activeTab === 'products') type = 'product-item';
+            if (activeTab === 'performance-metrics') type = 'performance-metric';
 
             const newBlock = {
                 section: activeTab,
@@ -68,9 +85,11 @@ export default function AdminPanel() {
 
     const sections = [
         { id: 'dashboard', label: 'Dashboard', icon: '📊' },
+        { id: 'performance-metrics', label: 'Performance Metrics', icon: '🎯' },
         { id: 'services', label: 'Services', icon: '🛠️' },
         { id: 'portfolio', label: 'Portfolio', icon: '💼' },
         { id: 'case-studies', label: 'Case Studies', icon: '📂' },
+        { id: 'about-us', label: 'About Us', icon: '👤' },
         { id: 'products', label: 'Products', icon: '📦' },
         { id: 'navigation', label: 'Navigation', icon: '🔗' },
         { id: 'theme', label: 'Theme Config', icon: '🎨' }
@@ -96,17 +115,39 @@ export default function AdminPanel() {
 
     return (
         <div className={classes.panelContainer}>
+            {/* Mobile Menu Toggle */}
+            <button 
+                className={classes.mobileMenuToggle}
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+                ☰
+            </button>
+
+            {/* Mobile Overlay */}
+            <div 
+                className={`${classes.mobileOverlay} ${mobileMenuOpen ? classes.active : ''}`}
+                onClick={closeMobileMenu}
+            />
+
             {/* Sidebar Navigation */}
-            <aside className={classes.sidebar}>
+            <aside className={`${classes.sidebar} ${mobileMenuOpen ? classes.mobileOpen : ''}`}>
                 <div className={classes.sidebarHeader}>
-                    <h2>Hyper<span>Control</span></h2>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <h2>Hyperman<span>Control</span></h2>
+                        <button 
+                            className={classes.mobileCloseBtn}
+                            onClick={closeMobileMenu}
+                        >
+                            ✕
+                        </button>
+                    </div>
                 </div>
                 <nav className={classes.sidebarNav}>
                     {sections.map(s => (
                         <button
                             key={s.id}
                             className={`${classes.navItem} ${activeTab === s.id ? classes.activeTab : ''}`}
-                            onClick={() => setActiveTab(s.id)}
+                            onClick={() => handleTabChange(s.id)}
                         >
                             <div className={classes.itemLabel}>
                                 <span>{s.icon}</span> {s.label}
@@ -269,7 +310,7 @@ export default function AdminPanel() {
                                         </div>
                                         <div className={classes.inputGroup}>
                                             <label>Service ID (Internal)</label>
-                                            <input type="text" value={editData.id || ''} onChange={e => setEditData({ ...editData, id: e.target.value })} placeholder="e.g. meta-ads" />
+                                            <input type="text" value={editData.id || ''} onChange={e => setEditData({ ...editData, id: e.target.value })} placeholder="e.g. digital-marketing" />
                                         </div>
                                         <div className={classes.inputGroup}>
                                             <label>Deployment Description</label>
@@ -333,6 +374,180 @@ export default function AdminPanel() {
                                                         setEditData({ ...editData, widgets });
                                                     } catch (err) { }
                                                 }}
+                                            />
+                                        </div>
+                                    </>
+                                )}
+
+                                {activeTab === 'about-us' && (
+                                    <>
+                                        <div className={classes.inputGroup}>
+                                            <label>Content Section</label>
+                                            <select value={editData.section || 'hero'} onChange={e => setEditData({ ...editData, section: e.target.value })}>
+                                                <option value="hero">Hero Content</option>
+                                                <option value="approach">Approach Card</option>
+                                                <option value="story">Company Story</option>
+                                                <option value="capabilities">Capabilities</option>
+                                                <option value="team">Team Member</option>
+                                                <option value="settings">Page Settings</option>
+                                            </select>
+                                        </div>
+
+                                        {editData.section === 'hero' && (
+                                            <>
+                                                <div className={classes.inputGroup}>
+                                                    <label>Badge Text</label>
+                                                    <input type="text" value={editData.badge || ''} onChange={e => setEditData({ ...editData, badge: e.target.value })} />
+                                                </div>
+                                                <div className={classes.inputGroup}>
+                                                    <label>Main Headline</label>
+                                                    <input type="text" value={editData.headline || ''} onChange={e => setEditData({ ...editData, headline: e.target.value })} />
+                                                </div>
+                                                <div className={classes.inputGroup}>
+                                                    <label>Subtitle</label>
+                                                    <textarea value={editData.subtitle || ''} onChange={e => setEditData({ ...editData, subtitle: e.target.value })} />
+                                                </div>
+                                                <div className={classes.inputGroup}>
+                                                    <label>Description</label>
+                                                    <textarea rows="4" value={editData.description || ''} onChange={e => setEditData({ ...editData, description: e.target.value })} />
+                                                </div>
+                                            </>
+                                        )}
+
+                                        {editData.section === 'approach' && (
+                                            <>
+                                                <div className={classes.inputGroup}>
+                                                    <label>Card Title</label>
+                                                    <input type="text" value={editData.title || ''} onChange={e => setEditData({ ...editData, title: e.target.value })} />
+                                                </div>
+                                                <div className={classes.inputGroup}>
+                                                    <label>Description</label>
+                                                    <textarea value={editData.description || ''} onChange={e => setEditData({ ...editData, description: e.target.value })} />
+                                                </div>
+                                                <div className={classes.inputGroup}>
+                                                    <label>Icon (Emoji)</label>
+                                                    <input type="text" value={editData.icon || ''} onChange={e => setEditData({ ...editData, icon: e.target.value })} placeholder="🚀" />
+                                                </div>
+                                            </>
+                                        )}
+
+                                        {editData.section === 'story' && (
+                                            <>
+                                                <div className={classes.inputGroup}>
+                                                    <label>Story Title</label>
+                                                    <input type="text" value={editData.title || ''} onChange={e => setEditData({ ...editData, title: e.target.value })} />
+                                                </div>
+                                                <div className={classes.inputGroup}>
+                                                    <label>Story Content</label>
+                                                    <textarea rows="6" value={editData.content || ''} onChange={e => setEditData({ ...editData, content: e.target.value })} />
+                                                </div>
+                                                <div className={classes.inputGroup}>
+                                                    <label>Milestone Year</label>
+                                                    <input type="text" value={editData.year || ''} onChange={e => setEditData({ ...editData, year: e.target.value })} />
+                                                </div>
+                                                <div className={classes.inputGroup}>
+                                                    <label>Milestone Event</label>
+                                                    <input type="text" value={editData.event || ''} onChange={e => setEditData({ ...editData, event: e.target.value })} />
+                                                </div>
+                                                <div className={classes.inputGroup}>
+                                                    <label>Event Description</label>
+                                                    <textarea value={editData.eventDescription || ''} onChange={e => setEditData({ ...editData, eventDescription: e.target.value })} />
+                                                </div>
+                                            </>
+                                        )}
+
+                                        {editData.section === 'capabilities' && (
+                                            <div className={classes.inputGroup}>
+                                                <label>Capability Name</label>
+                                                <input type="text" value={editData.capability || ''} onChange={e => setEditData({ ...editData, capability: e.target.value })} />
+                                            </div>
+                                        )}
+
+                                        {editData.section === 'team' && (
+                                            <>
+                                                <div className={classes.inputGroup}>
+                                                    <label>Team Member Name</label>
+                                                    <input type="text" value={editData.name || ''} onChange={e => setEditData({ ...editData, name: e.target.value })} />
+                                                </div>
+                                                <div className={classes.inputGroup}>
+                                                    <label>Role/Position</label>
+                                                    <input type="text" value={editData.role || ''} onChange={e => setEditData({ ...editData, role: e.target.value })} />
+                                                </div>
+                                                <div className={classes.inputGroup}>
+                                                    <label>Bio</label>
+                                                    <textarea rows="4" value={editData.bio || ''} onChange={e => setEditData({ ...editData, bio: e.target.value })} />
+                                                </div>
+                                                <div className={classes.inputGroup}>
+                                                    <label>Photo URL</label>
+                                                    <input type="text" value={editData.image || ''} onChange={e => setEditData({ ...editData, image: e.target.value })} />
+                                                </div>
+                                                <div className={classes.inputGroup}>
+                                                    <label>LinkedIn URL</label>
+                                                    <input type="text" value={editData.linkedin || ''} onChange={e => setEditData({ ...editData, linkedin: e.target.value })} />
+                                                </div>
+                                            </>
+                                        )}
+
+                                        {editData.section === 'settings' && (
+                                            <div className={classes.inputGroup}>
+                                                <label>Show Team Section</label>
+                                                <select value={editData.showTeam ? 'true' : 'false'} onChange={e => setEditData({ ...editData, showTeam: e.target.value === 'true' })}>
+                                                    <option value="true">Yes - Show Team Section</option>
+                                                    <option value="false">No - Hide Team Section</option>
+                                                </select>
+                                            </div>
+                                        )}
+                                    </>
+                                )}
+
+                                {activeTab === 'performance-metrics' && (
+                                    <>
+                                        <div className={classes.inputGroup}>
+                                            <label>Metric Label</label>
+                                            <input 
+                                                type="text" 
+                                                value={editData.label || ''} 
+                                                onChange={e => setEditData({ ...editData, label: e.target.value })} 
+                                                placeholder="e.g. Client Satisfaction"
+                                            />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Current Value (%)</label>
+                                            <input 
+                                                type="number" 
+                                                value={editData.value || 0} 
+                                                onChange={e => setEditData({ ...editData, value: parseFloat(e.target.value) })} 
+                                                min="0"
+                                                max="100"
+                                                step="0.1"
+                                            />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Color</label>
+                                            <input 
+                                                type="color" 
+                                                value={editData.color || '#4CAF50'} 
+                                                onChange={e => setEditData({ ...editData, color: e.target.value })} 
+                                            />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Icon (Emoji)</label>
+                                            <input 
+                                                type="text" 
+                                                value={editData.icon || ''} 
+                                                onChange={e => setEditData({ ...editData, icon: e.target.value })} 
+                                                placeholder="📊"
+                                                maxLength="2"
+                                            />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Suffix (optional)</label>
+                                            <input 
+                                                type="text" 
+                                                value={editData.suffix || ''} 
+                                                onChange={e => setEditData({ ...editData, suffix: e.target.value })} 
+                                                placeholder="e.g. %, +, x"
+                                                maxLength="3"
                                             />
                                         </div>
                                     </>

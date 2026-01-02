@@ -1,6 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DashboardWidget } from '../components/ui/DashboardWidget';
+import { PerformanceMeter } from '../components/ui/PerformanceMeter';
 import { useContent } from '../hooks/useContent';
 import { portfolioData as staticPortfolio } from '../data/portfolioData';
 import { servicesConfig as staticServices } from '../data/servicesConfig';
@@ -11,6 +12,7 @@ function Portfolio() {
     const { data: servicesConfig } = useContent('services', staticServices);
     const [activeGroup, setActiveGroup] = useState('live');
     const [selectedService, setSelectedService] = useState('all');
+    const [selectedProject, setSelectedProject] = useState(null);
 
     const filteredProjects = useMemo(() => {
         return portfolioData.filter(project => {
@@ -21,10 +23,118 @@ function Portfolio() {
     }, [activeGroup, selectedService, portfolioData]);
 
     const agencyStats = [
-        { label: 'Asset Management', value: '₹4.5Cr+' },
-        { label: 'Active Partnerships', value: '12' },
-        { label: 'Ecosystem Growth', value: '98.2%' }
+        { label: 'Asset Management', value: '₹6.8Cr+' },
+        { label: 'Active Partnerships', value: '18' },
+        { label: 'Success Rate', value: '94.2%' }
     ];
+
+    const ProjectModal = ({ project, onClose }) => {
+        if (!project) return null;
+
+        return (
+            <motion.div
+                className={classes.modalOverlay}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={onClose}
+            >
+                <motion.div
+                    className={classes.modalContent}
+                    initial={{ scale: 0.9, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    exit={{ scale: 0.9, opacity: 0 }}
+                    onClick={e => e.stopPropagation()}
+                    style={{ '--project-color': project.color }}
+                >
+                    <div className={classes.modalHeader}>
+                        <div>
+                            <span className={classes.modalServiceTag}>
+                                {servicesConfig.find(s => s.id === project.serviceId)?.label}
+                            </span>
+                            <h2>{project.name}</h2>
+                            <p className={classes.modalDescription}>{project.description}</p>
+                        </div>
+                        <button className={classes.closeButton} onClick={onClose}>×</button>
+                    </div>
+
+                    <div className={classes.modalBody}>
+                        <div className={classes.modalSection}>
+                            <h3>Project Details</h3>
+                            <div className={classes.projectMeta}>
+                                <div className={classes.metaItem}>
+                                    <span className={classes.metaLabel}>Industry</span>
+                                    <span className={classes.metaValue}>{project.industry}</span>
+                                </div>
+                                <div className={classes.metaItem}>
+                                    <span className={classes.metaLabel}>Duration</span>
+                                    <span className={classes.metaValue}>{project.duration}</span>
+                                </div>
+                                <div className={classes.metaItem}>
+                                    <span className={classes.metaLabel}>Team Size</span>
+                                    <span className={classes.metaValue}>{project.teamSize} specialists</span>
+                                </div>
+                                <div className={classes.metaItem}>
+                                    <span className={classes.metaLabel}>Status</span>
+                                    <span className={classes.metaValue}>{project.status}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {project.results && (
+                            <div className={classes.modalSection}>
+                                <h3>Results Comparison</h3>
+                                <div className={classes.resultsComparison}>
+                                    <div className={classes.resultColumn}>
+                                        <h4>Before</h4>
+                                        {Object.entries(project.results.before).map(([key, value]) => (
+                                            <div key={key} className={classes.resultItem}>
+                                                <span className={classes.resultLabel}>{key}</span>
+                                                <span className={classes.resultValue}>{value}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className={classes.resultArrow}>→</div>
+                                    <div className={classes.resultColumn}>
+                                        <h4>After</h4>
+                                        {Object.entries(project.results.after).map(([key, value]) => (
+                                            <div key={key} className={classes.resultItem}>
+                                                <span className={classes.resultLabel}>{key}</span>
+                                                <span className={classes.resultValue} style={{ color: project.color }}>
+                                                    {value}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+
+                        {project.technologies && (
+                            <div className={classes.modalSection}>
+                                <h3>Technologies Used</h3>
+                                <div className={classes.techStack}>
+                                    {project.technologies.map((tech, idx) => (
+                                        <span key={idx} className={classes.techTag}>{tech}</span>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {project.testimonial && (
+                            <div className={classes.modalSection}>
+                                <h3>Client Testimonial</h3>
+                                <div className={classes.testimonial}>
+                                    <blockquote>"{project.testimonial.quote}"</blockquote>
+                                    <cite>— {project.testimonial.author}</cite>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </motion.div>
+            </motion.div>
+        );
+    };
 
     return (
         <div className={classes.container}>
@@ -42,13 +152,21 @@ function Portfolio() {
                     ))}
                 </motion.div>
 
-                <motion.h1
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2 }}
-                >
-                    Growth<br />Intelligence<span>_</span>
-                </motion.h1>
+                <div className={classes.titleSection}>
+                    <motion.h1
+                        initial={{ opacity: 0, x: -30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.2 }}
+                    >
+                        Growth<br />Intelligence<span>_</span>
+                    </motion.h1>
+                    
+                    {/* Performance Orb positioned next to title */}
+                    <div className={classes.performanceOrb}>
+                        <PerformanceMeter />
+                    </div>
+                </div>
+
                 <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -107,13 +225,19 @@ function Portfolio() {
                             exit={{ opacity: 0, scale: 0.95 }}
                             className={classes.clientSection}
                             style={{ '--service-color': project.color }}
+                            onClick={() => setSelectedProject(project)}
+                            whileHover={{ scale: 1.02 }}
                         >
                             <div className={classes.clientHeader}>
                                 <div className={classes.clientTitle}>
-                                    <span className={classes.serviceTag}>
-                                        {servicesConfig.find(s => s.id === project.serviceId)?.label || 'Strategy'}
-                                    </span>
+                                    <div className={classes.titleRow}>
+                                        <span className={classes.serviceTag}>
+                                            {servicesConfig.find(s => s.id === project.serviceId)?.label || 'Strategy'}
+                                        </span>
+                                        <span className={classes.industryTag}>{project.industry}</span>
+                                    </div>
                                     <h2>{project.name}</h2>
+                                    <p className={classes.projectDescription}>{project.description}</p>
                                 </div>
                                 <div className={classes.projectStatus}>
                                     {project.group === 'live' && (
@@ -133,6 +257,9 @@ function Portfolio() {
                                     <span className={classes.badge} style={{ color: project.color, borderColor: `${project.color}33` }}>
                                         {project.status}
                                     </span>
+                                    <div className={classes.projectMeta}>
+                                        <span className={classes.metaText}>{project.duration} • {project.teamSize} team</span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -150,6 +277,17 @@ function Portfolio() {
                                     </div>
                                 )}
                             </div>
+
+                            {project.testimonial && (
+                                <div className={classes.testimonialPreview}>
+                                    <blockquote>"{project.testimonial.quote}"</blockquote>
+                                    <cite>— {project.testimonial.author}</cite>
+                                </div>
+                            )}
+
+                            <div className={classes.projectFooter}>
+                                <span className={classes.viewDetails}>Click to view detailed case study →</span>
+                            </div>
                         </motion.div>
                     ))}
                 </AnimatePresence>
@@ -159,6 +297,16 @@ function Portfolio() {
                     </div>
                 )}
             </motion.div>
+
+            {/* Project Detail Modal */}
+            <AnimatePresence>
+                {selectedProject && (
+                    <ProjectModal 
+                        project={selectedProject} 
+                        onClose={() => setSelectedProject(null)} 
+                    />
+                )}
+            </AnimatePresence>
         </div>
     );
 }

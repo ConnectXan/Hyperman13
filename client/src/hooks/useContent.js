@@ -20,12 +20,15 @@ export const useContent = (section, fallback = []) => {
                     const extracted = blocks.map(b => b.data);
                     if (extracted.length > 0) {
                         setData(extracted);
+                    } else {
+                        setData(fallback);
                     }
                     setLoading(false);
                 }
             } catch (err) {
                 if (isMounted) {
                     setError(err.message);
+                    setData(fallback); // Use fallback data when API fails
                     setLoading(false);
                 }
             }
@@ -33,7 +36,7 @@ export const useContent = (section, fallback = []) => {
 
         fetchData();
         return () => { isMounted = false; };
-    }, [section]);
+    }, [section, fallback]);
 
     return { data, loading, error };
 };

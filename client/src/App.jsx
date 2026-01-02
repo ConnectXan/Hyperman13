@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Contact from './pages/Contact';
 import Portfolio from './pages/Portfolio';
 import CaseStudy from './pages/CaseStudy';
+import AboutUs from './pages/AboutUs';
 
 import { ThemeProvider } from './context/ThemeContext';
 
@@ -25,6 +26,7 @@ function App() {
                         <Route path="/contact" component={Contact} />
                         <Route path="/portfolio" component={Portfolio} />
                         <Route path="/case-study" component={CaseStudy} />
+                        <Route path="/about" component={AboutUs} />
                         <Route path="/marketplace" component={Marketplace} />
                         <Route path="/marketplace/animnow" component={Animnow} />
                         <Route path="/marketplace/hyper-control" component={HyperControl} />

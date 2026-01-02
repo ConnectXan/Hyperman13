@@ -29,7 +29,7 @@ export const servicesConfig = [
         activeColor: '#F1C40F',
         metrics: { roas: '5.5x', conversions: '1.5k+' },
         formFields: [
-            { name: 'targetRegion', label: 'Target Region', type: 'text', placeholder: 'e.g. Pan India, Mumbai, Bangalore' }
+            { name: 'targetRegion', label: 'Target Region', type: 'text', placeholder: 'e.g. Mumbai, Delhi, Bangalore' }
         ],
         modalInfo: {
             title: "Google Ads Mastery",
@@ -51,7 +51,7 @@ export const servicesConfig = [
         activeColor: '#52BE80',
         metrics: { uptime: '99.99%', loadTime: '0.6s' },
         formFields: [
-            { name: 'storeUrl', label: 'Current Store URL (if any)', type: 'text', placeholder: 'e.g. www.your-brand.in' }
+            { name: 'storeUrl', label: 'Current Store URL (if any)', type: 'text', placeholder: 'e.g. yourstore.com' }
         ],
         modalInfo: {
             title: "Shopify Expertise",
@@ -95,7 +95,7 @@ export const servicesConfig = [
         activeColor: '#E91E63',
         metrics: { engagement: '+350%', followers: '+15k' },
         formFields: [
-            { name: 'platforms', label: 'Priority Platforms', type: 'text', placeholder: 'IG, TikTok (Intl), LinkedIn, WhatsApp...' }
+            { name: 'platforms', label: 'Priority Platforms', type: 'text', placeholder: 'Instagram, LinkedIn, TikTok, YouTube' }
         ],
         modalInfo: {
             title: "Social Media Management",

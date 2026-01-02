@@ -283,8 +283,8 @@ function Animnow() {
                             <p>Be the first to know when we open the private beta.</p>
                             <form className={classes.signupForm} onSubmit={handleSignup}>
                                 <div className={classes.inputRow}>
-                                    <input type="text" placeholder="Full Name" required />
-                                    <input type="email" placeholder="Email Address" required />
+                                    <input type="text" placeholder="Your Full Name" required />
+                                    <input type="email" placeholder="Business Email" required />
                                 </div>
                                 <div className={classes.inputRow}>
                                     <select required>
@@ -294,7 +294,7 @@ function Animnow() {
                                         <option value="educator">Educator</option>
                                         <option value="agency">Agency</option>
                                     </select>
-                                    <input type="text" placeholder="Intended Use Case" required />
+                                    <input type="text" placeholder="How will you use AI animation?" required />
                                 </div>
                                 <button type="submit" disabled={formState === 'loading'}>
                                     {formState === 'loading' ? 'Encrypting...' : 'Request Invitation'}

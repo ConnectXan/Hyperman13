@@ -7,8 +7,8 @@
 }
 
 .header {
-    margin-bottom: 5rem;
-    max-width: 800px;
+    margin-bottom: 4rem;
+    max-width: 900px;
 }
 
 .eyebrow {
@@ -26,18 +26,86 @@
     margin-bottom: 1rem;
     letter-spacing: -4px;
     line-height: 1;
+    background: linear-gradient(135deg, var(--color-text), var(--color-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .header p {
     font-size: 1.2rem;
     color: var(--color-text-dim);
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.searchContainer {
+    position: relative;
+    flex: 1;
+    min-width: 300px;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    border-radius: 50px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.searchInput:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(218, 192, 163, 0.1);
+}
+
+.searchInput::placeholder {
+    color: var(--color-text-dim);
+}
+
+.searchIcon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-dim);
+    font-size: 1rem;
+}
+
+.sortSelect {
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 150px;
+}
+
+.sortSelect:focus {
+    outline: none;
+    border-color: var(--color-primary);
 }
 
 .filterBar {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    margin-bottom: 1rem;
 }
 
 .filterBtn {
@@ -52,84 +120,144 @@
     display: flex;
     align-items: center;
     gap: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.filterBtn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.filterBtn:hover::before {
+    left: 100%;
 }
 
 .fIcon {
     font-size: 0.9rem;
     opacity: 0.7;
+    transition: opacity 0.3s;
 }
 
 .filterBtn:hover {
-    border-color: var(--color-text);
+    border-color: var(--color-primary);
     color: var(--color-text);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .activeFilter {
-    background: var(--color-text);
+    background: var(--color-primary);
     color: var(--color-bg) !important;
-    border-color: var(--color-text);
+    border-color: var(--color-primary);
+    box-shadow: 0 8px 25px rgba(218, 192, 163, 0.3);
 }
 
 .activeFilter .fIcon {
     opacity: 1;
 }
 
+.resultsCount {
+    font-size: 0.9rem;
+    color: var(--color-text-dim);
+    font-weight: 500;
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-}
-
-/* Mobile: Single column */
-@media (max-width: 640px) {
-    .grid {
-        grid-template-columns: 1fr;
-    }
-
-    .container {
-        padding: 100px var(--spacing-sm) 100px;
-    }
+    gap: 1.5rem;
 }
 
 .card {
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    background: var(--color-surface);
+    border-radius: 20px;
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.card:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.featuredCard {
+    border: 2px solid var(--color-primary);
+    box-shadow: 0 10px 30px rgba(218, 192, 163, 0.2);
+}
+
+.featuredBadge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--color-primary);
+    color: var(--color-bg);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    z-index: 3;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .mediaFrame {
-    aspect-ratio: 1/1;
-    /* Square for denser grid */
+    aspect-ratio: 4/3;
     background: var(--color-surface);
-    border-radius: 12px;
-    border: 1px solid var(--color-border);
     position: relative;
     overflow: hidden;
-    margin-bottom: 1rem;
 }
 
 .thumbnail {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s cubic-bezier(0.2, 0, 0.2, 1);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card:hover .thumbnail {
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
 .typeBadge {
     position: absolute;
     top: 1rem;
     left: 1rem;
-    padding: 4px 12px;
-    border-radius: 4px;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    color: #000;
+    color: var(--color-bg);
     z-index: 2;
+    backdrop-filter: blur(10px);
+}
+
+.gradientOverlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.3));
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.card:hover .gradientOverlay {
+    opacity: 1;
 }
 
 .overlay {
@@ -138,12 +266,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     backdrop-filter: blur(5px);
 }
 
@@ -152,9 +280,9 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-size: 0.8rem;
-    transform: translateY(10px);
-    transition: transform 0.3s;
+    font-size: 0.9rem;
+    transform: translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card:hover .overlay {
@@ -165,67 +293,237 @@
     transform: translateY(0);
 }
 
+.info {
+    padding: 1rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
 .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 0.5rem;
 }
 
 .service {
     font-size: 0.7rem;
-    color: var(--color-primary);
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 700;
 }
 
-.info h3 {
-    margin: 0.5rem 0;
-    font-size: 1.2rem;
-    letter-spacing: -0.5px;
+.duration {
+    font-size: 0.7rem;
+    color: var(--color-text-dim);
+    background: var(--color-bg);
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    font-weight: 600;
 }
 
-.info p {
-    font-size: 0.85rem;
+.info h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+    font-weight: 700;
+}
+
+.description {
+    font-size: 0.8rem;
     color: var(--color-text-dim);
     line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
-    /* Standard property */
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
-.linkBtn {
-    background: transparent;
-    border: none;
-    color: var(--color-text);
-    padding: 0;
+.industry {
     font-size: 0.8rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    cursor: pointer;
-    border-bottom: 2px solid var(--color-text);
-    padding-bottom: 4px;
+    color: var(--color-text-dim);
+    font-weight: 500;
 }
 
-@media (max-width: 1024px) {
+.metrics {
+    display: flex;
+    gap: 0.8rem;
+    margin: 0.3rem 0;
+}
+
+.metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+}
+
+.metricValue {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1;
+}
+
+.metricLabel {
+    font-size: 0.6rem;
+    color: var(--color-text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0.2rem;
+}
+
+.tags {
+    display: flex;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+    margin-top: auto;
+}
+
+.tag {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-dim);
+    background: var(--color-bg);
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.card:hover .tag {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.noResults {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--color-text-dim);
+}
+
+.noResultsIcon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.noResults h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--color-text);
+}
+
+.noResults p {
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+.clearFilters {
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    background: var(--color-primary);
+    color: var(--color-bg);
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.clearFilters:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(218, 192, 163, 0.3);
+}
+
+/* Mobile Responsive */
+@media (max-width: 1200px) {
     .grid {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media (max-width: 768px) {
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+    .container {
+        padding: 100px var(--spacing-sm) 60px;
     }
 
     .header h1 {
         font-size: 2.5rem;
     }
 
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .searchContainer {
+        min-width: auto;
+    }
+
+    .sortSelect {
+        min-width: auto;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .filterBar {
+        gap: 0.5rem;
+    }
+
+    .filterBtn {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+    }
+
     .info h3 {
         font-size: 1rem;
+    }
+
+    .metrics {
+        gap: 0.5rem;
+    }
+
+    .metricValue {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        margin-bottom: 3rem;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .header p {
+        font-size: 1rem;
+    }
+
+    .info {
+        padding: 0.8rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .tags {
+        gap: 0.2rem;
+    }
+
+    .tag {
+        font-size: 0.55rem;
+        padding: 0.15rem 0.5rem;
     }
 }
