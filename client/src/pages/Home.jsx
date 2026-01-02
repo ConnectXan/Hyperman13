@@ -5,6 +5,7 @@ import { useContent } from '../hooks/useContent';
 import { servicesConfig as staticServices } from '../data/servicesConfig';
 import { useStore } from '../hooks/useStore';
 import ServiceModal from '../components/ServiceModal';
+import { ServiceIcon } from '../components/ui/ServiceIcons';
 import classes from './Home.module.css';
 
 function Home() {
@@ -44,7 +45,15 @@ function Home() {
                             onClick={() => setSelectedService(service)}
                             whileTap={{ scale: 0.98 }}
                         >
-                            {service.label}
+                            <div className={classes.serviceContent}>
+                                <ServiceIcon 
+                                    serviceId={service.id}
+                                    size={20}
+                                    color={activeServiceId === service.id ? service.color : 'var(--color-text-dim)'}
+                                    className={classes.serviceIcon}
+                                />
+                                <span className={classes.serviceLabel}>{service.label}</span>
+                            </div>
                             {activeServiceId === service.id && (
                                 <motion.span
                                     layoutId="menu-indicator"

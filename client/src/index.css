@@ -2,10 +2,10 @@
   /* Light Mode - Warm Beige Aesthetic */
   --color-bg: #F5F1E8;
   --color-surface: #FFFCF5;
-  --color-primary: #1A1A1A;
+  --color-primary: #DAC0A3;
   --color-secondary: #4A4A4A;
   --color-accent: #B8926A;
-  --color-text: #2A2A2A;
+  --color-text: #1A1A1A;
   --color-text-dim: #6B6B6B;
   --color-border: #E8DCC8;
 
@@ -29,13 +29,13 @@
 }
 
 [data-theme='dark'] {
-  /* Dark Mode - Premium Black & Beige */
+  /* Dark Mode - Premium Black & Gold */
   --color-bg: #0A0A0A;
   --color-surface: #141414;
-  --color-primary: #DAC0A3;
+  --color-primary: #1A1A1A;
   --color-secondary: #9F8C76;
   --color-accent: #2A2A2A;
-  --color-text: #EADBC8;
+  --color-text: #DAC0A3;
   --color-text-dim: #9F8C76;
   --color-border: #2A2A2A;
 }

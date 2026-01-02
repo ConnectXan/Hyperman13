@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'wouter';
+import { ServiceIcon } from './ui/ServiceIcons';
 import classes from './ServiceModal.module.css';
 
 function ServiceModal({ service, onClose }) {
@@ -26,7 +27,15 @@ function ServiceModal({ service, onClose }) {
                     <button className={classes.closeBtn} onClick={onClose}>✕</button>
 
                     <div className={classes.modalHeader}>
-                        <h2>{service.modalInfo.title}</h2>
+                        <div className={classes.titleSection}>
+                            <ServiceIcon 
+                                serviceId={service.id}
+                                size={32}
+                                color={service.color}
+                                className={classes.modalIcon}
+                            />
+                            <h2>{service.modalInfo.title}</h2>
+                        </div>
                         <p className={classes.description}>{service.modalInfo.description}</p>
                     </div>
 

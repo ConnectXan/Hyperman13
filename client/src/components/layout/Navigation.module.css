@@ -38,7 +38,7 @@
 }
 
 [data-theme='dark'] .logoText span {
-    background: var(--color-primary);
+    background: var(--color-text);
     color: var(--color-bg);
 }
 
