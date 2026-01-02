@@ -1,5 +1,5 @@
 {
-    "name": "hyper13-root",
+    "name": "hyper13",
     "version": "1.0.0",
     "private": true,
     "type": "module",
@@ -11,7 +11,8 @@
         "dev": "node server/index.js",
         "start": "node server/index.js",
         "build": "npm run build -w client",
-        "vercel-build": "npm run build -w client"
+        "vercel-build": "npm run build -w client",
+        "install:all": "npm install && npm --prefix client install && npm --prefix server install"
     },
     "devDependencies": {
         "concurrently": "^9.2.1"
