@@ -1,3 +1,6 @@
 import app from '../server/index.js';
 
-export default app;
+// Export the Express app as a serverless function
+export default (req, res) => {
+    return app(req, res);
+};

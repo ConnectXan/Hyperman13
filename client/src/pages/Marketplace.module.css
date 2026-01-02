@@ -7,7 +7,7 @@
 }
 
 .header {
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
     max-width: 800px;
 }
 
@@ -26,6 +26,7 @@
     margin-bottom: 1rem;
     letter-spacing: -3px;
     line-height: 1.1;
+    color: var(--color-text);
 }
 
 .header p {
@@ -34,10 +35,43 @@
     line-height: 1.6;
 }
 
+/* Filter Tabs */
+.filterTabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filterTab {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 25px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-dim);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: capitalize;
+}
+
+.filterTab:hover {
+    border-color: var(--color-primary);
+    color: var(--color-text);
+}
+
+.filterTab.active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-bg);
+}
+
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
 }
 
 .productCard {
@@ -49,32 +83,54 @@
     overflow: hidden;
     position: relative;
     cursor: pointer;
-    transition: border-color 0.3s;
+    transition: all 0.3s ease;
 }
 
 .productCard:hover {
     border-color: var(--accent);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-bg);
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--color-border);
 }
 
 .cardStatus {
-    background: var(--color-bg);
-    padding: 0.75rem 1.5rem;
-    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.statusDot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.category {
     font-size: 0.7rem;
-    font-weight: 700;
+    color: var(--color-text-dim);
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: var(--accent);
+    font-weight: 700;
 }
 
 .cardContent {
-    padding: 3rem;
+    padding: 2rem;
 }
 
 .iconWrapper {
     width: 80px;
     height: 80px;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,39 +150,132 @@
     object-fit: contain;
 }
 
-.tag {
-    font-size: 0.7rem;
-    color: var(--color-primary);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    display: block;
-}
-
 .cardContent h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
     color: var(--color-text);
     letter-spacing: -1px;
 }
 
 .cardContent p {
     color: var(--color-text-dim);
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.6;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Progress Section */
+.progressSection {
+    margin-bottom: 1.5rem;
+}
+
+.progressHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.progressBar {
+    height: 6px;
+    background: var(--color-border);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progressFill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+/* Features */
+.features {
+    margin-bottom: 1.5rem;
+}
+
+.features h4 {
+    font-size: 0.8rem;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.featureList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.featureTag {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.7rem;
+    color: var(--color-text-dim);
+    font-weight: 500;
+}
+
+/* Tech Stack */
+.techStack {
+    margin-bottom: 1.5rem;
+}
+
+.techStack h4 {
+    font-size: 0.8rem;
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.techList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.techTag {
+    background: var(--accent);
+    color: var(--color-bg);
+    border-radius: 12px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--color-border);
+}
+
+.estimatedLaunch {
+    font-size: 0.8rem;
+    color: var(--color-text-dim);
+    font-weight: 500;
 }
 
 .cta {
-    font-weight: 800;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 0.8rem;
     color: var(--accent);
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .cta span {
@@ -138,29 +287,57 @@
 }
 
 .footer {
-    margin-top: 10rem;
+    margin-top: 6rem;
     text-align: center;
     border-top: 1px solid var(--color-border);
-    padding-top: 4rem;
+    padding-top: 3rem;
 }
 
-.footer p {
-    font-size: 0.9rem;
+.footerContent {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.footerContent h3 {
+    font-size: 1.5rem;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
+}
+
+.footerContent p {
+    font-size: 1rem;
     color: var(--color-text-dim);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
     font-style: italic;
+}
+
+.footerNote {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    text-align: left;
+}
+
+.footerNote strong {
+    color: var(--color-primary);
 }
 
 @media (max-width: 768px) {
     .container {
-        padding: 100px 1rem 100px;
+        padding: 100px 1rem 60px;
     }
 
     .header {
-        margin-bottom: 3rem;
+        margin-bottom: 2rem;
     }
 
     .header h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
         letter-spacing: -2px;
     }
 
@@ -168,19 +345,30 @@
         font-size: 1rem;
     }
 
+    .filterTabs {
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .filterTab {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+    }
+
     .grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
     }
 
     .cardContent {
-        padding: 2rem 1.5rem;
+        padding: 1.5rem;
     }
 
     .iconWrapper {
         width: 60px;
         height: 60px;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
 
     .productIcon {
@@ -189,19 +377,34 @@
     }
 
     .cardContent h2 {
-        font-size: 1.75rem;
-        margin-bottom: 0.75rem;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
     }
 
     .cardContent p {
         font-size: 0.9rem;
         line-height: 1.5;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
 
-    .tag {
-        font-size: 0.65rem;
-        margin-bottom: 0.75rem;
+    .progressSection {
+        margin-bottom: 1rem;
+    }
+
+    .features {
+        margin-bottom: 1rem;
+    }
+
+    .techStack {
+        margin-bottom: 1rem;
+    }
+
+    .cardFooter {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        margin-top: 1rem;
+        padding-top: 0.75rem;
     }
 
     .cta {
@@ -209,6 +412,58 @@
     }
 
     .footer {
-        margin-top: 4rem;
+        margin-top: 3rem;
+        padding-top: 2rem;
+    }
+
+    .footerContent h3 {
+        font-size: 1.25rem;
+    }
+
+    .footerContent p {
+        font-size: 0.9rem;
+    }
+
+    .footerNote {
+        padding: 0.75rem 1rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 90px 0.75rem 50px;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .filterTabs {
+        justify-content: center;
+    }
+
+    .filterTab {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem;
+    }
+
+    .cardContent {
+        padding: 1.25rem;
+    }
+
+    .cardContent h2 {
+        font-size: 1.25rem;
+    }
+
+    .featureList,
+    .techList {
+        gap: 0.25rem;
+    }
+
+    .featureTag,
+    .techTag {
+        font-size: 0.65rem;
+        padding: 0.2rem 0.5rem;
     }
 }

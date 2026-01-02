@@ -19,7 +19,11 @@ const PORT = process.env.PORT || 5000;
 app.use(
     cors({
         origin: process.env.NODE_ENV === 'production'
-            ? 'https://yourdomain.com'
+            ? [
+                process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
+                'https://hyperman13.vercel.app',
+                /^https:\/\/.*\.vercel\.app$/
+              ].filter(Boolean)
             : '*',
         credentials: true
     })
@@ -73,13 +77,16 @@ app.get('/api/content', async (req, res) => {
 
 // Admin Login
 app.post('/api/login', (req, res) => {
+    console.log('Login attempt:', { username: req.body.username, hasPassword: !!req.body.password });
     const { username, password } = req.body;
     const user = loginAdmin(username, password);
 
     if (user) {
         const token = generateToken(user);
+        console.log('Login successful for:', username);
         res.json({ token });
     } else {
+        console.log('Login failed for:', username);
         res.status(401).json({ error: 'Invalid credentials' });
     }
 });

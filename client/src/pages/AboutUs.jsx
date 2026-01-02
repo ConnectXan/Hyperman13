@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useContent } from '../hooks/useContent';
+import { PerformanceMeter } from '../components/ui/PerformanceMeter';
 import classes from './AboutUs.module.css';
 
 function AboutUs() {
@@ -108,61 +109,9 @@ function AboutUs() {
                     </motion.p>
                 </div>
 
-                {/* Hero Visual - Modern Marketing Dashboard */}
-                <div className={classes.visualContainer}>
-                    <div className={classes.dashboardWindow}>
-                        <div className={classes.windowHeader}>
-                            <div className={classes.dotGroup}>
-                                <span></span><span></span><span></span>
-                            </div>
-                            <div className={classes.windowTab}>Hyperman13_Analytics_Dashboard</div>
-                        </div>
-                        <div className={classes.dashboardBody}>
-                            <div className={classes.metricsGrid}>
-                                <motion.div 
-                                    className={classes.metricCard}
-                                    animate={{ scale: [1, 1.02, 1] }}
-                                    transition={{ duration: 2, repeat: Infinity }}
-                                >
-                                    <div className={classes.metricLabel}>Campaign ROI</div>
-                                    <div className={classes.metricValue}>347%</div>
-                                    <div className={classes.metricTrend}>↗ +23%</div>
-                                </motion.div>
-                                <motion.div 
-                                    className={classes.metricCard}
-                                    animate={{ scale: [1, 1.02, 1] }}
-                                    transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-                                >
-                                    <div className={classes.metricLabel}>Conversion Rate</div>
-                                    <div className={classes.metricValue}>12.4%</div>
-                                    <div className={classes.metricTrend}>↗ +8.2%</div>
-                                </motion.div>
-                                <motion.div 
-                                    className={classes.metricCard}
-                                    animate={{ scale: [1, 1.02, 1] }}
-                                    transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-                                >
-                                    <div className={classes.metricLabel}>Reach</div>
-                                    <div className={classes.metricValue}>2.1M</div>
-                                    <div className={classes.metricTrend}>↗ +156%</div>
-                                </motion.div>
-                            </div>
-                            <div className={classes.chartArea}>
-                                <div className={classes.chartHeader}>Performance Overview</div>
-                                <div className={classes.chart}>
-                                    {[...Array(12)].map((_, i) => (
-                                        <motion.div
-                                            key={i}
-                                            className={classes.chartBar}
-                                            initial={{ height: 0 }}
-                                            animate={{ height: `${Math.random() * 80 + 20}%` }}
-                                            transition={{ delay: i * 0.1, duration: 0.8 }}
-                                        />
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                {/* Performance Meter - Replace Dashboard */}
+                <div className={classes.performanceMeterContainer}>
+                    <PerformanceMeter />
                 </div>
             </section>
 

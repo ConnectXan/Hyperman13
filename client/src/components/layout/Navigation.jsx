@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import classes from './Navigation.module.css';
 import { useContent } from '../../hooks/useContent';
 import NavigationIcon from '../ui/NavigationIcon';
-
 import { useTheme } from '../../context/ThemeContext';
 
 export function Navigation() {
     const { data: navBlocks } = useContent('navigation');
     const [location] = useLocation();
-    const [isOpen, setIsOpen] = useState(false);
     const { theme, toggleTheme } = useTheme();
 
     // Hide global navigation on admin routes to prevent UI overlap
@@ -27,8 +25,6 @@ export function Navigation() {
         { path: '/marketplace', label: 'Market', icon: 'grid' }
     ];
 
-    // Intelligent merge: Backend items override static links if paths match,
-    // or are added as new items if they are unique.
     const links = [...staticLinks];
 
     if (navBlocks && navBlocks[0] && Array.isArray(navBlocks[0])) {
@@ -38,10 +34,8 @@ export function Navigation() {
             );
 
             if (existingIndex !== -1) {
-                // Update existing
                 links[existingIndex] = { ...links[existingIndex], label: backendItem.label, path: backendItem.link };
             } else {
-                // Add new (if not a duplicate of a standard route logic and not one of the filtered ones)
                 const isFiltered = ['services'].includes(backendItem.label.toLowerCase());
                 if (!isFiltered) {
                     links.push({ path: backendItem.link, label: backendItem.label, icon: 'file-text' });
@@ -50,38 +44,13 @@ export function Navigation() {
         });
     }
 
-    const toggleMenu = () => setIsOpen(!isOpen);
-
-    const ThemeToggle = ({ isDesktop = false }) => (
-        <button
-            className={classes.themeToggle}
-            onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                console.log(`${isDesktop ? 'Desktop' : 'Mobile'} theme toggle clicked`);
-                toggleTheme();
-            }}
-            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-            style={isDesktop ? {
-                padding: '0.5rem 1rem',
-                borderRadius: '25px',
-                width: 'auto',
-                height: 'auto'
-            } : {}}
-        >
-            <NavigationIcon name={theme === 'light' ? 'moon' : 'sun'} size={18} />
-        </button>
-    );
-
     return (
         <>
             {/* Global Brand Logo (Top Left) */}
             <div className={classes.logoWrapper}>
-                <Link href="/">
-                    <div className={classes.brandLogo}>
-                        <div className={classes.logoText}>
-                            Hyperman<span>13</span>
-                        </div>
+                <Link href="/" className={classes.brandLogo}>
+                    <div className={classes.logoText}>
+                        Hyperman<span>13</span>
                     </div>
                 </Link>
             </div>
@@ -103,7 +72,15 @@ export function Navigation() {
                             </li>
                         );
                     })}
-                    <li><ThemeToggle isDesktop={true} /></li>
+                    <li>
+                        <button
+                            className={classes.themeToggle}
+                            onClick={toggleTheme}
+                            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+                        >
+                            <NavigationIcon name={theme === 'light' ? 'moon' : 'sun'} size={18} />
+                        </button>
+                    </li>
                 </ul>
             </nav>
 
@@ -121,7 +98,13 @@ export function Navigation() {
                         </Link>
                     );
                 })}
-                <ThemeToggle isDesktop={false} />
+                <button
+                    className={classes.themeToggle}
+                    onClick={toggleTheme}
+                    aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+                >
+                    <NavigationIcon name={theme === 'light' ? 'moon' : 'sun'} size={18} />
+                </button>
             </nav>
         </>
     );
