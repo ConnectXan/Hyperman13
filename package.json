@@ -8,7 +8,7 @@
         "server"
     ],
     "scripts": {
-        "dev": "concurrently \"npm run dev -w client\" \"node server/index.js\"",
+        "dev": "node server/index.js",
         "start": "node server/index.js",
         "build": "npm run build -w client",
         "vercel-build": "npm run build -w client"
