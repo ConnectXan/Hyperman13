@@ -42,12 +42,7 @@ export default function AdminPanel() {
         if (activeTab === 'case-studies') initialData = { type: 'blog', content: {} };
         if (activeTab === 'portfolio') initialData = { name: '', status: 'Active', progress: 0 };
         if (activeTab === 'services') initialData = { label: '', description: '', color: '#DAC0A3' };
-        if (activeTab === 'performance-metrics') initialData = { 
-            label: '', 
-            value: 0, 
-            color: '#4CAF50', 
-            icon: '📊'
-        };
+
 
         setEditingBlock({ id: 'new', section: activeTab, data: initialData });
         setEditData(initialData);
@@ -66,7 +61,7 @@ export default function AdminPanel() {
             if (activeTab === 'portfolio') type = 'portfolio-item';
             if (activeTab === 'services') type = 'service-card';
             if (activeTab === 'products') type = 'product-item';
-            if (activeTab === 'performance-metrics') type = 'performance-metric';
+
 
             const newBlock = {
                 section: activeTab,
@@ -85,7 +80,7 @@ export default function AdminPanel() {
 
     const sections = [
         { id: 'dashboard', label: 'Dashboard', icon: '📊' },
-        { id: 'performance-metrics', label: 'Performance Metrics', icon: '🎯' },
+
         { id: 'services', label: 'Services', icon: '🛠️' },
         { id: 'portfolio', label: 'Portfolio', icon: '💼' },
         { id: 'case-studies', label: 'Case Studies', icon: '📂' },
@@ -116,7 +111,7 @@ export default function AdminPanel() {
     return (
         <div className={classes.panelContainer}>
             {/* Mobile Menu Toggle */}
-            <button 
+            <button
                 className={classes.mobileMenuToggle}
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
@@ -124,7 +119,7 @@ export default function AdminPanel() {
             </button>
 
             {/* Mobile Overlay */}
-            <div 
+            <div
                 className={`${classes.mobileOverlay} ${mobileMenuOpen ? classes.active : ''}`}
                 onClick={closeMobileMenu}
             />
@@ -134,7 +129,7 @@ export default function AdminPanel() {
                 <div className={classes.sidebarHeader}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <h2>Hyperman<span>Control</span></h2>
-                        <button 
+                        <button
                             className={classes.mobileCloseBtn}
                             onClick={closeMobileMenu}
                         >
@@ -500,58 +495,7 @@ export default function AdminPanel() {
                                     </>
                                 )}
 
-                                {activeTab === 'performance-metrics' && (
-                                    <>
-                                        <div className={classes.inputGroup}>
-                                            <label>Metric Label</label>
-                                            <input 
-                                                type="text" 
-                                                value={editData.label || ''} 
-                                                onChange={e => setEditData({ ...editData, label: e.target.value })} 
-                                                placeholder="e.g. Client Satisfaction"
-                                            />
-                                        </div>
-                                        <div className={classes.inputGroup}>
-                                            <label>Current Value (%)</label>
-                                            <input 
-                                                type="number" 
-                                                value={editData.value || 0} 
-                                                onChange={e => setEditData({ ...editData, value: parseFloat(e.target.value) })} 
-                                                min="0"
-                                                max="100"
-                                                step="0.1"
-                                            />
-                                        </div>
-                                        <div className={classes.inputGroup}>
-                                            <label>Color</label>
-                                            <input 
-                                                type="color" 
-                                                value={editData.color || '#4CAF50'} 
-                                                onChange={e => setEditData({ ...editData, color: e.target.value })} 
-                                            />
-                                        </div>
-                                        <div className={classes.inputGroup}>
-                                            <label>Icon (Emoji)</label>
-                                            <input 
-                                                type="text" 
-                                                value={editData.icon || ''} 
-                                                onChange={e => setEditData({ ...editData, icon: e.target.value })} 
-                                                placeholder="📊"
-                                                maxLength="2"
-                                            />
-                                        </div>
-                                        <div className={classes.inputGroup}>
-                                            <label>Suffix (optional)</label>
-                                            <input 
-                                                type="text" 
-                                                value={editData.suffix || ''} 
-                                                onChange={e => setEditData({ ...editData, suffix: e.target.value })} 
-                                                placeholder="e.g. %, +, x"
-                                                maxLength="3"
-                                            />
-                                        </div>
-                                    </>
-                                )}
+
 
                                 {activeTab === 'products' && (
                                     <>

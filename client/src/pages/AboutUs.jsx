@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useContent } from '../hooks/useContent';
-import { PerformanceMeter } from '../components/ui/PerformanceMeter';
 import classes from './AboutUs.module.css';
 
 function AboutUs() {
@@ -107,11 +106,6 @@ function AboutUs() {
                     >
                         {hero.description}
                     </motion.p>
-                </div>
-
-                {/* Performance Meter - Replace Dashboard */}
-                <div className={classes.performanceMeterContainer}>
-                    <PerformanceMeter />
                 </div>
             </section>
 
@@ -241,8 +235,8 @@ function AboutUs() {
                                     className={classes.teamCard}
                                 >
                                     <div className={classes.memberImage}>
-                                        <img 
-                                            src={member.image} 
+                                        <img
+                                            src={member.image}
                                             alt={member.name}
                                             onError={(e) => {
                                                 e.target.src = '/placeholder-team.svg';

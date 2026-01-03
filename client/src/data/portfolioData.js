@@ -11,6 +11,16 @@ export const portfolioData = [
         duration: '8 months',
         teamSize: 3,
         description: 'Ayurvedic wellness brand targeting health-conscious millennials across tier-1 cities',
+        metrics: {
+            roas: 4.8,
+            revenue: 1800000,
+            cac: 380,
+            conversion: 3.2,
+            totalBudget: 1200000,
+            clientSatisfaction: 9.5,
+            onTimeDelivery: true,
+            growthRate: 18.5
+        },
         testimonial: {
             quote: "Hyperman13 transformed our digital presence. Our ROAS improved by 340% in just 6 months.",
             author: "Priya Sharma, Founder"
@@ -39,6 +49,16 @@ export const portfolioData = [
         duration: '4 months',
         teamSize: 4,
         description: 'Premium ethnic wear brand with focus on modern Indian fashion and global shipping',
+        metrics: {
+            revenue: 240000,
+            conversion: 3.8,
+            loadTime: 0.8,
+            mobileScore: 98,
+            totalBudget: 450000,
+            clientSatisfaction: 9.8,
+            onTimeDelivery: true,
+            growthRate: 22.3
+        },
         testimonial: {
             quote: "The new store design increased our conversion rate by 180%. Exceptional work!",
             author: "Rajesh Mehra, CEO"
@@ -67,6 +87,16 @@ export const portfolioData = [
         duration: '6 months',
         teamSize: 5,
         description: 'B2B SaaS platform for startup ecosystem management and investor relations',
+        metrics: {
+            progress: 65,
+            featuresCompleted: 82,
+            codeCoverage: 94,
+            activeDevs: 4,
+            totalBudget: 2500000,
+            clientSatisfaction: 9.2,
+            onTimeDelivery: false,
+            growthRate: 12.8
+        },
         testimonial: {
             quote: "Their technical expertise and agile approach helped us launch 2 months ahead of schedule.",
             author: "Ankit Gupta, CTO"
@@ -95,6 +125,16 @@ export const portfolioData = [
         duration: '5 months',
         teamSize: 3,
         description: 'Premium cosmetics brand targeting Gen-Z with sustainable beauty solutions',
+        metrics: {
+            engagement: 8.4,
+            reach: 1200000,
+            leads: 450,
+            followers: 85000,
+            totalBudget: 350000,
+            clientSatisfaction: 8.9,
+            onTimeDelivery: true,
+            growthRate: 15.2
+        },
         testimonial: {
             quote: "Our Instagram engagement increased by 450%. The content strategy is phenomenal!",
             author: "Kavya Patel, Brand Manager"
@@ -123,6 +163,16 @@ export const portfolioData = [
         duration: '7 months',
         teamSize: 2,
         description: 'Traditional jewelry house expanding online presence with modern digital marketing',
+        metrics: {
+            roas: 5.8,
+            ctr: 4.8,
+            qualityScore: 9.2,
+            monthlyProfit: 820000,
+            totalBudget: 950000,
+            clientSatisfaction: 9.6,
+            onTimeDelivery: true,
+            growthRate: 19.7
+        },
         testimonial: {
             quote: "ROI improved by 280%. Their Google Ads expertise is unmatched in the jewelry sector.",
             author: "Vikram Singh, Managing Director"
@@ -151,6 +201,16 @@ export const portfolioData = [
         duration: '3 months',
         teamSize: 2,
         description: 'AI startup creating next-gen visual content for enterprise clients and agencies',
+        metrics: {
+            assetsProduced: 120,
+            productionTimeSaved: 85,
+            satisfaction: 9.8,
+            costSaved: 1200000,
+            totalBudget: 300000,
+            clientSatisfaction: 9.8,
+            onTimeDelivery: true,
+            growthRate: 25.4
+        },
         testimonial: {
             quote: "The AI animations revolutionized our client presentations. Production time reduced by 85%!",
             author: "Rohit Sharma, Creative Director"
@@ -180,6 +240,15 @@ export const portfolioData = [
         duration: '2 months',
         teamSize: 2,
         description: 'Organic spice brand expanding from local Kerala markets to pan-India distribution',
+        metrics: {
+            roas: 2.8,
+            audienceReach: 2500000,
+            testBudget: 200000,
+            totalBudget: 200000,
+            clientSatisfaction: 8.2,
+            onTimeDelivery: true,
+            growthRate: 8.5
+        },
         testimonial: {
             quote: "Early results are promising. Looking forward to scaling with Hyperman13.",
             author: "Meera Nair, Founder"
@@ -207,6 +276,16 @@ export const portfolioData = [
         duration: '6 months',
         teamSize: 3,
         description: 'Boutique fitness studio chain building community-driven social presence',
+        metrics: {
+            members: 340,
+            followers: 25000,
+            engagement: 12.3,
+            ugcPosts: 200,
+            totalBudget: 180000,
+            clientSatisfaction: 9.4,
+            onTimeDelivery: true,
+            growthRate: 16.8
+        },
         testimonial: {
             quote: "Membership increased by 200% through social media. Outstanding community building!",
             author: "Arjun Desai, Owner"

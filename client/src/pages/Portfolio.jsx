@@ -13,7 +13,6 @@ function Portfolio() {
     const [activeGroup, setActiveGroup] = useState('live');
     const [selectedService, setSelectedService] = useState('all');
     const [selectedProject, setSelectedProject] = useState(null);
-    const [showPerformancePopup, setShowPerformancePopup] = useState(false);
 
     const filteredProjects = useMemo(() => {
         return portfolioData.filter(project => {
@@ -29,63 +28,7 @@ function Portfolio() {
         { label: 'Success Rate', value: '94.2%' }
     ];
 
-    const PerformancePopup = () => (
-        <motion.div
-            className={classes.popupOverlay}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setShowPerformancePopup(false)}
-        >
-            <motion.div
-                className={classes.popupContent}
-                initial={{ scale: 0.8, opacity: 0, y: 20 }}
-                animate={{ scale: 1, opacity: 1, y: 0 }}
-                exit={{ scale: 0.8, opacity: 0, y: 20 }}
-                onClick={e => e.stopPropagation()}
-            >
-                <div className={classes.popupHeader}>
-                    <div className={classes.popupIcon}>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M12 2v4"/>
-                            <path d="M12 18v4"/>
-                            <path d="M4.93 4.93l2.83 2.83"/>
-                            <path d="M16.24 16.24l2.83 2.83"/>
-                            <path d="M2 12h4"/>
-                            <path d="M18 12h4"/>
-                            <path d="M4.93 19.07l2.83-2.83"/>
-                            <path d="M16.24 7.76l2.83-2.83"/>
-                            <circle cx="12" cy="12" r="3"/>
-                        </svg>
-                    </div>
-                    <h3>Performance Analytics</h3>
-                    <button 
-                        className={classes.popupClose}
-                        onClick={() => setShowPerformancePopup(false)}
-                    >
-                        ×
-                    </button>
-                </div>
-                
-                <div className={classes.popupBody}>
-                    <p>View our comprehensive performance metrics and analytics dashboard.</p>
-                    <div className={classes.popupActions}>
-                        <Link href="/about">
-                            <button className={classes.popupPrimary}>
-                                View Performance Meter
-                            </button>
-                        </Link>
-                        <button 
-                            className={classes.popupSecondary}
-                            onClick={() => setShowPerformancePopup(false)}
-                        >
-                            Cancel
-                        </button>
-                    </div>
-                </div>
-            </motion.div>
-        </motion.div>
-    );
+
 
     const ProjectModal = ({ project, onClose }) => {
         if (!project) return null;
@@ -219,34 +162,8 @@ function Portfolio() {
                     >
                         Growth<br />Intelligence<span>_</span>
                     </motion.h1>
-                    
-                    {/* Performance Meter Redirect Button */}
-                    <div className={classes.performanceRedirect}>
-                        <motion.button
-                            className={classes.performanceButton}
-                            onClick={() => setShowPerformancePopup(true)}
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ delay: 0.5 }}
-                        >
-                            <div className={classes.performanceIcon}>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <path d="M12 2v4"/>
-                                    <path d="M12 18v4"/>
-                                    <path d="M4.93 4.93l2.83 2.83"/>
-                                    <path d="M16.24 16.24l2.83 2.83"/>
-                                    <path d="M2 12h4"/>
-                                    <path d="M18 12h4"/>
-                                    <path d="M4.93 19.07l2.83-2.83"/>
-                                    <path d="M16.24 7.76l2.83-2.83"/>
-                                    <circle cx="12" cy="12" r="3"/>
-                                </svg>
-                            </div>
-                            <span>Performance</span>
-                        </motion.button>
-                    </div>
+
+
                 </div>
 
                 <motion.p
@@ -255,7 +172,6 @@ function Portfolio() {
                     transition={{ delay: 0.4 }}
                 >
                     Scaling D2C brands and tech ecosystems with industrial precision.
-                    Real-time performance metrics across our active partner network.
                 </motion.p>
 
                 <div className={classes.controls}>
@@ -380,17 +296,12 @@ function Portfolio() {
                 )}
             </motion.div>
 
-            {/* Performance Popup */}
-            <AnimatePresence>
-                {showPerformancePopup && <PerformancePopup />}
-            </AnimatePresence>
-
             {/* Project Detail Modal */}
             <AnimatePresence>
                 {selectedProject && (
-                    <ProjectModal 
-                        project={selectedProject} 
-                        onClose={() => setSelectedProject(null)} 
+                    <ProjectModal
+                        project={selectedProject}
+                        onClose={() => setSelectedProject(null)}
                     />
                 )}
             </AnimatePresence>

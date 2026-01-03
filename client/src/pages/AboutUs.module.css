@@ -11,7 +11,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 120px 4rem 0; /* Add top padding to start below navigation */
+    padding: 120px 4rem 0;
+    /* Add top padding to start below navigation */
     position: relative;
     overflow: hidden;
 }
@@ -62,8 +63,16 @@
 }
 
 @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+
+    0%,
+    50% {
+        opacity: 1;
+    }
+
+    51%,
+    100% {
+        opacity: 0;
+    }
 }
 
 .subtitle {
@@ -82,124 +91,6 @@
     margin-bottom: 0;
 }
 
-/* Performance Meter Container */
-.performanceMeterContainer {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-left: 2rem;
-}
-
-.dashboardWindow {
-    width: 500px;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-.windowHeader {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem 1rem;
-    background: var(--color-surface-elevated);
-    border-bottom: 1px solid var(--color-border);
-}
-
-.dotGroup {
-    display: flex;
-    gap: 0.5rem;
-    margin-right: 1rem;
-}
-
-.dotGroup span {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--color-text-dim);
-    opacity: 0.3;
-}
-
-.dotGroup span:first-child { background: #ff5f57; opacity: 1; }
-.dotGroup span:nth-child(2) { background: #ffbd2e; opacity: 1; }
-.dotGroup span:nth-child(3) { background: #28ca42; opacity: 1; }
-
-.windowTab {
-    font-size: 0.8rem;
-    color: var(--color-text-dim);
-    font-family: 'SF Mono', monospace;
-}
-
-.dashboardBody {
-    padding: 1.5rem;
-}
-
-.metricsGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.metricCard {
-    background: var(--color-background);
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    padding: 1rem;
-    text-align: center;
-}
-
-.metricLabel {
-    font-size: 0.7rem;
-    color: var(--color-text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 0.5rem;
-}
-
-.metricValue {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-primary);
-    margin-bottom: 0.25rem;
-}
-
-.metricTrend {
-    font-size: 0.75rem;
-    color: #4CAF50;
-    font-weight: 600;
-}
-
-.chartArea {
-    background: var(--color-background);
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    padding: 1rem;
-}
-
-.chartHeader {
-    font-size: 0.8rem;
-    color: var(--color-text-dim);
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.chart {
-    display: flex;
-    align-items: end;
-    gap: 4px;
-    height: 60px;
-}
-
-.chartBar {
-    flex: 1;
-    background: linear-gradient(to top, var(--color-primary), rgba(218, 192, 163, 0.3));
-    border-radius: 2px;
-    min-height: 8px;
-}
 
 /* Section Styles */
 .sectionContent {
@@ -553,15 +444,6 @@
         font-size: 2.5rem;
     }
 
-    .performanceMeterContainer {
-        padding-left: 0;
-        margin-top: 3rem;
-    }
-
-    .metricsGrid {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
-    }
 
     .sectionContent {
         padding: 0 1rem;
@@ -634,13 +516,6 @@
         font-size: 1rem;
     }
 
-    .performanceMeterContainer {
-        margin-top: 2rem;
-    }
-
-    .dashboardBody {
-        padding: 1rem;
-    }
 
     .sectionHeader h2 {
         font-size: 1.8rem;
