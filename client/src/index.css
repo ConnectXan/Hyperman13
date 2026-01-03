@@ -3,10 +3,11 @@
   --color-bg: #F5F1E8;
   --color-surface: #FFFCF5;
   --color-primary: #DAC0A3;
-  --color-secondary: #4A4A4A;
+  --color-secondary: #333333;
   --color-accent: #B8926A;
-  --color-text: #1A1A1A;
-  --color-text-dim: #6B6B6B;
+  --color-text: #050505;
+  /* Darker Black */
+  --color-text-dim: #555555;
   --color-border: #E8DCC8;
 
   /* Typography */
@@ -26,17 +27,24 @@
   --transition-fast: 0.2s ease;
   --transition-normal: 0.4s ease;
   --transition-slow: 0.8s ease;
+  /* Aliases & Helpers */
+  --color-background: var(--color-bg);
+  /* Fix for components using wrong var name */
+  --color-text-inverse: #050505;
+  /* Black text for primary buttons */
 }
 
 [data-theme='dark'] {
   /* Dark Mode - Premium Black & Gold */
-  --color-bg: #0A0A0A;
-  --color-surface: #141414;
-  --color-primary: #DAC0A3;
-  --color-secondary: #9F8C76;
+  --color-bg: #050505;
+  --color-surface: #111111;
+  --color-primary: #E6C795;
+  /* Brighter Gold */
+  --color-secondary: #B09B85;
   --color-accent: #2A2A2A;
-  --color-text: #DAC0A3;
-  --color-text-dim: #9F8C76;
+  --color-text: #E6C795;
+  /* Brighter Gold */
+  --color-text-dim: #B09B85;
   --color-border: #2A2A2A;
 }
 

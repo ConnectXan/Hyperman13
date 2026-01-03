@@ -5,6 +5,7 @@ import { servicesConfig as staticServices } from '../data/servicesConfig';
 import { useStore } from '../hooks/useStore';
 import ServiceModal from '../components/ServiceModal';
 import { ServiceIcon } from '../components/ui/ServiceIcons';
+import NeuralCore from '../components/three/NeuralCore';
 import classes from './Home.module.css';
 
 function Home() {
@@ -16,6 +17,9 @@ function Home() {
         <>
             {/* Plain Background */}
             <div className={classes.plainBackground} />
+
+            {/* 3D Particle System */}
+            <NeuralCore />
 
             {/* UI Overlay */}
             <div className={classes.overlay}>
@@ -44,7 +48,7 @@ function Home() {
                             whileTap={{ scale: 0.98 }}
                         >
                             <div className={classes.serviceContent}>
-                                <ServiceIcon 
+                                <ServiceIcon
                                     serviceId={service.id}
                                     size={20}
                                     color={activeServiceId === service.id ? service.color : 'var(--color-text-dim)'}

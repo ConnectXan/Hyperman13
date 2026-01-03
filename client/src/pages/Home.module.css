@@ -17,9 +17,21 @@
 }
 
 .header {
-    max-width: 600px;
-    margin-top: 2rem;
+    max-width: 500px;
+    /* Reduced from 600px */
+    width: 45%;
+    /* Dynamic constraint to avoid center/right overlap */
+    margin-top: 8rem;
+    /* Increased from 2rem to push content below logo area */
     /* Give breathing room from the logo */
+    pointer-events: none;
+    /* Let clicks pass through if needed, though header usually has text */
+}
+
+.header h1,
+.header p {
+    pointer-events: auto;
+    /* Re-enable pointer for text selection */
 }
 
 .mainTagline {
@@ -239,6 +251,7 @@
 .miniCard:hover h3 {
     color: var(--color-primary);
 }
+
 /* Plain Background */
 .plainBackground {
     position: fixed;

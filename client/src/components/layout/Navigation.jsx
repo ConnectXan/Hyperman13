@@ -10,6 +10,28 @@ export function Navigation() {
     const { data: navBlocks } = useContent('navigation');
     const [location] = useLocation();
     const { theme, toggleTheme } = useTheme();
+    const [hidden, setHidden] = useState(false);
+    const [lastScrollY, setLastScrollY] = useState(0);
+
+    // Scroll handler for hide/show nav
+    React.useEffect(() => {
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+
+            // Only toggle if we've scrolled a bit to avoid jitter at top
+            if (Math.abs(currentScrollY - lastScrollY) > 10) {
+                if (currentScrollY > lastScrollY && currentScrollY > 50) {
+                    setHidden(true); // Scroll Down -> Hide
+                } else {
+                    setHidden(false); // Scroll Up -> Show
+                }
+                setLastScrollY(currentScrollY);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [lastScrollY]);
 
     // Hide global navigation on admin routes to prevent UI overlap
     if (location.startsWith('/admin')) {
@@ -56,7 +78,7 @@ export function Navigation() {
             </div>
 
             {/* Desktop Navigation (Pill) */}
-            <nav className={`${classes.nav} ${classes.desktopOnly}`}>
+            <nav className={`${classes.nav} ${classes.desktopOnly} ${hidden ? classes.hidden : ''}`}>
                 <ul className={classes.list}>
                     {links.map((link) => {
                         const isActive = location === link.path;

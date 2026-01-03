@@ -1,6 +1,7 @@
 .logoWrapper {
     position: fixed;
     top: 2rem;
+    /* Adjusted down slightly to center vertically with the pill nav */
     left: 2rem;
     z-index: 1001;
 }
@@ -15,7 +16,8 @@
 
 .logoText {
     font-family: var(--font-heading);
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    /* Increased size */
     font-weight: 950;
     color: var(--color-text);
     text-transform: uppercase;
@@ -99,6 +101,15 @@
     border: 1px solid var(--color-border);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     width: max-content;
+    transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1), opacity 0.4s ease;
+    /* Smooth transition */
+}
+
+.nav.hidden {
+    transform: translateX(-50%) translateY(-150%);
+    /* Slide up */
+    opacity: 0;
+    pointer-events: none;
 }
 
 .desktopOnly {
@@ -166,7 +177,8 @@
     display: flex;
     gap: 0.25rem;
     padding: 0.5rem;
-    border-radius: 24px; /* More modern rounded corners */
+    border-radius: 24px;
+    /* More modern rounded corners */
     border: 1px solid var(--color-border);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     width: max-content;
@@ -184,7 +196,8 @@
     justify-content: center;
     width: 52px;
     height: 52px;
-    border-radius: 16px; /* More modern rounded corners */
+    border-radius: 16px;
+    /* More modern rounded corners */
     color: var(--color-text-dim);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     text-decoration: none;
@@ -212,7 +225,8 @@
 
 [data-theme='dark'] .mobileIconLink.active {
     background: var(--color-primary);
-    color: #000000; /* Force black text for maximum contrast in dark mode */
+    color: #000000;
+    /* Force black text for maximum contrast in dark mode */
     box-shadow: 0 8px 20px rgba(218, 192, 163, 0.4);
 }
 
