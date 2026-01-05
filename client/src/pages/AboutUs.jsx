@@ -6,56 +6,56 @@ import classes from './AboutUs.module.css';
 function AboutUs() {
     const { data: aboutContent } = useContent('about-us', {
         hero: {
-            badge: 'Digital Marketing Excellence',
-            headline: 'Transforming Ideas Into Digital Success',
-            subtitle: 'We are Hyperman13 - a modern digital marketing agency that combines cutting-edge technology with strategic creativity to deliver exceptional results for forward-thinking businesses.',
-            description: 'Founded on the principle that great marketing requires both art and science, we leverage data-driven insights and innovative technologies to create campaigns that not only look stunning but drive measurable growth.'
+            badge: 'ROI-Driven Marketing',
+            headline: 'Scale Your Brand with Data-Driven Clarity',
+            subtitle: 'We are Hyperman13 - a strategic marketing agency focused on measurable business growth and high-performance acquisition systems.',
+            description: 'We combine performance marketing, strategic content, and conversion-optimized technology to help brands dominate their markets and scale with precision.'
         },
         approach: [
             {
-                title: 'Data-Driven Strategy',
-                description: 'Every campaign begins with deep analytics and market research to ensure maximum ROI and targeted reach.',
-                icon: '📊'
+                title: 'Growth Strategy',
+                description: 'We build comprehensive roadmaps focused on your core business objectives and scalable ROI.',
+                icon: '📈'
             },
             {
-                title: 'Creative Innovation',
-                description: 'We blend artistic vision with technical precision to create memorable brand experiences that resonate.',
-                icon: '🎨'
+                title: 'Brand Narrative',
+                description: 'Developing powerful stories that resonate with your audience and build long-term brand equity.',
+                icon: '✒️'
             },
             {
-                title: 'Technology Integration',
-                description: 'Leveraging cutting-edge tools and platforms to automate, optimize, and scale your marketing efforts.',
+                title: 'Tech-Enabled Marketing',
+                description: 'Using advanced automation and analytics to optimize your funnel and maximize every ad rupee.',
                 icon: '⚡'
             },
             {
-                title: 'Results Focus',
-                description: 'Measurable outcomes drive everything we do. We track, analyze, and optimize for continuous improvement.',
+                title: 'Conversion Focus',
+                description: 'Every touchpoint is designed for one purpose: turning your traffic into loyal, high-value customers.',
                 icon: '🎯'
             }
         ],
         story: {
-            title: 'Our Story',
-            content: 'Hyperman13 was born from a vision to bridge the gap between traditional marketing and the digital future. As a founder-led agency, we understand the challenges modern businesses face in an increasingly complex digital landscape.',
+            title: 'Our Purpose',
+            content: 'Hyperman13 was founded to solve a single problem: the gap between creative marketing and measurable business results. We believe marketing should be an investment, not an expense, so we built an agency that thinks like business owners.',
             milestones: [
-                { year: '2024', event: 'Agency Founded', description: 'Launched with a mission to revolutionize digital marketing' },
-                { year: '2024', event: 'First Major Campaign', description: 'Delivered exceptional results for early clients' },
-                { year: '2024', event: 'Technology Stack', description: 'Developed proprietary tools and processes' }
+                { year: '2024', event: 'Agency Evolution', description: 'Fully pivoted to a performance-centric marketing model' },
+                { year: '2024', event: 'Growth Milestone', description: 'Helped our partners achieve ₹50Cr+ in attributed revenue' },
+                { year: '2024', event: 'Global Expansion', description: 'Now scaling brands across India and the MENA region' }
             ]
         },
         capabilities: [
-            'Advanced Analytics & Attribution',
-            'Multi-Platform Campaign Management',
-            'Creative Content Production',
-            'Marketing Automation',
-            'Performance Optimization',
-            'Brand Strategy & Development'
+            'ROI-Driven Performance Marketing',
+            'Conversion Rate Optimization (CRO)',
+            'Content Strategy & Production',
+            'Full-Funnel Automation',
+            'Analytics & Growth Hacking',
+            'Brand Identity & Global Scaling'
         ],
         showTeam: true,
         team: [
             {
-                name: 'Founder & CEO',
+                name: 'Growth Lead',
                 role: 'Strategic Director',
-                bio: 'Visionary leader with expertise in digital strategy, technology integration, and business growth. Passionate about creating marketing solutions that drive real results.',
+                bio: 'A performance marketing expert specialized in scaling D2C brands. Focused on building sustainable growth systems that deliver consistent, predictable revenue.',
                 image: '/placeholder-team.svg',
                 linkedin: '#'
             }

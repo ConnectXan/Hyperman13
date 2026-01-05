@@ -28,7 +28,7 @@ function Home() {
                     animate={{ opacity: 1, x: 0 }}
                     className={classes.header}
                 >
-                    <p className={classes.mainTagline}>High-Performance Systems for the Digital Era</p>
+                    <p className={classes.mainTagline}>Accelerating Business Growth through Strategic Marketing</p>
                 </motion.header>
 
                 <nav className={classes.serviceList}>
@@ -68,7 +68,7 @@ function Home() {
                 </nav>
 
                 <div className={classes.instruction}>
-                    Explore our digital services
+                    Discover Your Growth Potential
                 </div>
             </div>
 

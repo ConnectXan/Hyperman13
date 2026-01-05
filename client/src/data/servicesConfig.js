@@ -1,134 +1,134 @@
 export const servicesConfig = [
     {
         id: 'meta-ads',
-        label: 'Meta Ads',
-        description: 'High-conversion campaigns on Facebook & Instagram in India.',
+        label: 'Meta Growth Ads',
+        description: 'Scalable acquisition campaigns on Facebook & Instagram focused on high-ROAS growth.',
         color: '#DAC0A3',
         activeColor: '#C8A17E',
-        metrics: { roas: '4.8x', spend: '₹5L+/mo' },
+        metrics: { roas: '4.8x', revenue: '₹50Cr+' },
         formFields: [
             { name: 'monthlyBudget', label: 'Monthly Ad Budget', type: 'select', options: ['< ₹1L', '₹1L - ₹5L', '₹5L - ₹20L', '₹20L+'] }
         ],
         modalInfo: {
-            title: "Meta Ads Excellence",
-            description: "Dominate Facebook & Instagram with data-driven campaigns optimized for the Indian market.",
+            title: "Meta Ads Scaling",
+            description: "Scale your revenue with data-driven Meta campaigns optimized for maximum customer acquisition.",
             features: [
-                "Advanced audience targeting",
-                "A/B creative testing",
-                "Real-time ROAS optimization",
-                "Conversion tracking setup"
+                "Advanced CBO/ABO targeting",
+                "U-G-C and Creative Ad Testing",
+                "Full-Funnel ROAS Optimization",
+                "Deep Conversion Tracking Setup"
             ],
-            deliverables: "Campaign strategy, ad creatives, performance reports"
+            deliverables: "Growth Strategy, Ad Creatives, Weekly Performance Reports"
         }
     },
     {
         id: 'google-ads',
-        label: 'Google Ads',
-        description: 'Search, Display, and Video campaigns for the Indian market.',
+        label: 'Google Search & Scale',
+        description: 'Precision-targeted Search and Shopping campaigns to capture high-intent buyers.',
         color: '#F4D03F',
         activeColor: '#F1C40F',
-        metrics: { roas: '5.5x', conversions: '1.5k+' },
+        metrics: { roas: '5.5x', conversions: '10k+' },
         formFields: [
-            { name: 'targetRegion', label: 'Target Region', type: 'text', placeholder: 'e.g. Mumbai, Delhi, Bangalore' }
+            { name: 'targetRegion', label: 'Target Market', type: 'text', placeholder: 'e.g. India, USA, Global' }
         ],
         modalInfo: {
-            title: "Google Ads Mastery",
-            description: "Capture high-intent customers with precision-targeted Search, Display, and Video campaigns.",
+            title: "Google Ads Growth",
+            description: "Capture high-intent traffic with expertly managed Google Search, Display, and Video campaigns.",
             features: [
-                "Keyword research & optimization",
-                "Smart bidding strategies",
-                "YouTube video ads",
-                "Performance tracking & analytics"
+                "Intent-Based Keyword Research",
+                "Smart Bidding & Alpha/Beta Structuring",
+                "YouTube Conversion Funnels",
+                "PMax & Shopping Optimization"
             ],
-            deliverables: "Ad strategy, campaign setup, monthly optimization reports"
+            deliverables: "Strategy Roadmap, Campaign Setup, Scaling Reports"
         }
     },
     {
         id: 'shopify-dev',
-        label: 'Shopify Development',
-        description: 'Custom themes and apps for Indian D2C brands.',
+        label: 'E-com Growth Engines',
+        description: 'High-converting Shopify systems designed to scale D2C brands globally.',
         color: '#7DCEA0',
         activeColor: '#52BE80',
-        metrics: { uptime: '99.99%', loadTime: '0.6s' },
+        metrics: { conversion: '+120%', speed: '98/100' },
         formFields: [
-            { name: 'storeUrl', label: 'Current Store URL (if any)', type: 'text', placeholder: 'e.g. yourstore.com' }
+            { name: 'storeUrl', label: 'Store URL / Niche', type: 'text', placeholder: 'e.g. fashion, wellness' }
         ],
         modalInfo: {
-            title: "Shopify Expertise",
-            description: "Build high-converting Shopify stores tailored for Indian D2C brands.",
+            title: "E-commerce Systems",
+            description: "Build a high-performance Shopify store designed specifically for conversion and growth.",
             features: [
-                "Custom theme development",
-                "Payment gateway integration (Razorpay, Paytm)",
-                "App development & integration",
-                "Speed optimization"
+                "Custom UX for Higher AOV",
+                "Proprietary Checkout Optimization",
+                "Advanced Tech Stack Integration",
+                "Mobile-First Growth Architecture"
             ],
-            deliverables: "Fully functional Shopify store, custom theme, technical support"
+            deliverables: "Ready-to-Scale Store, Custom Theme, Conversion Audit"
         }
     },
     {
         id: 'web-dev',
-        label: 'Web Development',
-        description: 'Next-gen web solutions for high-growth Indian startups.',
+        label: 'Conversion-Optimized Web',
+        description: 'Next-gen web applications built for lead generation and business automation.',
         color: '#3498DB',
         activeColor: '#2E86C1',
-        metrics: { lighthouse: '100', deployments: 'Daily' },
+        metrics: { performance: '100', scalability: 'Infinite' },
         formFields: [
-            { name: 'projectType', label: 'Project Type', type: 'select', options: ['E-commerce', 'SaaS Platform', 'Corporate Portal'] }
+            { name: 'projectType', label: 'Business Vertical', type: 'select', options: ['B2B SaaS', 'Lead-Gen Portal', 'Enterprise App'] }
         ],
         modalInfo: {
-            title: "Web Development",
-            description: "Build lightning-fast, scalable web applications with modern technologies.",
+            title: "Web Systems",
+            description: "Leverage lightning-fast technology to build platforms that convert visitors into customers.",
             features: [
-                "React/Next.js development",
-                "Responsive design",
-                "SEO optimization",
-                "Cloud deployment"
+                "Next.js/React Enterprise Stack",
+                "High-Conversion UI UX",
+                "Marketing Tech Stack Sync",
+                "Infinite Scale Infrastructure"
             ],
-            deliverables: "Production-ready website, source code, deployment & hosting setup"
+            deliverables: "Scalable Web Platform, Source Code, Growth Integration"
         }
     },
     {
         id: 'social-mgmt',
-        label: 'Social Media Mgmt',
-        description: 'Organic growth strategies for the Indian demographic.',
+        label: 'Social Growth & Content',
+        description: 'Building community-centric brands through strategic storytelling and content.',
         color: '#FF5C8D',
         activeColor: '#E91E63',
-        metrics: { engagement: '+350%', followers: '+15k' },
+        metrics: { reach: '5M+', community: '100k+' },
         formFields: [
-            { name: 'platforms', label: 'Priority Platforms', type: 'text', placeholder: 'Instagram, LinkedIn, TikTok, YouTube' }
+            { name: 'platforms', label: 'Priority Channels', type: 'text', placeholder: 'IG, LinkedIn, YouTube, Twitter' }
         ],
         modalInfo: {
-            title: "Social Media Management",
-            description: "Grow your brand presence with strategic content and community management.",
+            title: "Brand Storytelling",
+            description: "Build a loyal community and long-term brand equity with strategic content management.",
             features: [
-                "Content calendar & creation",
-                "Community engagement",
-                "Influencer collaborations",
-                "Analytics & growth tracking"
+                "Story-Driven Content Calendars",
+                "High-Engagement Micro-Content",
+                "Influencer & Creator Management",
+                "Omnichannel Growth Strategy"
             ],
-            deliverables: "Monthly content plan, posts & stories, engagement reports"
+            deliverables: "Content Strategy, Daily Management, Growth Analytics"
         }
     },
     {
         id: 'ai-animation',
-        label: 'AI 2D Animation',
-        description: 'Cutting-edge AI visuals for Indian brands and agencies.',
+        label: 'AI Brand Storytelling',
+        description: 'Revolutionary AI-powered visual assets for modern brand identity.',
         color: '#BB86FC',
         activeColor: '#9965f4',
-        metrics: { production: '-90% time', uniqueness: '100%' },
+        metrics: { cost: '-85%', speed: '10x Faster' },
         formFields: [
-            { name: 'videoStyle', label: 'Preferred Style', type: 'select', options: ['Abstract', 'Realistic', 'Bollywood Style', 'Anime'] }
+            { name: 'videoStyle', label: 'Brand Aesthetic', type: 'select', options: ['Minimalist', 'Realistic', 'Cinematic', 'Hyper-Real'] }
         ],
         modalInfo: {
-            title: "AI 2D Animation",
-            description: "Create stunning animated content with AI-powered tools and human creativity.",
+            title: "AI Visual Revolution",
+            description: "Create disruptive visual content at scale using the latest in AI and creative design.",
             features: [
-                "Character animation",
-                "Explainer videos",
-                "Social media animations",
-                "Brand storytelling"
+                "Automated Video Storytelling",
+                "AI-Enhanced Brand Identity",
+                "Rapid Creative Iteration",
+                "Viral Content Production"
             ],
-            deliverables: "Animated videos, source files, revisions included"
+            deliverables: "AI Assets, Production Pipeline, Visual Strategy"
         }
     }
 ];

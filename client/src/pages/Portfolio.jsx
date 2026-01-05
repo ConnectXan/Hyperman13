@@ -13,14 +13,22 @@ function Portfolio() {
     const [activeGroup, setActiveGroup] = useState('live');
     const [selectedService, setSelectedService] = useState('all');
     const [selectedProject, setSelectedProject] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [visibleCount, setVisibleCount] = useState(12);
 
     const filteredProjects = useMemo(() => {
         return portfolioData.filter(project => {
             const matchesGroup = project.group === activeGroup;
             const matchesService = selectedService === 'all' || project.serviceId === selectedService;
-            return matchesGroup && matchesService;
+            const matchesSearch = project.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                (project.industry || '').toLowerCase().includes(searchTerm.toLowerCase());
+            return matchesGroup && matchesService && matchesSearch;
         });
-    }, [activeGroup, selectedService, portfolioData]);
+    }, [activeGroup, selectedService, searchTerm, portfolioData]);
+
+    const displayedProjects = useMemo(() => {
+        return filteredProjects.slice(0, visibleCount);
+    }, [filteredProjects, visibleCount]);
 
     const agencyStats = [
         { label: 'Asset Management', value: '₹6.8Cr+' },
@@ -190,6 +198,16 @@ function Portfolio() {
                         </button>
                     </div>
 
+                    <div className={classes.searchBar}>
+                        <input
+                            type="text"
+                            placeholder="Search by client or industry..."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                        />
+                        <span className={classes.searchIcon}>🔍</span>
+                    </div>
+
                     <div className={classes.serviceFilters}>
                         <button
                             className={selectedService === 'all' ? classes.activeFilter : ''}
@@ -213,78 +231,55 @@ function Portfolio() {
 
             <motion.div layout className={classes.clientGrid}>
                 <AnimatePresence mode="popLayout">
-                    {filteredProjects.map((project) => (
+                    {displayedProjects.map((project) => (
                         <motion.div
                             key={project.id}
                             layout
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95 }}
                             className={classes.clientSection}
-                            style={{ '--service-color': project.color }}
                             onClick={() => setSelectedProject(project)}
-                            whileHover={{ scale: 1.02 }}
+                            whileHover={{ y: -5 }}
+                            style={{ '--service-color': project.color }}
                         >
-                            <div className={classes.clientHeader}>
-                                <div className={classes.clientTitle}>
-                                    <div className={classes.titleRow}>
-                                        <span className={classes.serviceTag}>
-                                            {servicesConfig.find(s => s.id === project.serviceId)?.label || 'Strategy'}
-                                        </span>
-                                        <span className={classes.industryTag}>{project.industry}</span>
-                                    </div>
-                                    <h2>{project.name}</h2>
-                                    <p className={classes.projectDescription}>{project.description}</p>
-                                </div>
-                                <div className={classes.projectStatus}>
-                                    {project.group === 'live' && (
-                                        <div className={classes.miniProgress}>
-                                            <span className={classes.progressText}>{project.progress}% Optimization</span>
-                                            <div className={classes.progressRail}>
-                                                <motion.div
-                                                    className={classes.progressFill}
-                                                    initial={{ width: 0 }}
-                                                    whileInView={{ width: `${project.progress}%` }}
-                                                    transition={{ duration: 1.5, ease: "easeOut" }}
-                                                    style={{ backgroundColor: project.color }}
-                                                />
-                                            </div>
-                                        </div>
-                                    )}
-                                    <span className={classes.badge} style={{ color: project.color, borderColor: `${project.color}33` }}>
-                                        {project.status}
+                            <div className={classes.cardHeader}>
+                                <div className={classes.tagRow}>
+                                    <span className={classes.serviceTag}>
+                                        {servicesConfig.find(s => s.id === project.serviceId)?.label || 'Strategy'}
                                     </span>
-                                    <div className={classes.projectMeta}>
-                                        <span className={classes.metaText}>{project.duration} • {project.teamSize} team</span>
-                                    </div>
+                                    <span className={classes.industryTag}>{project.industry}</span>
                                 </div>
+                                <h2 className={classes.projectTitle}>{project.name}</h2>
                             </div>
 
-                            <div className={classes.widgetRow}>
-                                {project.widgets?.map((widget, idx) => (
-                                    <DashboardWidget
-                                        key={idx}
-                                        {...widget}
-                                        color={project.color}
-                                    />
+                            <div className={classes.cardStats}>
+                                {project.widgets?.slice(0, 2).map((widget, idx) => (
+                                    <div key={idx} className={classes.miniStat}>
+                                        <span className={classes.miniLabel}>{widget.label}</span>
+                                        <span className={classes.miniValue}>{widget.value}</span>
+                                    </div>
                                 ))}
-                                {(!project.widgets || project.widgets.length === 0) && (
-                                    <div style={{ color: '#444', fontStyle: 'italic', fontSize: '0.9rem' }}>
-                                        Initializing technical instrumentation...
-                                    </div>
-                                )}
                             </div>
 
-                            {project.testimonial && (
-                                <div className={classes.testimonialPreview}>
-                                    <blockquote>"{project.testimonial.quote}"</blockquote>
-                                    <cite>— {project.testimonial.author}</cite>
+                            <div className={classes.cardProgress}>
+                                <div className={classes.progressHeader}>
+                                    <span className={classes.statusText}>{project.status}</span>
+                                    <span className={classes.pctText}>{project.progress}%</span>
                                 </div>
-                            )}
+                                <div className={classes.progressRail}>
+                                    <motion.div
+                                        className={classes.progressFill}
+                                        initial={{ width: 0 }}
+                                        animate={{ width: `${project.progress}%` }}
+                                        style={{ backgroundColor: project.color }}
+                                    />
+                                </div>
+                            </div>
 
-                            <div className={classes.projectFooter}>
-                                <span className={classes.viewDetails}>Click to view detailed case study →</span>
+                            <div className={classes.cardAction}>
+                                <span>Analysis Details</span>
+                                <span className={classes.arrowIcon}>→</span>
                             </div>
                         </motion.div>
                     ))}
@@ -295,6 +290,17 @@ function Portfolio() {
                     </div>
                 )}
             </motion.div>
+
+            {filteredProjects.length > visibleCount && (
+                <div className={classes.loadMoreContainer}>
+                    <button
+                        className={classes.loadMoreBtn}
+                        onClick={() => setVisibleCount(prev => prev + 12)}
+                    >
+                        Load More Partners
+                    </button>
+                </div>
+            )}
 
             {/* Project Detail Modal */}
             <AnimatePresence>

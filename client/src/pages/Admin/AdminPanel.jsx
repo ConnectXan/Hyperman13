@@ -105,7 +105,7 @@ export default function AdminPanel() {
         { label: 'Total Blocks', value: blocks.length },
         { label: 'Active Services', value: blocks.filter(b => b.section === 'services' && b.visible).length },
         { label: 'Case Studies', value: blocks.filter(b => b.section === 'case-studies').length },
-        { label: 'System Uptime', value: '99.9%' }
+        { label: 'Growth Rate', value: '94.2%' }
     ]), [blocks]);
 
     return (
@@ -128,7 +128,7 @@ export default function AdminPanel() {
             <aside className={`${classes.sidebar} ${mobileMenuOpen ? classes.mobileOpen : ''}`}>
                 <div className={classes.sidebarHeader}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                        <h2>Hyperman<span>Control</span></h2>
+                        <h2>Growth<span>Hub</span></h2>
                         <button
                             className={classes.mobileCloseBtn}
                             onClick={closeMobileMenu}
@@ -155,7 +155,7 @@ export default function AdminPanel() {
                 </nav>
                 <div className={classes.sidebarFooter}>
                     <div style={{ padding: '0 0.5rem 1rem', fontSize: '0.65rem', color: '#333' }}>
-                        DEBUG: Sync Nodes [{blocks.length}]
+                        DEBUG: Sync Blocks [{blocks.length}]
                     </div>
                     <button onClick={handleLogout} className={classes.logoutBtn}>Sign Out</button>
                 </div>
@@ -165,16 +165,16 @@ export default function AdminPanel() {
             <main className={classes.mainContent}>
                 <header className={classes.contentHeader}>
                     <div className={classes.headerTitles}>
-                        <span className={classes.breadcrumb}>Sector / {activeTab}</span>
+                        <span className={classes.breadcrumb}>Category / {activeTab}</span>
                         <h1>{activeTab.replace('-', ' ')}</h1>
                     </div>
                     <div className={classes.headerActions}>
                         <button onClick={fetchBlocks} className={classes.actionBtn} style={{ marginRight: '1rem' }}>
-                            ⟳ Refresh Nodes
+                            ⟳ Refresh Blocks
                         </button>
                         {activeTab !== 'dashboard' && (
                             <button onClick={startAdd} className={classes.addBtn}>
-                                + New Protocol
+                                + New Item
                             </button>
                         )}
                     </div>
@@ -192,8 +192,8 @@ export default function AdminPanel() {
                                 ))}
                             </div>
                             <div className={classes.welcomeMsg}>
-                                <h2>Industrial Management Hub</h2>
-                                <p>Operational integrity is optimal. Use the sidebar to manage your enterprise infrastructure. All data nodes are synchronized with the primary SQLite engine.</p>
+                                <h2>Agency Growth Hub</h2>
+                                <p>Campaign performance is optimal. Use the sidebar to manage your marketing assets and strategies. All content blocks are synchronized with the primary database.</p>
                                 <div style={{ marginTop: '1.5rem', fontSize: '0.8rem', opacity: 0.5 }}>
                                     Current session: {new Date().toLocaleTimeString()} | DB: SQLite-Hyper.db
                                 </div>
@@ -233,9 +233,9 @@ export default function AdminPanel() {
                             {blocks.filter(b => b.section === activeTab).length === 0 && (
                                 <div className={classes.emptyState}>
                                     <div className={classes.emptyIcon}>∅</div>
-                                    <p>No operational records found in the "{activeTab}" sector.</p>
+                                    <p>No campaign records found in the "{activeTab}" category.</p>
                                     <button onClick={startAdd} className={classes.addBtn} style={{ marginTop: '2rem' }}>
-                                        Initialize First Entry
+                                        Initialize First Campaign
                                     </button>
                                 </div>
                             )}
@@ -251,7 +251,7 @@ export default function AdminPanel() {
                                 {activeTab === 'case-studies' && (
                                     <>
                                         <div className={classes.inputGroup}>
-                                            <label>Industrial Title</label>
+                                            <label>Growth Focus Title</label>
                                             <input type="text" value={editData.title || ''} onChange={e => setEditData({ ...editData, title: e.target.value })} />
                                         </div>
                                         <div className={classes.inputGroup}>
@@ -281,7 +281,7 @@ export default function AdminPanel() {
                                         </div>
                                         {editData.type === 'blog' ? (
                                             <div className={classes.inputGroup}>
-                                                <label>Technical Log (Markdown)</label>
+                                                <label>Marketing Strategy Bloom (Markdown)</label>
                                                 <textarea rows="6" value={editData.content?.fullText || ''} onChange={e => setEditData({ ...editData, content: { ...editData.content, fullText: e.target.value } })} />
                                             </div>
                                         ) : (
@@ -291,7 +291,7 @@ export default function AdminPanel() {
                                             </div>
                                         )}
                                         <div className={classes.inputGroup}>
-                                            <label>Architecture Summary</label>
+                                            <label>Success Narrative Summary</label>
                                             <textarea value={editData.content?.summary || ''} onChange={e => setEditData({ ...editData, content: { ...editData.content, summary: e.target.value } })} />
                                         </div>
                                     </>
@@ -300,7 +300,7 @@ export default function AdminPanel() {
                                 {activeTab === 'services' && (
                                     <>
                                         <div className={classes.inputGroup}>
-                                            <label>System Capability (Label)</label>
+                                            <label>Growth Capability (Label)</label>
                                             <input type="text" value={editData.label || ''} onChange={e => setEditData({ ...editData, label: e.target.value })} />
                                         </div>
                                         <div className={classes.inputGroup}>
@@ -308,7 +308,7 @@ export default function AdminPanel() {
                                             <input type="text" value={editData.id || ''} onChange={e => setEditData({ ...editData, id: e.target.value })} placeholder="e.g. digital-marketing" />
                                         </div>
                                         <div className={classes.inputGroup}>
-                                            <label>Deployment Description</label>
+                                            <label>Growth Strategy Description</label>
                                             <textarea value={editData.description || ''} onChange={e => setEditData({ ...editData, description: e.target.value })} />
                                         </div>
                                         <div className={classes.inputGroup}>
@@ -321,7 +321,7 @@ export default function AdminPanel() {
                                 {activeTab === 'portfolio' && (
                                     <>
                                         <div className={classes.inputGroup}>
-                                            <label>Project Designation (Name)</label>
+                                            <label>Client Campaign (Name)</label>
                                             <input type="text" value={editData.name || ''} onChange={e => setEditData({ ...editData, name: e.target.value })} />
                                         </div>
                                         <div className={classes.inputGroup}>
@@ -334,7 +334,7 @@ export default function AdminPanel() {
                                             </select>
                                         </div>
                                         <div className={classes.inputGroup}>
-                                            <label>Lifecycle Status</label>
+                                            <label>Growth Stage</label>
                                             <select value={editData.status || 'Active'} onChange={e => setEditData({ ...editData, status: e.target.value })}>
                                                 <option value="Active">Active / Scaling</option>
                                                 <option value="Deployment">Deployment Mode</option>
@@ -344,14 +344,14 @@ export default function AdminPanel() {
                                             </select>
                                         </div>
                                         <div className={classes.inputGroup}>
-                                            <label>Operational Group</label>
+                                            <label>Campaign Group</label>
                                             <select value={editData.group || 'live'} onChange={e => setEditData({ ...editData, group: e.target.value })}>
                                                 <option value="live">Live Operations</option>
                                                 <option value="finished">Success Stories</option>
                                             </select>
                                         </div>
                                         <div className={classes.inputGroup}>
-                                            <label>Optimization Index (%)</label>
+                                            <label>Success Probability (%)</label>
                                             <input type="number" min="0" max="100" value={editData.progress || 0} onChange={e => setEditData({ ...editData, progress: parseInt(e.target.value) })} />
                                         </div>
                                         <div className={classes.inputGroup}>
@@ -359,14 +359,69 @@ export default function AdminPanel() {
                                             <input type="text" value={editData.color || '#DAC0A3'} onChange={e => setEditData({ ...editData, color: e.target.value })} />
                                         </div>
                                         <div className={classes.inputGroup}>
-                                            <label>Metrics Visualization (JSON Array)</label>
+                                            <label>Client Industry</label>
+                                            <input type="text" value={editData.industry || ''} onChange={e => setEditData({ ...editData, industry: e.target.value })} placeholder="e.g. Health & Wellness" />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Campaign Duration</label>
+                                            <input type="text" value={editData.duration || ''} onChange={e => setEditData({ ...editData, duration: e.target.value })} placeholder="e.g. 12 months" />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Specialist Team Size</label>
+                                            <input type="number" value={editData.teamSize || 0} onChange={e => setEditData({ ...editData, teamSize: parseInt(e.target.value) })} />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Strategic Description</label>
+                                            <textarea value={editData.description || ''} onChange={e => setEditData({ ...editData, description: e.target.value })} />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Performance Metrics (JSON Array)</label>
                                             <textarea
-                                                rows="6"
+                                                rows="4"
                                                 value={JSON.stringify(editData.widgets || [], null, 2)}
                                                 onChange={e => {
                                                     try {
                                                         const widgets = JSON.parse(e.target.value);
                                                         setEditData({ ...editData, widgets });
+                                                    } catch (err) { }
+                                                }}
+                                            />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Client Testimonial (JSON: quote, author)</label>
+                                            <textarea
+                                                rows="3"
+                                                value={JSON.stringify(editData.testimonial || { quote: '', author: '' }, null, 2)}
+                                                onChange={e => {
+                                                    try {
+                                                        const testimonial = JSON.parse(e.target.value);
+                                                        setEditData({ ...editData, testimonial });
+                                                    } catch (err) { }
+                                                }}
+                                            />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Tech Stack (JSON Array)</label>
+                                            <textarea
+                                                rows="2"
+                                                value={JSON.stringify(editData.technologies || [], null, 2)}
+                                                onChange={e => {
+                                                    try {
+                                                        const technologies = JSON.parse(e.target.value);
+                                                        setEditData({ ...editData, technologies });
+                                                    } catch (err) { }
+                                                }}
+                                            />
+                                        </div>
+                                        <div className={classes.inputGroup}>
+                                            <label>Results Comparison (JSON: before, after)</label>
+                                            <textarea
+                                                rows="4"
+                                                value={JSON.stringify(editData.results || { before: {}, after: {} }, null, 2)}
+                                                onChange={e => {
+                                                    try {
+                                                        const results = JSON.parse(e.target.value);
+                                                        setEditData({ ...editData, results });
                                                     } catch (err) { }
                                                 }}
                                             />
@@ -516,7 +571,7 @@ export default function AdminPanel() {
 
                                 {(activeTab === 'navigation' || activeTab === 'theme') && (
                                     <div className={classes.inputGroup}>
-                                        <label>Technical Node (JSON Archive)</label>
+                                        <label>Strategy Config (JSON Archive)</label>
                                         <textarea
                                             rows="12"
                                             value={JSON.stringify(editData, null, 2)}
@@ -530,8 +585,8 @@ export default function AdminPanel() {
                                 )}
                             </div>
                             <div className={classes.modalActions}>
-                                <button onClick={() => setEditingBlock(null)} className={classes.cancelBtn}>Abort</button>
-                                <button onClick={handleSave} className={classes.saveBtn}>Commit Changes</button>
+                                <button onClick={() => setEditingBlock(null)} className={classes.cancelBtn}>Cancel</button>
+                                <button onClick={handleSave} className={classes.saveBtn}>Save Strategy</button>
                             </div>
                         </div>
                     </div>
